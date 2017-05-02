@@ -121,14 +121,14 @@ public class Vowels extends Fragment {
 
         // Diphthongs
 
-        sound ay = new sound(R.id.button13,"eɪ",R.raw.ay,"The /eɪ/ Sound", 1,2,2, new String[]{"dead", "header"});
-        sound igh = new sound(R.id.button14,"aɪ",R.raw.igh,"The /aɪ/ Sound", 2,2,2, new String[]{"queue", "quite"});
-        sound ow = new sound(R.id.button15,"aʊ",R.raw.ow,"The /aʊ/ Sound", 3,2,2, new String[]{"great", "green"});
-        sound oh = new sound(R.id.button16,"əʊ",R.raw.o,"The /əʊ/ Sound", 1,1,3, new String[]{"chime", "chew"});
-        sound ear = new sound(R.id.button17,"ɪə",R.raw.ear,"The /ɪə/ Sound", 2,1,3, new String[]{"project", "manager"});
-        sound ehuh = new sound(R.id.button18,"eə",R.raw.air,"The /eə/ Sound", 1,1,4, new String[]{"chime", "mother"});
-        sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", 2,1,4, new String[]{"none", "crown"});
-        sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", 3,1,4, new String[]{"sing", "finger"});
+        sound ay = new sound(R.id.button13,"eɪ",R.raw.ay,"The /eɪ/ Sound", 1,1,3, new String[]{"dead", "header"});
+        sound igh = new sound(R.id.button14,"aɪ",R.raw.igh,"The /aɪ/ Sound", 2,1,3, new String[]{"queue", "quite"});
+        sound ow = new sound(R.id.button15,"aʊ",R.raw.ow,"The /aʊ/ Sound", 3,1,3, new String[]{"great", "green"});
+        sound oh = new sound(R.id.button16,"əʊ",R.raw.o,"The /əʊ/ Sound", 1,2,3, new String[]{"chime", "chew"});
+        sound ear = new sound(R.id.button17,"ɪə",R.raw.ear,"The /ɪə/ Sound", 2,2,3, new String[]{"project", "manager"});
+        sound ehuh = new sound(R.id.button18,"eə",R.raw.air,"The /eə/ Sound", 3,2,3, new String[]{"chime", "mother"});
+        sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", 1,3,3, new String[]{"none", "crown"});
+        sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", 2,3,3, new String[]{"sing", "finger"});
 
         createButton(button13, ay, sound13);
         createButton(button14, igh, sound14);
