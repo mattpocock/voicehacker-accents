@@ -1,12 +1,17 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * Created by Matt on 01-May-17.
@@ -19,6 +24,9 @@ public class Consonants extends Fragment {
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19, button20, button21, button22, button23, button24, button25;
     MediaPlayer sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8, sound9, sound10, sound11, sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21, sound22, sound23, sound24, sound25;
 
+    // Is there a navbar?
+
+    boolean navBarOn = false;
 
     // Create Button Method
 
@@ -26,12 +34,14 @@ public class Consonants extends Fragment {
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
-        // mp = MediaPlayer.create(this, s.soundfile);
 
         final int sf = s.soundfile;
 
         btn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             public void onClick(View v) {
+
+                // Handles Sound Playing
 
                 MediaPlayer media = mp;
                 media = MediaPlayer.create(getActivity(), sf);
@@ -44,8 +54,60 @@ public class Consonants extends Fragment {
                 });
                 media.start();
 
+                // Handles nav bar creation
+
+                LinearLayout newll = new LinearLayout(getContext());
+
+                newll.setId(R.id.navbarll);
+
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(16,12,16,0);
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+
+                Button navbtn = new Button(getContext());
+                navbtn.setId(R.id.navbarbtn);
 
 
+
+                LinearLayout oldll = (LinearLayout) getView().findViewById(R.id.consonantll); // Used in both statements
+
+                // Takes Out NavBtn
+
+                if (navBarOn) {
+                    Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
+                    LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
+                    newllid.removeView(insertedBtn);
+                    oldll.removeView(newllid);
+                    navBarOn = false;
+                }
+
+                // Puts in Button
+
+                    int insertId = s.row + (s.section + 1);
+
+                    oldll.addView(newll, insertId, params);
+
+                    LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
+
+                    newllid.addView(navbtn, 0, params);
+
+                    navBarOn = true;
+                    Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
+
+
+
+                    insertedBtn.setText("/" + s.symbol + "/ PRACTICE WORDS");
+                    insertedBtn.setAllCaps(false);
+                    insertedBtn.setTextSize(20);
+                    insertedBtn.setTextColor(getResources().getColor(R.color.white));
+                    insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                insertedBtn.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "/" + s.symbol + "/ Practice Words Coming Soon!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -112,12 +174,12 @@ public class Consonants extends Fragment {
 
         // Plosives
 
-        sound pSound = new sound(R.id.button10,"p",R.raw.psound,"The P Sound", 1,1,2, new String[]{"person, people"});
-        sound bSound = new sound(R.id.button11,"b",R.raw.bsound,"The B Sound", 2,1,2, new String[]{"bowl", "bible"});
-        sound tSound = new sound(R.id.button12,"t",R.raw.tsound,"The T Sound", 3,1,2, new String[]{"teen", "time"});
-        sound dSound = new sound(R.id.button13,"d",R.raw.dsound,"The D Sound", 1,2,2, new String[]{"dead", "header"});
-        sound kSound = new sound(R.id.button14,"k",R.raw.ksound,"The K Sound", 2,2,2, new String[]{"queue", "quite"});
-        sound gSound = new sound(R.id.button15,"g",R.raw.gsound,"The G Sound", 3,2,2, new String[]{"great", "green"});
+        sound pSound = new sound(R.id.button10,"p",R.raw.psound,"The P Sound", 1,4,2, new String[]{"person, people"});
+        sound bSound = new sound(R.id.button11,"b",R.raw.bsound,"The B Sound", 2,4,2, new String[]{"bowl", "bible"});
+        sound tSound = new sound(R.id.button12,"t",R.raw.tsound,"The T Sound", 3,4,2, new String[]{"teen", "time"});
+        sound dSound = new sound(R.id.button13,"d",R.raw.dsound,"The D Sound", 1,5,2, new String[]{"dead", "header"});
+        sound kSound = new sound(R.id.button14,"k",R.raw.ksound,"The K Sound", 2,5,2, new String[]{"queue", "quite"});
+        sound gSound = new sound(R.id.button15,"g",R.raw.gsound,"The G Sound", 3,5,2, new String[]{"great", "green"});
 
         createButton(button10, pSound, sound10);
         createButton(button11, bSound, sound11);
@@ -128,27 +190,27 @@ public class Consonants extends Fragment {
 
         // Affricates
 
-        sound chSound = new sound(R.id.button16,"tʃ",R.raw.chsound,"The CH Sound", 1,1,3, new String[]{"chime", "chew"});
-        sound jSound = new sound(R.id.button17,"dʒ",R.raw.jsound,"The J Sound", 2,1,3, new String[]{"project", "manager"});
+        sound chSound = new sound(R.id.button16,"tʃ",R.raw.chsound,"The CH Sound", 1,6,3, new String[]{"chime", "chew"});
+        sound jSound = new sound(R.id.button17,"dʒ",R.raw.jsound,"The J Sound", 2,6,3, new String[]{"project", "manager"});
         createButton(button16, chSound, sound16);
         createButton(button17, jSound, sound17);
 
         // Nasals
 
-        sound mSound = new sound(R.id.button18,"m",R.raw.msound,"The M Sound", 1,1,4, new String[]{"chime", "mother"});
-        sound nSound = new sound(R.id.button19,"n",R.raw.nsound,"The N Sound", 2,1,4, new String[]{"none", "crown"});
-        sound ngSound = new sound(R.id.button20,"ŋ",R.raw.ngsound,"The NG Sound", 3,1,4, new String[]{"sing", "finger"});
+        sound mSound = new sound(R.id.button18,"m",R.raw.msound,"The M Sound", 1,7,4, new String[]{"chime", "mother"});
+        sound nSound = new sound(R.id.button19,"n",R.raw.nsound,"The N Sound", 2,7,4, new String[]{"none", "crown"});
+        sound ngSound = new sound(R.id.button20,"ŋ",R.raw.ngsound,"The NG Sound", 3,7,4, new String[]{"sing", "finger"});
         createButton(button18, mSound, sound18);
         createButton(button19, nSound, sound19);
         createButton(button20, ngSound, sound20);
 
         // Approximants
 
-        sound lightLSound = new sound(R.id.button21,"l",R.raw.lightl,"The Light L", 1,1,5, new String[]{"light", "really"});
-        sound darkLSound = new sound(R.id.button22,"ɫ",R.raw.darkl,"The Dark L", 2,1,5, new String[]{"real", "milk"});
-        sound rSound = new sound(R.id.button23,"r",R.raw.rsound,"The R Sound", 3,1,5, new String[]{"project", "round"});
-        sound ySound = new sound(R.id.button24,"j",R.raw.ysound,"The Yod", 1,2,5, new String[]{"you", "beautiful"});
-        sound wSound = new sound(R.id.button25,"w",R.raw.wsound,"The W Sound", 1,2,5, new String[]{"when", "why"});
+        sound lightLSound = new sound(R.id.button21,"l",R.raw.lightl,"The Light L", 1,8,5, new String[]{"light", "really"});
+        sound darkLSound = new sound(R.id.button22,"ɫ",R.raw.darkl,"The Dark L", 2,8,5, new String[]{"real", "milk"});
+        sound rSound = new sound(R.id.button23,"r",R.raw.rsound,"The R Sound", 3,8,5, new String[]{"project", "round"});
+        sound ySound = new sound(R.id.button24,"j",R.raw.ysound,"The Yod", 1,9,5, new String[]{"you", "beautiful"});
+        sound wSound = new sound(R.id.button25,"w",R.raw.wsound,"The W Sound", 1,9,5, new String[]{"when", "why"});
         createButton(button21, lightLSound, sound21);
         createButton(button22, darkLSound, sound22);
         createButton(button23, rSound, sound23);
