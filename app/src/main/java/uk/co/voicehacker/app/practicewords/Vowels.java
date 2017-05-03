@@ -158,13 +158,13 @@ public class Vowels extends Fragment {
 
         // Short Vowels
 
-        sound shortAhsound = new sound(R.id.button1,"æ",R.raw.ah,"The /æ/ Sound", 1,1,1, new String[]{"attack","attribute","actual"});
-        sound ehSound = new sound(R.id.button2,"e",R.raw.eh,"The /e/ Sound", 2,1,1, new String[]{"ahead","already","bed","bedroom","bell","better","cell","check","dead","death","definitely","edge","else","fell","felt","forget","gently","get","head","heavy","held","hello","help","herself","himself","instead","led","left","leg","less","let","letter","meant","met","myself","pretend","red","said","self","set","settle","smell","tell","ten","well","yell","yet","yourself"});
-        sound ihSound = new sound(R.id.button3,"ɪ",R.raw.ih,"The /ɪ/ Sound", 1,2,1, new String[]{"admit","anything","big","bit","blink","bring","build","business","city","did","different","dinner","disappear","drink","figure","fill","finger","finish","fit","fix","flip","giggle","give","grin","grip","him","his","hit","if","ignore","imagine","important","inside","instead","into","isn't","it","kick","kid","kill","kiss","kitchen","lip","listen","little","live","middle","minute","mirror","miss","morning","Mr.","Mrs.","music","nothing","notice","office","pick","picture","pink","possible","promise","quick","shift","shirt","sick","since","single","sister","sit","situation","six","skin","something","stick","still","stupid","thick","thing","think","this","trip","until","visit","which","whisper","will","wish","with","within","without"});
-        sound shortOohSound = new sound(R.id.button4,"ʊ",R.raw.ouh,"The /ʊ/ Sound", 1,2,1, new String[]{"book","could","couldn't","foot","full","good","look","pull","put","shook","should","shouldn't","stood","took","wood","would","wouldn't"});
-        sound ohSound = new sound(R.id.button5,"ɒ",R.raw.oh,"The /ɒ/ Sound", 2,2,1, new String[]{"cot","hot"});
-        sound uhSound = new sound(R.id.button6,"ʌ",R.raw.uh,"The /ʌ/ Sound", 1,3,1, new String[]{"but","shut","fuss"});
-        sound schwaSound = new sound(R.id.button7,"ə",R.raw.schwa,"The Schwa", 2,3,1, new String[]{"comma","better","compress"});
+        sound shortAhsound = new sound(R.id.button1,"æ",R.raw.ah,"The /æ/ Sound", 1,1,1, new String[]{"attack","cat","stand","cancel","back","add","fashion","lamp","bag","had"});
+        sound ehSound = new sound(R.id.button2,"e",R.raw.eh,"The /e/ Sound", 2,1,1, new String[]{"guest","bet","get","friend","lend","mend","pet","many","expensive","very"});
+        sound ihSound = new sound(R.id.button3,"ɪ",R.raw.ih,"The /ɪ/ Sound", 1,2,1, new String[]{"think","bit","fill","still","hill","city","biscuit","ring","music","kitchen"});
+        sound shortOohSound = new sound(R.id.button4,"ʊ",R.raw.ouh,"The /ʊ/ Sound", 1,2,1, new String[]{"book","could","couldn't","foot","full","good","look","pull","put","shook"});
+        sound ohSound = new sound(R.id.button5,"ɒ",R.raw.oh,"The /ɒ/ Sound", 2,2,1, new String[]{"won","off","not","cost","hot","dog","sock","sausage","pot","chocolate"});
+        sound uhSound = new sound(R.id.button6,"ʌ",R.raw.uh,"The /ʌ/ Sound", 1,3,1, new String[]{"button","just","hut","other","mother","government","blood","bus","chuckle","enough"});
+        sound schwaSound = new sound(R.id.button7,"ə",R.raw.schwa,"The Schwa", 2,3,1, new String[]{"comma","better","complete","station","england","doctor","delicate","allow","forgot","local"});
 
         createButton(button1, shortAhsound, sound1);
         createButton(button2, ehSound, sound2);
@@ -176,11 +176,11 @@ public class Vowels extends Fragment {
 
         // Long Vowels
 
-        sound eeSound = new sound(R.id.button8,"iː",R.raw.ee,"The /iː/ Sound", 1,4,2, new String[]{"mean", "seen"});
-        sound ooSound = new sound(R.id.button9,"uː",R.raw.oo,"The /uː/ Sound", 2,4,2, new String[]{"soon", "bloom"});
-        sound urSound = new sound(R.id.button10,"ɜː",R.raw.ur,"The /ɜː/ Sound", 3,4,2, new String[]{"hurt", "search"});
-        sound orSound = new sound(R.id.button11,"ɔː",R.raw.or,"The /ɔː/ Sound", 1,5,2, new String[]{"cause", "force"});
-        sound arSound = new sound(R.id.button12,"ɑː",R.raw.longah,"The /ɑː/ Sound", 2,5,2, new String[]{"pass", "master"});
+        sound eeSound = new sound(R.id.button8,"iː",R.raw.ee,"The /iː/ Sound", 1,4,2, new String[]{"free","keep","mean","clean","speech","need","feed","seen","believe","thirteen"});
+        sound ooSound = new sound(R.id.button9,"uː",R.raw.oo,"The /uː/ Sound", 2,4,2, new String[]{"blue","food","new","who","queue","few","group","do","movie","shoe"});
+        sound urSound = new sound(R.id.button10,"ɜː",R.raw.ur,"The /ɜː/ Sound", 3,4,2, new String[]{"hurt","shirt","first","thirteen","work","worse","were","urgent","word","earth"});
+        sound orSound = new sound(R.id.button11,"ɔː",R.raw.or,"The /ɔː/ Sound", 1,5,2, new String[]{"tall","more","thought","caution","order","also","short","taught","north","august"});
+        sound arSound = new sound(R.id.button12,"ɑː",R.raw.longah,"The /ɑː/ Sound", 2,5,2, new String[]{"fast","car","staff","photograph","past","calm","bath","after","heart","party"});
 
         createButton(button8, eeSound, sound8);
         createButton(button9, ooSound, sound9);
@@ -190,14 +190,14 @@ public class Vowels extends Fragment {
 
         // Diphthongs
 
-        sound ay = new sound(R.id.button13,"eɪ",R.raw.ay,"The /eɪ/ Sound", 1,6,3, new String[]{"day", "fade"});
-        sound igh = new sound(R.id.button14,"aɪ",R.raw.igh,"The /aɪ/ Sound", 2,6,3, new String[]{"quite", "try"});
-        sound ow = new sound(R.id.button15,"aʊ",R.raw.ow,"The /aʊ/ Sound", 3,6,3, new String[]{"mouth", "now"});
-        sound oh = new sound(R.id.button16,"əʊ",R.raw.o,"The /əʊ/ Sound", 1,7,3, new String[]{"go", "open"});
-        sound ear = new sound(R.id.button17,"ɪə",R.raw.ear,"The /ɪə/ Sound", 2,7,3, new String[]{"near", "fear"});
-        sound ehuh = new sound(R.id.button18,"eə",R.raw.air,"The /eə/ Sound", 3,7,3, new String[]{"air", "care"});
-        sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", 1,8,3, new String[]{"boy", "soil"});
-        sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", 2,8,3, new String[]{"pure", "cure"});
+        sound ay = new sound(R.id.button13,"eɪ",R.raw.ay,"The /eɪ/ Sound", 1,6,3, new String[]{"same","fame","rain","hey","game","brain","amaze","hate","case","aim"});
+        sound igh = new sound(R.id.button14,"aɪ",R.raw.igh,"The /aɪ/ Sound", 2,6,3, new String[]{"fine","line","time","mine","kind","find","sign","die","hi","my"});
+        sound ow = new sound(R.id.button15,"aʊ",R.raw.ow,"The /aʊ/ Sound", 3,6,3, new String[]{"out","about","now","how","shower","power","found","loud","proud","without"});
+        sound oh = new sound(R.id.button16,"əʊ",R.raw.o,"The /əʊ/ Sound", 1,7,3, new String[]{"home","know","grow","show","flow","OK","open","location","load","cold"});
+        sound ear = new sound(R.id.button17,"ɪə",R.raw.ear,"The /ɪə/ Sound", 2,7,3, new String[]{"ear","real","area","beer","dear","hear","nearly","year","weird","really"});
+        sound ehuh = new sound(R.id.button18,"eə",R.raw.air,"The /eə/ Sound", 3,7,3, new String[]{"chair","air","care","area","there","mary","dare","nightmare","rare","share"});
+        sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", 1,8,3, new String[]{"boy","coin","foil","noise","toy","choice","avoid","join","point","voice"});
+        sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", 2,8,3, new String[]{"pure","cure","endure","jewel","usual","fury","mature","during","secure","curious"});
 
         createButton(button13, ay, sound13);
         createButton(button14, igh, sound14);
