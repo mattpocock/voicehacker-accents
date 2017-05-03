@@ -1,35 +1,44 @@
 package uk.co.voicehacker.app.practicewords;
 
-
-
-import android.media.MediaPlayer;
-import android.support.v4.app.FragmentManager;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.TextView;
 
+/**
+ * Created by Matt on 03-May-17.
+ */
 
-public class MainActivity extends AppCompatActivity {
-
-
+public class ShowWordsPager extends AppCompatActivity {
 
     FragmentPagerAdapter adapterViewPager;
+    String wordArr[];
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        setContentView(R.layout.show_words_pager);
+        ViewPager vpPager = (ViewPager) findViewById(R.id.showwordsvpager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
+        // Get Intent Stuff
+
+        Intent intent = getIntent();
+        wordArr = intent.getStringArrayExtra("wordArr");
+        title = intent.getStringExtra("title");
 
         vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
+
             }
 
             // This method will be invoked when the current page is scrolled
@@ -49,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     // ...
 
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
-        public static int NUM_ITEMS = 2;
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -59,20 +68,15 @@ public class MainActivity extends AppCompatActivity {
         // Returns total number of pages
         @Override
         public int getCount() {
-            return NUM_ITEMS;
+            Intent intent = getIntent();
+            wordArr = intent.getStringArrayExtra("wordArr");
+            return wordArr.length;
         }
 
         // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return Consonants.newInstance(0, "Page # 1");
-                case 1:
-                    return Vowels.newInstance(1, "Page # 2");
-                default:
-                    return null;
-            }
+            return ShowWordsFragment.newInstance(title, wordArr, position);
         }
 
         // Returns the page title for the top indicator

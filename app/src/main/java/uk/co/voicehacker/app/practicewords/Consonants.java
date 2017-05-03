@@ -1,5 +1,6 @@
 package uk.co.voicehacker.app.practicewords;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -10,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 /**
  * Created by Matt on 01-May-17.
@@ -109,7 +113,12 @@ public class Consonants extends Fragment {
 
                 insertedBtn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "/" + s.symbol + "/ Practice Words Coming Soon!", Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(getContext(), ShowWordsPager.class);
+                        i.putExtra("title", s.title);
+                        i.putExtra("wordArr", s.words);
+                        startActivity(i);
+
                     }
                 });
             }
@@ -158,10 +167,10 @@ public class Consonants extends Fragment {
 
         sound unvoicedTHsound = new sound(R.id.button1,"θ",R.raw.unvoicedth,"The Unvoiced TH", 1,1,1, new String[]{"think","thumb","thistle"});
         sound voicedTHsound = new sound(R.id.button2,"ð",R.raw.voicedth,"The Voiced TH", 2,1,1, new String[]{"although","this","them"});
-        sound sSound = new sound(R.id.button3,"s",R.raw.ssound,"The S Sound", 3,1,1, new String[]{"simple"});
-        sound zSound = new sound(R.id.button4,"z",R.raw.zsound,"The Z Sound", 1,2,1, new String[]{"these"});
-        sound fSound = new sound(R.id.button5,"f",R.raw.fsound,"The F Sound", 2,2,1, new String[]{"find"});
-        sound vSound = new sound(R.id.button6,"v",R.raw.vsound,"The V Sound", 3,2,1, new String[]{"vindicate"});
+        sound sSound = new sound(R.id.button3,"s",R.raw.ssound,"The S Sound", 3,1,1, new String[]{"simple","sound"});
+        sound zSound = new sound(R.id.button4,"z",R.raw.zsound,"The Z Sound", 1,2,1, new String[]{"these","rose"});
+        sound fSound = new sound(R.id.button5,"f",R.raw.fsound,"The F Sound", 2,2,1, new String[]{"find","feel"});
+        sound vSound = new sound(R.id.button6,"v",R.raw.vsound,"The V Sound", 3,2,1, new String[]{"vindicate","vermin"});
         sound hSound = new sound(R.id.button7,"h",R.raw.hsound,"The H Sound", 1,3,1, new String[]{"hello", "hall", "high"});
         sound shSound = new sound(R.id.button8,"ʃ",R.raw.shsound,"The SH Sound", 2,3,1, new String[]{"shush", "relationship"});
         sound zhSound = new sound(R.id.button9,"ʒ",R.raw.zhsound,"The /ʒ/ Sound", 3,3,1, new String[]{"measure", "treasure"});
