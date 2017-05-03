@@ -7,6 +7,38 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/showwordsvpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0sp"
+        android:layout_weight="0.9">
     </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:orientation="horizontal"
+        android:layout_weight="0.1">
+
+        <Button
+            android:id="@+id/prevbtn"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginRight="0sp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Previous"
+            android:background="@drawable/background"/>
+
+        <Button
+            android:id="@+id/nextbtn"
+            android:layout_width="0sp"
+            android:textSize="18sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="0sp"
+            android:textColor="@color/white"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Next"
+            android:background="@drawable/background"/>
+    </LinearLayout>
 </LinearLayout>

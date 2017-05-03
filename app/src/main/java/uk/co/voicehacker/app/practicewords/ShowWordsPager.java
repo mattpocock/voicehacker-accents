@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -18,12 +20,13 @@ public class ShowWordsPager extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
     String wordArr[];
     String title;
+    int pageSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_words_pager);
-        ViewPager vpPager = (ViewPager) findViewById(R.id.showwordsvpager);
+        final ViewPager vpPager = (ViewPager) findViewById(R.id.showwordsvpager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
@@ -38,7 +41,7 @@ public class ShowWordsPager extends AppCompatActivity {
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
-
+                pageSelected = position;
             }
 
             // This method will be invoked when the current page is scrolled
@@ -54,6 +57,26 @@ public class ShowWordsPager extends AppCompatActivity {
                 // Code goes here
             }
         });
+
+        final Button nBtn = (Button) findViewById(R.id.nextbtn);
+        final Button pBtn = (Button) findViewById(R.id.prevbtn);
+
+        nBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pBtn.setPressed(false);
+                nBtn.setPressed(true);
+                vpPager.setCurrentItem(pageSelected + 1);
+            }
+        });
+
+        pBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pBtn.setPressed(true);
+                nBtn.setPressed(false);
+                vpPager.setCurrentItem(pageSelected - 1);
+            }
+        });
+
     }
 
     // ...

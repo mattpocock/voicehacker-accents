@@ -9,6 +9,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TabHost;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        final ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
@@ -45,6 +49,28 @@ public class MainActivity extends AppCompatActivity {
                 // Code goes here
             }
         });
+
+        // Navigator Buttons
+
+        final Button vBtn = (Button) findViewById(R.id.vowelbtn);
+        final Button cBtn = (Button) findViewById(R.id.consbtn);
+
+        vBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                vpPager.setCurrentItem(1);
+            }
+        });
+
+
+
+        cBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                vpPager.setCurrentItem(0);
+            }
+        });
+
+
+
     }
 
     // ...
@@ -83,4 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
 }
+
+
+
