@@ -96,12 +96,16 @@ public class Consonants extends Fragment {
                     Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
 
 
-
                     insertedBtn.setText("/" + s.symbol + "/ PRACTICE WORDS");
                     insertedBtn.setAllCaps(false);
                     insertedBtn.setTextSize(20);
                     insertedBtn.setTextColor(getResources().getColor(R.color.white));
                     insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    // Prepare the View for the animation
+                    insertedBtn.setAlpha(0.0f);
+                    // Start the animation
+                    insertedBtn.animate()
+                        .alpha(1.0f);
 
                 insertedBtn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {

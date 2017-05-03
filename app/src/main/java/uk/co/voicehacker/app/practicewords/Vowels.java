@@ -97,6 +97,12 @@ public class Vowels extends Fragment {
                 insertedBtn.setTextColor(getResources().getColor(R.color.white));
                 insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
+                // Prepare the View for the animation
+                insertedBtn.setAlpha(0.0f);
+                // Start the animation
+                insertedBtn.animate()
+                        .alpha(1.0f);
+
                 insertedBtn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         Toast.makeText(getContext(), "/" + s.symbol + "/ Practice Words Coming Soon!", Toast.LENGTH_SHORT).show();
