@@ -154,6 +154,8 @@ public class Vowels extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //TODO Put in full word lists for each sound
+
         // Short Vowels
 
         sound shortAhsound = new sound(R.id.button1,"æ",R.raw.ah,"The /æ/ Sound", 1,1,1, new String[]{"attack","attribute","actual"});
@@ -176,7 +178,7 @@ public class Vowels extends Fragment {
 
         sound eeSound = new sound(R.id.button8,"iː",R.raw.ee,"The /iː/ Sound", 1,4,2, new String[]{"mean", "seen"});
         sound ooSound = new sound(R.id.button9,"uː",R.raw.oo,"The /uː/ Sound", 2,4,2, new String[]{"soon", "bloom"});
-        sound urSound = new sound(R.id.button10,"ɜː",R.raw.ur,"The /ɜː/ Sound", 3,4,2, new String[]{"hurt, search"});
+        sound urSound = new sound(R.id.button10,"ɜː",R.raw.ur,"The /ɜː/ Sound", 3,4,2, new String[]{"hurt", "search"});
         sound orSound = new sound(R.id.button11,"ɔː",R.raw.or,"The /ɔː/ Sound", 1,5,2, new String[]{"cause", "force"});
         sound arSound = new sound(R.id.button12,"ɑː",R.raw.longah,"The /ɑː/ Sound", 2,5,2, new String[]{"pass", "master"});
 

@@ -187,7 +187,7 @@ public class Consonants extends Fragment {
 
         // Plosives
 
-        sound pSound = new sound(R.id.button10,"p",R.raw.psound,"The P Sound", 1,4,2, new String[]{"person, people"});
+        sound pSound = new sound(R.id.button10,"p",R.raw.psound,"The P Sound", 1,4,2, new String[]{"person", "people"});
         sound bSound = new sound(R.id.button11,"b",R.raw.bsound,"The B Sound", 2,4,2, new String[]{"bowl", "bible"});
         sound tSound = new sound(R.id.button12,"t",R.raw.tsound,"The T Sound", 3,4,2, new String[]{"teen", "time"});
         sound dSound = new sound(R.id.button13,"d",R.raw.dsound,"The D Sound", 1,5,2, new String[]{"dead", "header"});

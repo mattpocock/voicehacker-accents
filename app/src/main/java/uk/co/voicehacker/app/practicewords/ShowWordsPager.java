@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by Matt on 03-May-17.
  */
@@ -58,6 +60,9 @@ public class ShowWordsPager extends AppCompatActivity {
             }
         });
 
+        //TODO Find a better word than 'previous' - people click on that button when they want to go back
+
+        final Button bBtn = (Button) findViewById(R.id.backbtn);
         final Button nBtn = (Button) findViewById(R.id.nextbtn);
         final Button pBtn = (Button) findViewById(R.id.prevbtn);
 
@@ -74,6 +79,13 @@ public class ShowWordsPager extends AppCompatActivity {
                 pBtn.setPressed(true);
                 nBtn.setPressed(false);
                 vpPager.setCurrentItem(pageSelected - 1);
+            }
+        });
+
+        bBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
             }
         });
 
