@@ -2,6 +2,7 @@ package uk.co.voicehacker.app.practicewords;
 
 
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
         final ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            int p = intent.getIntExtra("sentFrom", 0);
+            vpPager.setCurrentItem(p);
+        }
+
+
+
+
 
         vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

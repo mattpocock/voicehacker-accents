@@ -115,6 +115,7 @@ public class Consonants extends Fragment {
                         Intent i = new Intent(getContext(), ShowWordsPager.class);
                         i.putExtra("title", s.title);
                         i.putExtra("wordArr", s.words);
+                        i.putExtra("sentFrom", 0);
                         startActivity(i);
 
                     }

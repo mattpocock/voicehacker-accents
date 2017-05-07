@@ -22,6 +22,7 @@ public class ShowWordsPager extends AppCompatActivity {
     FragmentPagerAdapter adapterViewPager;
     String wordArr[];
     String title;
+    int sentFrom;
     int pageSelected;
 
     @Override
@@ -37,6 +38,7 @@ public class ShowWordsPager extends AppCompatActivity {
         Intent intent = getIntent();
         wordArr = intent.getStringArrayExtra("wordArr");
         title = intent.getStringExtra("title");
+        sentFrom = intent.getIntExtra("sentFrom", 0);
 
         vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -59,8 +61,6 @@ public class ShowWordsPager extends AppCompatActivity {
                 // Code goes here
             }
         });
-
-        //TODO Find a better word than 'previous' - people click on that button when they want to go back
 
         final Button bBtn = (Button) findViewById(R.id.backbtn);
         final Button nBtn = (Button) findViewById(R.id.nextbtn);
@@ -85,6 +85,7 @@ public class ShowWordsPager extends AppCompatActivity {
         bBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("sentFrom", sentFrom);
                 startActivity(i);
             }
         });
