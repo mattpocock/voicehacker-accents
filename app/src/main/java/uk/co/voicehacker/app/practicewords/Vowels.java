@@ -21,13 +21,14 @@ public class Vowels extends Fragment {
     // Declares Buttons & Sounds
 
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19, button20, button21;
-    MediaPlayer sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8, sound9, sound10, sound11, sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21;
+
+    MediaPlayer allsounds;
 
     boolean navBarOn = false;
 
     // Create Button Method
 
-    public void createButton(Button btn, final sound s, final MediaPlayer mp) {
+    public void createButton(Button btn, final sound s) {
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
@@ -38,16 +39,12 @@ public class Vowels extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                MediaPlayer media = mp;
-                media = MediaPlayer.create(getActivity(), sf);
+                if (allsounds != null) {
+                    allsounds.release();
+                }
 
-                media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                media.start();
+                allsounds = MediaPlayer.create(getActivity(), sf);
+                allsounds.start();
 
                 // Handles nav bar creation
 
@@ -166,13 +163,13 @@ public class Vowels extends Fragment {
         sound uhSound = new sound(R.id.button6,"ʌ",R.raw.uh,"The /ʌ/ Sound", 1,3,1, new String[]{"button","just","hut","other","mother","government","blood","bus","chuckle","enough"});
         sound schwaSound = new sound(R.id.button7,"ə",R.raw.schwa,"The Schwa", 2,3,1, new String[]{"comma","better","complete","station","england","doctor","delicate","allow","forgot","local"});
 
-        createButton(button1, shortAhsound, sound1);
-        createButton(button2, ehSound, sound2);
-        createButton(button3, ihSound, sound3);
-        createButton(button4, shortOohSound, sound4);
-        createButton(button5, ohSound, sound5);
-        createButton(button6, uhSound, sound6);
-        createButton(button7, schwaSound, sound7);
+        createButton(button1, shortAhsound);
+        createButton(button2, ehSound);
+        createButton(button3, ihSound);
+        createButton(button4, shortOohSound);
+        createButton(button5, ohSound);
+        createButton(button6, uhSound);
+        createButton(button7, schwaSound);
 
         // Long Vowels
 
@@ -182,11 +179,11 @@ public class Vowels extends Fragment {
         sound orSound = new sound(R.id.button11,"ɔː",R.raw.or,"The /ɔː/ Sound", 1,5,2, new String[]{"tall","more","thought","caution","order","also","short","taught","north","august"});
         sound arSound = new sound(R.id.button12,"ɑː",R.raw.longah,"The /ɑː/ Sound", 2,5,2, new String[]{"fast","car","staff","photograph","past","calm","bath","after","heart","party"});
 
-        createButton(button8, eeSound, sound8);
-        createButton(button9, ooSound, sound9);
-        createButton(button10, urSound, sound10);
-        createButton(button11, orSound, sound11);
-        createButton(button12, arSound, sound12);
+        createButton(button8, eeSound);
+        createButton(button9, ooSound);
+        createButton(button10, urSound);
+        createButton(button11, orSound);
+        createButton(button12, arSound);
 
         // Diphthongs
 
@@ -199,14 +196,14 @@ public class Vowels extends Fragment {
         sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", 1,8,3, new String[]{"boy","coin","foil","noise","toy","choice","avoid","join","point","voice"});
         sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", 2,8,3, new String[]{"pure","cure","endure","jewel","usual","fury","mature","during","secure","curious"});
 
-        createButton(button13, ay, sound13);
-        createButton(button14, igh, sound14);
-        createButton(button15, ow, sound15);
-        createButton(button16, oh, sound16);
-        createButton(button17, ear, sound17);
-        createButton(button18, ehuh, sound18);
-        createButton(button19, oy, sound19);
-        createButton(button20, ure, sound20);
+        createButton(button13, ay);
+        createButton(button14, igh);
+        createButton(button15, ow);
+        createButton(button16, oh);
+        createButton(button17, ear);
+        createButton(button18, ehuh);
+        createButton(button19, oy);
+        createButton(button20, ure);
 
 
 

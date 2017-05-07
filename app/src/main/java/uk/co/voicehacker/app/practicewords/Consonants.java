@@ -26,7 +26,8 @@ public class Consonants extends Fragment {
     // Declares Buttons & Sounds
 
     Button button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16, button17, button18, button19, button20, button21, button22, button23, button24, button25;
-    MediaPlayer sound1, sound2, sound3, sound4, sound5, sound6, sound7, sound8, sound9, sound10, sound11, sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21, sound22, sound23, sound24, sound25;
+
+    MediaPlayer allsounds;
 
     // Is there a navbar?
 
@@ -34,7 +35,7 @@ public class Consonants extends Fragment {
 
     // Create Button Method
 
-    public void createButton(Button btn, final sound s, final MediaPlayer mp) {
+    public void createButton(Button btn, final sound s) {
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
@@ -45,18 +46,15 @@ public class Consonants extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.M)
             public void onClick(View v) {
 
+                if (allsounds != null) {
+                    allsounds.release();
+                }
+
+
                 // Handles Sound Playing
 
-                MediaPlayer media = mp;
-                media = MediaPlayer.create(getActivity(), sf);
-
-                media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                media.start();
+                allsounds = MediaPlayer.create(getActivity(), sf);
+                allsounds.start();
 
                 // Handles nav bar creation
 
@@ -175,15 +173,15 @@ public class Consonants extends Fragment {
         sound shSound = new sound(R.id.button8,"ʃ",R.raw.shsound,"The SH Sound", 2,3,1, new String[]{"brush","finish","flash","push","relationship","rush","shadow","shake","share","she"});
         sound zhSound = new sound(R.id.button9,"ʒ",R.raw.zhsound,"The /ʒ/ Sound", 3,3,1, new String[]{"measure","treasure","pleasure","vision","usual","casual","revision","occasion","division","decision"});
 
-        createButton(button1, unvoicedTHsound, sound1);
-        createButton(button2, voicedTHsound, sound2);
-        createButton(button3, sSound, sound3);
-        createButton(button4, zSound, sound4);
-        createButton(button5, fSound, sound5);
-        createButton(button6, vSound, sound6);
-        createButton(button7, hSound, sound7);
-        createButton(button8, shSound, sound8);
-        createButton(button9, zhSound, sound9);
+        createButton(button1, unvoicedTHsound);
+        createButton(button2, voicedTHsound);
+        createButton(button3, sSound);
+        createButton(button4, zSound);
+        createButton(button5, fSound);
+        createButton(button6, vSound);
+        createButton(button7, hSound);
+        createButton(button8, shSound);
+        createButton(button9, zhSound);
 
         // Plosives
 
@@ -194,28 +192,28 @@ public class Consonants extends Fragment {
         sound kSound = new sound(R.id.button14,"k",R.raw.ksound,"The K Sound", 2,5,2, new String[]{"attack","back","breakfast","check","chuckle","dark","jacket","keep","kept","kick"});
         sound gSound = new sound(R.id.button15,"g",R.raw.gsound,"The G Sound", 3,5,2, new String[]{"again","ago","anger","began","begin","drag","figure","forget","game","gasp"});
 
-        createButton(button10, pSound, sound10);
-        createButton(button11, bSound, sound11);
-        createButton(button12, tSound, sound12);
-        createButton(button13, dSound, sound13);
-        createButton(button14, kSound, sound14);
-        createButton(button15, gSound, sound15);
+        createButton(button10, pSound);
+        createButton(button11, bSound);
+        createButton(button12, tSound);
+        createButton(button13, dSound);
+        createButton(button14, kSound);
+        createButton(button15, gSound);
 
         // Affricates
 
         sound chSound = new sound(R.id.button16,"tʃ",R.raw.chsound,"The CH Sound", 1,6,3, new String[]{"approach","catch","chair","chance","chase","check","chest","child","chuckle","kitchen"});
         sound jSound = new sound(R.id.button17,"dʒ",R.raw.jsound,"The J Sound", 2,6,3, new String[]{"enjoy","jacket","jeans","join","joke","jump","just","edge","age","college"});
-        createButton(button16, chSound, sound16);
-        createButton(button17, jSound, sound17);
+        createButton(button16, chSound);
+        createButton(button17, jSound);
 
         // Nasals
 
         sound mSound = new sound(R.id.button18,"m",R.raw.msound,"The M Sound", 1,7,4, new String[]{"admit","almost","amaze","anymore","arm","became","bedroom","bottom","climb","come"});
         sound nSound = new sound(R.id.button19,"n",R.raw.nsound,"The N Sound", 2,7,4, new String[]{"band","been","began","blonde","boyfriend","chance","change","children","continue","control"});
         sound ngSound = new sound(R.id.button20,"ŋ",R.raw.ngsound,"The NG Sound", 3,7,4, new String[]{"during","evening","finger","hung","blink","drink","pink","thank","long","morning"});
-        createButton(button18, mSound, sound18);
-        createButton(button19, nSound, sound19);
-        createButton(button20, ngSound, sound20);
+        createButton(button18, mSound);
+        createButton(button19, nSound);
+        createButton(button20, ngSound);
 
         // Approximants
 
@@ -224,11 +222,11 @@ public class Consonants extends Fragment {
         sound rSound = new sound(R.id.button23,"r",R.raw.rsound,"The R Sound", 3,8,5, new String[]{"carry","very","cry","dry","every","real","right","ring","round","sorry"});
         sound ySound = new sound(R.id.button24,"j",R.raw.ysound,"The Yod", 1,9,5, new String[]{"year","UK","yell","yes","yet","yourself","USA","beautiful","curious","music"});
         sound wSound = new sound(R.id.button25,"w",R.raw.wsound,"The W Sound", 1,9,5, new String[]{"one","once","what","why","where","forward","however","sweet","quite","quiet"});
-        createButton(button21, lightLSound, sound21);
-        createButton(button22, darkLSound, sound22);
-        createButton(button23, rSound, sound23);
-        createButton(button24, ySound, sound24);
-        createButton(button25, wSound, sound25);
+        createButton(button21, lightLSound);
+        createButton(button22, darkLSound);
+        createButton(button23, rSound);
+        createButton(button24, ySound);
+        createButton(button25, wSound);
 
 
     }
