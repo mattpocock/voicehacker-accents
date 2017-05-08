@@ -5,12 +5,35 @@
     android:orientation="vertical"
     android:layout_marginBottom="-1sp">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/showwordsvpager"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0sp"
+        android:orientation="horizontal"
         android:layout_weight="0.4">
-    </android.support.v4.view.ViewPager>
+
+        <ImageButton
+            android:id="@+id/prevbtn"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:src="@drawable/leftbtn"
+            android:background="@drawable/whitebackground"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/showwordsvpager"
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/nextbtn"
+            android:layout_width="0sp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:src="@drawable/rightbtn"
+            android:background="@drawable/whitebackground"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,28 +90,10 @@
             android:text="Back"
             android:background="@drawable/altbackground"/>
 
-        <Button
-            android:id="@+id/prevbtn"
+        <TextView
             android:layout_width="0sp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:layout_marginRight="0sp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Previous"
-            android:background="@drawable/background"/>
-
-        <Button
-            android:id="@+id/nextbtn"
-            android:layout_width="0sp"
-            android:textSize="18sp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginLeft="0sp"
-            android:textColor="@color/white"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Next"
-            android:background="@drawable/background"/>
+            android:layout_weight="2"
+            android:background="@color/colorPrimary"/>
     </LinearLayout>
 </LinearLayout>

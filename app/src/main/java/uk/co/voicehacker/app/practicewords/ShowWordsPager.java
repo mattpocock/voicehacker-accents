@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -121,8 +122,8 @@ public class ShowWordsPager extends AppCompatActivity {
         });
 
         final Button bBtn = (Button) findViewById(R.id.backbtn);
-        final Button nBtn = (Button) findViewById(R.id.nextbtn);
-        final Button pBtn = (Button) findViewById(R.id.prevbtn);
+        final ImageButton nBtn = (ImageButton) findViewById(R.id.nextbtn);
+        final ImageButton pBtn = (ImageButton) findViewById(R.id.prevbtn);
 
         nBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -147,7 +148,7 @@ public class ShowWordsPager extends AppCompatActivity {
         LinearLayout moreinfoll = (LinearLayout) findViewById(R.id.moreinfo);
 
         TextView titleview = (TextView) findViewById(R.id.moreinfotitle);
-        titleview.setText(title.toUpperCase());
+        titleview.setText(title);
 
         int insertID = 0; // 1 Because of title, 0 if none
 

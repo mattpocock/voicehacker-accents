@@ -18,6 +18,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="Word Goes Here"
+            android:background="@color/white"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
