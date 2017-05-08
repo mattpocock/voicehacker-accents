@@ -109,6 +109,9 @@ public class Vowels extends Fragment {
                         i.putExtra("wordArr", s.words);
                         i.putExtra("sentFrom", 1);
                         i.putExtra("moreInfoSections", s.moreinfosections);
+                        if (allsounds != null) {
+                            allsounds.release();
+                        }
                         startActivity(i);
                     }
                 });

@@ -1,0 +1,860 @@
+<html>
+<head>
+<title>ShowWordsPager.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+ShowWordsPager.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">uk.co.voicehacker.app.practicewords; 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Intent; 
+</span><span class="s0">import </span><span class="s1">android.media.MediaPlayer; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.Fragment; 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.FragmentManager; 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.FragmentPagerAdapter; 
+</span><span class="s0">import </span><span class="s1">android.support.v4.view.ViewPager; 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.widget.Button; 
+</span><span class="s0">import </span><span class="s1">android.widget.ImageButton; 
+</span><span class="s0">import </span><span class="s1">android.widget.LinearLayout; 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView; 
+ 
+</span><span class="s0">import </span><span class="s1">org.w3c.dom.Text; 
+ 
+</span><span class="s0">import static </span><span class="s1">java.security.AccessController.getContext; 
+ 
+</span><span class="s2">/** 
+ * Created by Matt on 03-May-17. 
+ */</span><span class="s1"> 
+ 
+</span><span class="s0">public class </span><span class="s1">ShowWordsPager </span><span class="s0">extends </span><span class="s1">AppCompatActivity { 
+ 
+    FragmentPagerAdapter adapterViewPager; 
+    String wordArr[]; 
+    String title; 
+    </span><span class="s0">int </span><span class="s1">sentFrom; 
+    </span><span class="s0">int </span><span class="s1">moreInfoSections[]; 
+    </span><span class="s0">int </span><span class="s1">pageSelected; 
+    MediaPlayer media; 
+ 
+    </span><span class="s2">//TODO: Add All Words to This</span><span class="s1"> 
+ 
+    </span><span class="s0">int </span><span class="s1">getSoundFile(String word) { 
+        </span><span class="s0">int </span><span class="s1">sf; 
+ 
+        </span><span class="s0">switch </span><span class="s1">(word) { 
+ 
+            </span><span class="s2">// Unvoiced TH Sounds</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;bath&quot;</span><span class="s1">: sf = R.raw.bath; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;anything&quot;</span><span class="s1">: sf = R.raw.anything; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;think&quot;</span><span class="s1">: sf = R.raw.think; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;breath&quot;</span><span class="s1">: sf = R.raw.breath; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;death&quot;</span><span class="s1">: sf = R.raw.death; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;everything&quot;</span><span class="s1">: sf = R.raw.everything; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;month&quot;</span><span class="s1">: sf = R.raw.month; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mouth&quot;</span><span class="s1">: sf = R.raw.mouth; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;nothing&quot;</span><span class="s1">: sf = R.raw.nothing; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;something&quot;</span><span class="s1">: sf = R.raw.something; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Voiced TH Sounds</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;this&quot;</span><span class="s1">: sf = R.raw.thisfile; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;than&quot;</span><span class="s1">: sf = R.raw.than; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;that&quot;</span><span class="s1">: sf = R.raw.that; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;the&quot;</span><span class="s1">: sf = R.raw.the; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;themselves&quot;</span><span class="s1">: sf = R.raw.themselves; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mother&quot;</span><span class="s1">: sf = R.raw.mother; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;brother&quot;</span><span class="s1">: sf = R.raw.brother; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;these&quot;</span><span class="s1">: sf = R.raw.these; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;they&quot;</span><span class="s1">: sf = R.raw.they; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;together&quot;</span><span class="s1">: sf = R.raw.together; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// S Sounds</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;accept&quot;</span><span class="s1">: sf = R.raw.accept; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;against&quot;</span><span class="s1">: sf = R.raw.against; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;almost&quot;</span><span class="s1">: sf = R.raw.almost; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;also&quot;</span><span class="s1">: sf = R.raw.also; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;answer&quot;</span><span class="s1">: sf = R.raw.answer; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;ask&quot;</span><span class="s1">: sf = R.raw.ask; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;asleep&quot;</span><span class="s1">: sf = R.raw.asleep; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;beside&quot;</span><span class="s1">: sf = R.raw.beside; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;best&quot;</span><span class="s1">: sf = R.raw.best; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;breakfast&quot;</span><span class="s1">: sf = R.raw.breakfast; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Z Sounds</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;as&quot;</span><span class="s1">: sf = R.raw.as; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;busy&quot;</span><span class="s1">: sf = R.raw.busy; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;always&quot;</span><span class="s1">: sf = R.raw.always; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;cause&quot;</span><span class="s1">: sf = R.raw.cause; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;confuse&quot;</span><span class="s1">: sf = R.raw.confuse; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;does&quot;</span><span class="s1">: sf = R.raw.does; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;easy&quot;</span><span class="s1">: sf = R.raw.easy; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;has&quot;</span><span class="s1">: sf = R.raw.has; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;is&quot;</span><span class="s1">: sf = R.raw.is; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;jeans&quot;</span><span class="s1">: sf = R.raw.jeans; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Short 'Ah' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;attack&quot;</span><span class="s1">: sf = R.raw.attack; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;cat&quot;</span><span class="s1">: sf = R.raw.cat; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;stand&quot;</span><span class="s1">: sf = R.raw.stand; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;cancel&quot;</span><span class="s1">: sf = R.raw.cancel; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;back&quot;</span><span class="s1">: sf = R.raw.back; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;add&quot;</span><span class="s1">: sf = R.raw.add; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;fashion&quot;</span><span class="s1">: sf = R.raw.fashion; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;lamp&quot;</span><span class="s1">: sf = R.raw.lamp; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;bag&quot;</span><span class="s1">: sf = R.raw.bag; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;had&quot;</span><span class="s1">: sf = R.raw.had; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Short 'Eh' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;guest&quot;</span><span class="s1">: sf = R.raw.guest; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;bet&quot;</span><span class="s1">: sf = R.raw.bet; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;get&quot;</span><span class="s1">: sf = R.raw.get; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;friend&quot;</span><span class="s1">: sf = R.raw.friend; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;lend&quot;</span><span class="s1">: sf = R.raw.lend; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mend&quot;</span><span class="s1">: sf = R.raw.mend; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;pet&quot;</span><span class="s1">: sf = R.raw.pet; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;many&quot;</span><span class="s1">: sf = R.raw.many; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;expensive&quot;</span><span class="s1">: sf = R.raw.expensive; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;very&quot;</span><span class="s1">: sf = R.raw.very; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Short 'Ih' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;bit&quot;</span><span class="s1">: sf = R.raw.bit; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;fill&quot;</span><span class="s1">: sf = R.raw.fill; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;still&quot;</span><span class="s1">: sf = R.raw.still; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hill&quot;</span><span class="s1">: sf = R.raw.hill; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;city&quot;</span><span class="s1">: sf = R.raw.city; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;biscuit&quot;</span><span class="s1">: sf = R.raw.biscuit; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;ring&quot;</span><span class="s1">: sf = R.raw.ring; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;music&quot;</span><span class="s1">: sf = R.raw.music; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;kitchen&quot;</span><span class="s1">: sf = R.raw.kitchen; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Short 'Ooh' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;book&quot;</span><span class="s1">: sf = R.raw.book; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;could&quot;</span><span class="s1">: sf = R.raw.could; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;couldn't&quot;</span><span class="s1">: sf = R.raw.couldnt; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;foot&quot;</span><span class="s1">: sf = R.raw.foot; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;full&quot;</span><span class="s1">: sf = R.raw.full; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;good&quot;</span><span class="s1">: sf = R.raw.good; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;look&quot;</span><span class="s1">: sf = R.raw.look; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;pull&quot;</span><span class="s1">: sf = R.raw.pull; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;put&quot;</span><span class="s1">: sf = R.raw.put; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;shook&quot;</span><span class="s1">: sf = R.raw.shook; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Short 'Oh' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;won&quot;</span><span class="s1">: sf = R.raw.won; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;off&quot;</span><span class="s1">: sf = R.raw.off; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;not&quot;</span><span class="s1">: sf = R.raw.not; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;cost&quot;</span><span class="s1">: sf = R.raw.cost; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hot&quot;</span><span class="s1">: sf = R.raw.hot; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;dog&quot;</span><span class="s1">: sf = R.raw.dog; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;sock&quot;</span><span class="s1">: sf = R.raw.sock; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;sausage&quot;</span><span class="s1">: sf = R.raw.sausage; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;pot&quot;</span><span class="s1">: sf = R.raw.pot; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;chocolate&quot;</span><span class="s1">: sf = R.raw.chocolate; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Short Uh</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;button&quot;</span><span class="s1">: sf = R.raw.button; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;just&quot;</span><span class="s1">: sf = R.raw.just; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hut&quot;</span><span class="s1">: sf = R.raw.hut; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;other&quot;</span><span class="s1">: sf = R.raw.other; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;government&quot;</span><span class="s1">: sf = R.raw.government; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;blood&quot;</span><span class="s1">: sf = R.raw.blood; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;bus&quot;</span><span class="s1">: sf = R.raw.bus; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;chuckle&quot;</span><span class="s1">: sf = R.raw.chuckle; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;enough&quot;</span><span class="s1">: sf = R.raw.enough; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Schwa</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;comma&quot;</span><span class="s1">: sf = R.raw.comma; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;better&quot;</span><span class="s1">: sf = R.raw.better; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;complete&quot;</span><span class="s1">: sf = R.raw.complete; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;station&quot;</span><span class="s1">: sf = R.raw.station; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;england&quot;</span><span class="s1">: sf = R.raw.england; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;doctor&quot;</span><span class="s1">: sf = R.raw.doctor; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;delicate&quot;</span><span class="s1">: sf = R.raw.delicate; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;allow&quot;</span><span class="s1">: sf = R.raw.allow; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;forgot&quot;</span><span class="s1">: sf = R.raw.forgot; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;local&quot;</span><span class="s1">: sf = R.raw.local; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Long 'Ee' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;free&quot;</span><span class="s1">: sf = R.raw.free; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;keep&quot;</span><span class="s1">: sf = R.raw.keep; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mean&quot;</span><span class="s1">: sf = R.raw.mean; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;clean&quot;</span><span class="s1">: sf = R.raw.clean; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;speech&quot;</span><span class="s1">: sf = R.raw.speech; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;need&quot;</span><span class="s1">: sf = R.raw.need; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;feed&quot;</span><span class="s1">: sf = R.raw.feed; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;seen&quot;</span><span class="s1">: sf = R.raw.seen; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;believe&quot;</span><span class="s1">: sf = R.raw.believe; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;thirteen&quot;</span><span class="s1">: sf = R.raw.thirteen; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Long 'Oo' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;blue&quot;</span><span class="s1">: sf = R.raw.blue; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;food&quot;</span><span class="s1">: sf = R.raw.food; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;new&quot;</span><span class="s1">: sf = R.raw.newfile; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;who&quot;</span><span class="s1">: sf = R.raw.who; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;queue&quot;</span><span class="s1">: sf = R.raw.queue; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;few&quot;</span><span class="s1">: sf = R.raw.few; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;group&quot;</span><span class="s1">: sf = R.raw.group; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;do&quot;</span><span class="s1">: sf = R.raw.dofile; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;movie&quot;</span><span class="s1">: sf = R.raw.movie; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;shoe&quot;</span><span class="s1">: sf = R.raw.shoe; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Long 'Ur' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;hurt&quot;</span><span class="s1">: sf = R.raw.hurt; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;shirt&quot;</span><span class="s1">: sf = R.raw.shirt; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;first&quot;</span><span class="s1">: sf = R.raw.first; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;work&quot;</span><span class="s1">: sf = R.raw.work; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;worse&quot;</span><span class="s1">: sf = R.raw.worse; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;were&quot;</span><span class="s1">: sf = R.raw.were; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;urgent&quot;</span><span class="s1">: sf = R.raw.urgent; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;word&quot;</span><span class="s1">: sf = R.raw.word; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;earth&quot;</span><span class="s1">: sf = R.raw.earth; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Long 'Or' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;tall&quot;</span><span class="s1">: sf = R.raw.tall; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;more&quot;</span><span class="s1">: sf = R.raw.thought; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;caution&quot;</span><span class="s1">: sf = R.raw.caution; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;order&quot;</span><span class="s1">: sf = R.raw.order; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;short&quot;</span><span class="s1">: sf = R.raw.shortfile; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;taught&quot;</span><span class="s1">: sf = R.raw.taught; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;north&quot;</span><span class="s1">: sf = R.raw.north; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;august&quot;</span><span class="s1">: sf = R.raw.august; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Long 'Ah' Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;fast&quot;</span><span class="s1">: sf = R.raw.fast; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;car&quot;</span><span class="s1">: sf = R.raw.car; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;staff&quot;</span><span class="s1">: sf = R.raw.staff; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;photograph&quot;</span><span class="s1">: sf = R.raw.photograph; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;past&quot;</span><span class="s1">: sf = R.raw.past; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;calm&quot;</span><span class="s1">: sf = R.raw.calm; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;after&quot;</span><span class="s1">: sf = R.raw.after; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;heart&quot;</span><span class="s1">: sf = R.raw.heart; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;party&quot;</span><span class="s1">: sf = R.raw.party; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Ay Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;same&quot;</span><span class="s1">: sf = R.raw.same; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;fame&quot;</span><span class="s1">: sf = R.raw.fame; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;rain&quot;</span><span class="s1">: sf = R.raw.rain; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hey&quot;</span><span class="s1">: sf = R.raw.hey; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;game&quot;</span><span class="s1">: sf = R.raw.game; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;brain&quot;</span><span class="s1">: sf = R.raw.brain; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;amaze&quot;</span><span class="s1">: sf = R.raw.amaze; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hate&quot;</span><span class="s1">: sf = R.raw.hate; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;case&quot;</span><span class="s1">: sf = R.raw.casefile; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;aim&quot;</span><span class="s1">: sf = R.raw.aim; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Igh Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;fine&quot;</span><span class="s1">: sf = R.raw.fine; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;line&quot;</span><span class="s1">: sf = R.raw.line; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;time&quot;</span><span class="s1">: sf = R.raw.time; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mine&quot;</span><span class="s1">: sf = R.raw.mine; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;kind&quot;</span><span class="s1">: sf = R.raw.kind; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;find&quot;</span><span class="s1">: sf = R.raw.find; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;sign&quot;</span><span class="s1">: sf = R.raw.sign; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;die&quot;</span><span class="s1">: sf = R.raw.hi; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;my&quot;</span><span class="s1">: sf = R.raw.my; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hi&quot;</span><span class="s1">: sf = R.raw.hi; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Ow Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;out&quot;</span><span class="s1">: sf = R.raw.out; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;about&quot;</span><span class="s1">: sf = R.raw.about; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;now&quot;</span><span class="s1">: sf = R.raw.now; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;how&quot;</span><span class="s1">: sf = R.raw.shower; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;power&quot;</span><span class="s1">: sf = R.raw.power; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;found&quot;</span><span class="s1">: sf = R.raw.found; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;loud&quot;</span><span class="s1">: sf = R.raw.loud; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;shower&quot;</span><span class="s1">: sf = R.raw.shower; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;proud&quot;</span><span class="s1">: sf = R.raw.proud; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;without&quot;</span><span class="s1">: sf = R.raw.without; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// O Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;home&quot;</span><span class="s1">: sf = R.raw.home; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;grow&quot;</span><span class="s1">: sf = R.raw.grow; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;show&quot;</span><span class="s1">: sf = R.raw.flow; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;know&quot;</span><span class="s1">: sf = R.raw.know; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;flow&quot;</span><span class="s1">: sf = R.raw.flow; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;OK&quot;</span><span class="s1">: sf = R.raw.ok; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;open&quot;</span><span class="s1">: sf = R.raw.open; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;location&quot;</span><span class="s1">: sf = R.raw.location; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;load&quot;</span><span class="s1">: sf = R.raw.load; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;cold&quot;</span><span class="s1">: sf = R.raw.cold; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// O Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;ear&quot;</span><span class="s1">: sf = R.raw.ear; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;real&quot;</span><span class="s1">: sf = R.raw.real; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;area&quot;</span><span class="s1">: sf = R.raw.area; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;beer&quot;</span><span class="s1">: sf = R.raw.beer; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;dear&quot;</span><span class="s1">: sf = R.raw.dear; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;hear&quot;</span><span class="s1">: sf = R.raw.hear; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;nearly&quot;</span><span class="s1">: sf = R.raw.nearly; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;year&quot;</span><span class="s1">: sf = R.raw.year; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;weird&quot;</span><span class="s1">: sf = R.raw.weird; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;really&quot;</span><span class="s1">: sf = R.raw.cold; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Air Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;chair&quot;</span><span class="s1">: sf = R.raw.chair; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;air&quot;</span><span class="s1">: sf = R.raw.air; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;care&quot;</span><span class="s1">: sf = R.raw.care; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;there&quot;</span><span class="s1">: sf = R.raw.there; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mary&quot;</span><span class="s1">: sf = R.raw.mary; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;dare&quot;</span><span class="s1">: sf = R.raw.dare; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;rare&quot;</span><span class="s1">: sf = R.raw.rare; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;nightmare&quot;</span><span class="s1">: sf = R.raw.nightmare; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;share&quot;</span><span class="s1">: sf = R.raw.share; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Oy Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;boy&quot;</span><span class="s1">: sf = R.raw.boy; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;coin&quot;</span><span class="s1">: sf = R.raw.coin; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;foil&quot;</span><span class="s1">: sf = R.raw.foil; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;noise&quot;</span><span class="s1">: sf = R.raw.noise; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;toy&quot;</span><span class="s1">: sf = R.raw.toy; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;choice&quot;</span><span class="s1">: sf = R.raw.choice; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;avoid&quot;</span><span class="s1">: sf = R.raw.avoid; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;join&quot;</span><span class="s1">: sf = R.raw.join; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;point&quot;</span><span class="s1">: sf = R.raw.point; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;voice&quot;</span><span class="s1">: sf = R.raw.voice; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s2">// Ure Sound</span><span class="s1"> 
+ 
+            </span><span class="s0">case </span><span class="s3">&quot;pure&quot;</span><span class="s1">: sf = R.raw.pure; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;cure&quot;</span><span class="s1">: sf = R.raw.cure; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;endure&quot;</span><span class="s1">: sf = R.raw.endure; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;jewel&quot;</span><span class="s1">: sf = R.raw.jewel; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;usual&quot;</span><span class="s1">: sf = R.raw.usual; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;fury&quot;</span><span class="s1">: sf = R.raw.fury; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;mature&quot;</span><span class="s1">: sf = R.raw.mature; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;during&quot;</span><span class="s1">: sf = R.raw.during; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;secure&quot;</span><span class="s1">: sf = R.raw.secure; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s3">&quot;curious&quot;</span><span class="s1">: sf = R.raw.curious; 
+                </span><span class="s0">break</span><span class="s1">; 
+ 
+            </span><span class="s0">default</span><span class="s1">: sf = </span><span class="s4">0</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+        } 
+        </span><span class="s0">return </span><span class="s1">sf; 
+    }; 
+ 
+    </span><span class="s0">public </span><span class="s1">String getTitlefromDesc(</span><span class="s0">int </span><span class="s1">desc) { 
+ 
+        String t; 
+ 
+        </span><span class="s0">switch </span><span class="s1">(desc) { 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_morecoming: t = </span><span class="s3">&quot;More Coming Soon&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_closedjaw: t = </span><span class="s3">&quot;Jaw: Closed&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_midjaw: t = </span><span class="s3">&quot;Jaw: Semi-Open&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_openjaw: t = </span><span class="s3">&quot;Jaw: Open&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_longvowels: t = </span><span class="s3">&quot;Long Vowel&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_shortvowels: t = </span><span class="s3">&quot;Short Vowel&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_diphthongs: t = </span><span class="s3">&quot;Diphthong&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_roundedlips: t = </span><span class="s3">&quot;Lips: Rounded&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_neutrallips: t = </span><span class="s3">&quot;Lips: Neutral&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_spreadlips: t = </span><span class="s3">&quot;Lips: Spread&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_placementback: t = </span><span class="s3">&quot;Placement: Back&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_placementcentral: t = </span><span class="s3">&quot;Placement: Central&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_placementfront: t = </span><span class="s3">&quot;Placement: Front&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_fricatve: t = </span><span class="s3">&quot;Fricative&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_plosive: t = </span><span class="s3">&quot;Plosive&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_affricate: t = </span><span class="s3">&quot;Affricate&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_nasal: t = </span><span class="s3">&quot;Nasal&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_approximant: t = </span><span class="s3">&quot;Approximant&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_voiced: t = </span><span class="s3">&quot;Voiced&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">case </span><span class="s1">R.string.desc_unvoiced: t = </span><span class="s3">&quot;Unvoiced&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+            </span><span class="s0">default</span><span class="s1">: t = </span><span class="s3">&quot;Unknown Title&quot;</span><span class="s1">; 
+                </span><span class="s0">break</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">return </span><span class="s1">t; 
+    } 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+        setContentView(R.layout.show_words_pager); 
+        </span><span class="s0">final </span><span class="s1">ViewPager vpPager = (ViewPager) findViewById(R.id.showwordsvpager); 
+        adapterViewPager = </span><span class="s0">new </span><span class="s1">MyPagerAdapter(getSupportFragmentManager()); 
+        vpPager.setAdapter(adapterViewPager); 
+ 
+ 
+        </span><span class="s2">// Get Intent Stuff</span><span class="s1"> 
+ 
+        Intent intent = getIntent(); 
+        wordArr = intent.getStringArrayExtra(</span><span class="s3">&quot;wordArr&quot;</span><span class="s1">); 
+        title = intent.getStringExtra(</span><span class="s3">&quot;title&quot;</span><span class="s1">); 
+        sentFrom = intent.getIntExtra(</span><span class="s3">&quot;sentFrom&quot;</span><span class="s1">, </span><span class="s4">0</span><span class="s1">); 
+        moreInfoSections = intent.getIntArrayExtra(</span><span class="s3">&quot;moreInfoSections&quot;</span><span class="s1">); 
+ 
+        </span><span class="s2">// FIRST TIME</span><span class="s1"> 
+ 
+ 
+ 
+        </span><span class="s0">if </span><span class="s1">(getSoundFile(wordArr[</span><span class="s4">0</span><span class="s1">]) != </span><span class="s4">0</span><span class="s1">) { 
+ 
+            </span><span class="s0">if </span><span class="s1">(media != </span><span class="s0">null</span><span class="s1">) { 
+                media.release(); 
+            } 
+ 
+            media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[</span><span class="s4">0</span><span class="s1">])); 
+            media.start(); 
+ 
+            media.setOnCompletionListener(</span><span class="s0">new </span><span class="s1">MediaPlayer.OnCompletionListener() { 
+                @Override 
+                </span><span class="s0">public void </span><span class="s1">onCompletion(MediaPlayer mp) { 
+                    media.release(); 
+                } 
+            }); 
+        } 
+ 
+        vpPager.addOnPageChangeListener(</span><span class="s0">new </span><span class="s1">ViewPager.OnPageChangeListener() { 
+ 
+            </span><span class="s2">// This method will be invoked when a new page becomes selected.</span><span class="s1"> 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onPageSelected(</span><span class="s0">int </span><span class="s1">position) { 
+                pageSelected = position; 
+                </span><span class="s0">if </span><span class="s1">(getSoundFile(wordArr[position]) != </span><span class="s4">0</span><span class="s1">) { 
+ 
+                    </span><span class="s0">if </span><span class="s1">(media != </span><span class="s0">null</span><span class="s1">) { 
+                        media.release(); 
+                    } 
+ 
+                    media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[position])); 
+                    media.start(); 
+ 
+                    media.setOnCompletionListener(</span><span class="s0">new </span><span class="s1">MediaPlayer.OnCompletionListener() { 
+                        @Override 
+                        </span><span class="s0">public void </span><span class="s1">onCompletion(MediaPlayer mp) { 
+                            media.release(); 
+                        } 
+                    }); 
+                } 
+            } 
+ 
+            </span><span class="s2">// This method will be invoked when the current page is scrolled</span><span class="s1"> 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onPageScrolled(</span><span class="s0">int </span><span class="s1">position, </span><span class="s0">float </span><span class="s1">positionOffset, </span><span class="s0">int </span><span class="s1">positionOffsetPixels) { 
+                </span><span class="s2">// Code goes here</span><span class="s1"> 
+            } 
+ 
+            </span><span class="s2">// Called when the scroll state changes:</span><span class="s1"> 
+            </span><span class="s2">// SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING</span><span class="s1"> 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onPageScrollStateChanged(</span><span class="s0">int </span><span class="s1">state) { 
+                </span><span class="s2">// Code goes here</span><span class="s1"> 
+            } 
+        }); 
+ 
+        </span><span class="s0">final </span><span class="s1">Button bBtn = (Button) findViewById(R.id.backbtn); 
+        </span><span class="s0">final </span><span class="s1">ImageButton nBtn = (ImageButton) findViewById(R.id.nextbtn); 
+        </span><span class="s0">final </span><span class="s1">ImageButton pBtn = (ImageButton) findViewById(R.id.prevbtn); 
+        nBtn.setSoundEffectsEnabled(</span><span class="s0">false</span><span class="s1">); 
+        pBtn.setSoundEffectsEnabled(</span><span class="s0">false</span><span class="s1">); 
+ 
+        nBtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                vpPager.setCurrentItem(pageSelected + </span><span class="s4">1</span><span class="s1">); 
+            } 
+        }); 
+ 
+        pBtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                vpPager.setCurrentItem(pageSelected - </span><span class="s4">1</span><span class="s1">); 
+            } 
+        }); 
+ 
+        bBtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                Intent i = </span><span class="s0">new </span><span class="s1">Intent(getApplicationContext(), MainActivity.</span><span class="s0">class</span><span class="s1">); 
+                i.putExtra(</span><span class="s3">&quot;sentFrom&quot;</span><span class="s1">, sentFrom); 
+                startActivity(i); 
+            } 
+        }); 
+ 
+        LinearLayout moreinfoll = (LinearLayout) findViewById(R.id.moreinfo); 
+ 
+        TextView titleview = (TextView) findViewById(R.id.moreinfotitle); 
+        titleview.setText(title); 
+ 
+        </span><span class="s0">int </span><span class="s1">insertID = </span><span class="s4">0</span><span class="s1">; </span><span class="s2">// 1 Because of title, 0 if none</span><span class="s1"> 
+ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s1">; i &lt; moreInfoSections.length; i++) { 
+ 
+            </span><span class="s2">// Subtitle</span><span class="s1"> 
+ 
+            TextView subtitle = </span><span class="s0">new </span><span class="s1">TextView(getApplicationContext()); 
+            subtitle.setId(i); 
+            LinearLayout.LayoutParams params = </span><span class="s0">new </span><span class="s1">LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT); 
+            </span><span class="s0">if </span><span class="s1">(i == </span><span class="s4">0</span><span class="s1">) { 
+                params.topMargin = </span><span class="s4">24</span><span class="s1">; 
+            } 
+            params.bottomMargin = </span><span class="s4">24</span><span class="s1">; 
+            moreinfoll.addView(subtitle, insertID, params); 
+            TextView insertedSub = (TextView) findViewById(i); 
+            insertedSub.setText(getTitlefromDesc(moreInfoSections[i])); 
+            insertedSub.setTextAppearance(</span><span class="s0">this</span><span class="s1">, R.style.MoreInfoSub); 
+            </span><span class="s2">// insertedSub.setGravity(Gravity.CENTER);</span><span class="s1"> 
+            insertID++; 
+ 
+            </span><span class="s2">//TODO: Create Buttons instead of Body</span><span class="s1"> 
+ 
+            </span><span class="s2">// Body</span><span class="s1"> 
+ 
+            TextView body = </span><span class="s0">new </span><span class="s1">TextView(getApplicationContext()); 
+            body.setId(i + </span><span class="s4">1000</span><span class="s1">); 
+            body.setVisibility(View.GONE); 
+            LinearLayout.LayoutParams bodyparams = </span><span class="s0">new </span><span class="s1">LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT); 
+            bodyparams.bottomMargin = </span><span class="s4">24</span><span class="s1">; 
+            moreinfoll.addView(body, insertID, bodyparams); 
+            TextView insertedBody = (TextView) findViewById(i + </span><span class="s4">1000</span><span class="s1">); 
+            insertedBody.setText(moreInfoSections[i]); 
+            insertedBody.setTextAppearance(</span><span class="s0">this</span><span class="s1">, R.style.MoreInfoBody); 
+            insertID++; 
+ 
+            Button moreinfobtn = </span><span class="s0">new </span><span class="s1">Button(getApplicationContext(), </span><span class="s0">null</span><span class="s1">, R.drawable.moreinfobtn); 
+            moreinfobtn.setId(i + </span><span class="s4">2000</span><span class="s1">); 
+            moreinfobtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.moreinfobtn)); 
+            LinearLayout.LayoutParams btnparams = </span><span class="s0">new </span><span class="s1">LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT); 
+            btnparams.bottomMargin = </span><span class="s4">24</span><span class="s1">; 
+            moreinfoll.addView(moreinfobtn, insertID, btnparams); 
+            Button insertedBtn = (Button) findViewById(i + </span><span class="s4">2000</span><span class="s1">); 
+            insertedBtn.setTextSize(</span><span class="s4">16</span><span class="s1">); 
+            insertedBtn.setText(</span><span class="s3">&quot;MORE INFO&quot;</span><span class="s1">); 
+            insertedBtn.setTextColor(getResources().getColor(R.color.colorPrimary)); 
+ 
+            </span><span class="s0">final int </span><span class="s1">listenerID = i; 
+            insertedBtn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+                </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                    Button btn = (Button) findViewById(listenerID + </span><span class="s4">2000</span><span class="s1">); 
+                    btn.setVisibility(View.GONE); 
+                    TextView body = (TextView) findViewById(listenerID + </span><span class="s4">1000</span><span class="s1">); 
+                    body.setVisibility(View.VISIBLE); 
+                } 
+            }); 
+            insertID++; 
+ 
+        } 
+ 
+    } 
+ 
+    </span><span class="s2">// ...</span><span class="s1"> 
+ 
+    </span><span class="s0">public class </span><span class="s1">MyPagerAdapter </span><span class="s0">extends </span><span class="s1">FragmentPagerAdapter { 
+ 
+ 
+        </span><span class="s0">public </span><span class="s1">MyPagerAdapter(FragmentManager fragmentManager) { 
+            </span><span class="s0">super</span><span class="s1">(fragmentManager); 
+        } 
+ 
+        </span><span class="s2">// Returns total number of pages</span><span class="s1"> 
+        @Override 
+        </span><span class="s0">public int </span><span class="s1">getCount() { 
+            Intent intent = getIntent(); 
+            wordArr = intent.getStringArrayExtra(</span><span class="s3">&quot;wordArr&quot;</span><span class="s1">); 
+            </span><span class="s0">return </span><span class="s1">wordArr.length; 
+        } 
+ 
+        </span><span class="s2">// Returns the fragment to display for that page</span><span class="s1"> 
+        @Override 
+        </span><span class="s0">public </span><span class="s1">Fragment getItem(</span><span class="s0">int </span><span class="s1">position) { 
+            </span><span class="s0">return </span><span class="s1">ShowWordsFragment.newInstance(title, wordArr, position); 
+        } 
+ 
+        </span><span class="s2">// Returns the page title for the top indicator</span><span class="s1"> 
+        @Override 
+        </span><span class="s0">public </span><span class="s1">CharSequence getPageTitle(</span><span class="s0">int </span><span class="s1">position) { 
+            </span><span class="s0">return </span><span class="s3">&quot;Page &quot; </span><span class="s1">+ position; 
+        } 
+ 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>

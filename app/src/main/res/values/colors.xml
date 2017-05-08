@@ -6,6 +6,7 @@
     <color name="colorAccentDark">#76a9d0</color>
     <color name="white">#fff</color>
     <color name="darkGrey">#787578</color>
+    <color name="darkestGrey">#4f4d4e</color>
     <color name="black">#030303</color>
     <color name="lightGrey">#dbd9d8</color>
 </resources>
