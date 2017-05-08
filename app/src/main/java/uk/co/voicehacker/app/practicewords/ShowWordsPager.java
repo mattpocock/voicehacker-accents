@@ -170,18 +170,41 @@ public class ShowWordsPager extends AppCompatActivity {
             // insertedSub.setGravity(Gravity.CENTER);
             insertID++;
 
-            // Body
-
             //TODO: Create Buttons instead of Body
+
+            // Body
 
             TextView body = new TextView(getApplicationContext());
             body.setId(i + 1000);
+            body.setVisibility(View.GONE);
             LinearLayout.LayoutParams bodyparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             bodyparams.bottomMargin = 24;
             moreinfoll.addView(body, insertID, bodyparams);
             TextView insertedBody = (TextView) findViewById(i + 1000);
             insertedBody.setText(moreInfoSections[i]);
             insertedBody.setTextAppearance(this, R.style.MoreInfoBody);
+            insertID++;
+
+            Button moreinfobtn = new Button(getApplicationContext(), null, R.drawable.moreinfobtn);
+            moreinfobtn.setId(i + 2000);
+            moreinfobtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.moreinfobtn));
+            LinearLayout.LayoutParams btnparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            btnparams.bottomMargin = 24;
+            moreinfoll.addView(moreinfobtn, insertID, btnparams);
+            Button insertedBtn = (Button) findViewById(i + 2000);
+            insertedBtn.setTextSize(16);
+            insertedBtn.setText("MORE INFO");
+            insertedBtn.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+            final int listenerID = i;
+            insertedBtn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Button btn = (Button) findViewById(listenerID + 2000);
+                    btn.setVisibility(View.GONE);
+                    TextView body = (TextView) findViewById(listenerID + 1000);
+                    body.setVisibility(View.VISIBLE);
+                }
+            });
             insertID++;
 
         }
