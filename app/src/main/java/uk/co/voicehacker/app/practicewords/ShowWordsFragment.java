@@ -1,5 +1,6 @@
 package uk.co.voicehacker.app.practicewords;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ public class ShowWordsFragment extends Fragment {
     private String title;
     private String[] wordArr = {};
     private int pos;
+
 
     // newInstance constructor for creating fragment with arguments
     public static ShowWordsFragment newInstance(String title, String[] wordArr, int position) {
@@ -48,6 +50,8 @@ public class ShowWordsFragment extends Fragment {
         TextView showWordsText = (TextView) view.findViewById(R.id.showWordsText);
         String str = wordArr[pos];
         showWordsText.setText(str.substring(0, 1).toUpperCase() + str.substring(1));
+
+
 
         return view;
     }

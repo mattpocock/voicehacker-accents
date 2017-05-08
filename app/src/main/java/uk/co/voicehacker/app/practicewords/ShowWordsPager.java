@@ -1,13 +1,13 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -30,6 +30,202 @@ public class ShowWordsPager extends AppCompatActivity {
     int sentFrom;
     int moreInfoSections[];
     int pageSelected;
+    MediaPlayer media;
+
+    //TODO: Add All Words to This
+
+    int getSoundFile(String word) {
+        int sf;
+
+        switch (word) {
+
+            // Unvoiced TH Sounds
+
+            case "bath": sf = R.raw.bath;
+                break;
+            case "anything": sf = R.raw.anything;
+                break;
+            case "think": sf = R.raw.think;
+                break;
+            case "breath": sf = R.raw.breath;
+                break;
+            case "death": sf = R.raw.death;
+                break;
+            case "everything": sf = R.raw.everything;
+                break;
+            case "month": sf = R.raw.month;
+                break;
+            case "mouth": sf = R.raw.mouth;
+                break;
+            case "nothing": sf = R.raw.nothing;
+                break;
+            case "something": sf = R.raw.something;
+                break;
+
+            // Voiced TH Sounds
+
+            case "this": sf = R.raw.thisfile;
+                break;
+            case "than": sf = R.raw.than;
+                break;
+            case "that": sf = R.raw.that;
+                break;
+            case "the": sf = R.raw.the;
+                break;
+            case "themselves": sf = R.raw.themselves;
+                break;
+            case "mother": sf = R.raw.mother;
+                break;
+            case "brother": sf = R.raw.brother;
+                break;
+            case "these": sf = R.raw.these;
+                break;
+            case "they": sf = R.raw.they;
+                break;
+            case "together": sf = R.raw.together;
+                break;
+
+            // S Sounds
+
+            case "accept": sf = R.raw.accept;
+                break;
+            case "against": sf = R.raw.against;
+                break;
+            case "almost": sf = R.raw.almost;
+                break;
+            case "also": sf = R.raw.also;
+                break;
+            case "answer": sf = R.raw.answer;
+                break;
+            case "ask": sf = R.raw.ask;
+                break;
+            case "asleep": sf = R.raw.asleep;
+                break;
+            case "beside": sf = R.raw.beside;
+                break;
+            case "best": sf = R.raw.best;
+                break;
+            case "breakfast": sf = R.raw.breakfast;
+                break;
+
+            // Z Sounds
+
+            case "as": sf = R.raw.as;
+                break;
+            case "busy": sf = R.raw.busy;
+                break;
+            case "always": sf = R.raw.always;
+                break;
+            case "cause": sf = R.raw.cause;
+                break;
+            case "confuse": sf = R.raw.confuse;
+                break;
+            case "does": sf = R.raw.does;
+                break;
+            case "easy": sf = R.raw.easy;
+                break;
+            case "has": sf = R.raw.has;
+                break;
+            case "is": sf = R.raw.is;
+                break;
+            case "jeans": sf = R.raw.jeans;
+                break;
+
+            // Short 'Ah' Sound
+
+            case "attack": sf = R.raw.attack;
+                break;
+            case "cat": sf = R.raw.cat;
+                break;
+            case "stand": sf = R.raw.stand;
+                break;
+            case "cancel": sf = R.raw.cancel;
+                break;
+            case "back": sf = R.raw.back;
+                break;
+            case "add": sf = R.raw.add;
+                break;
+            case "fashion": sf = R.raw.fashion;
+                break;
+            case "lamp": sf = R.raw.lamp;
+                break;
+            case "bag": sf = R.raw.bag;
+                break;
+            case "had": sf = R.raw.had;
+                break;
+
+            // Short 'Eh' Sound
+
+            case "guest": sf = R.raw.guest;
+                break;
+            case "bet": sf = R.raw.bet;
+                break;
+            case "get": sf = R.raw.get;
+                break;
+            case "friend": sf = R.raw.friend;
+                break;
+            case "lend": sf = R.raw.lend;
+                break;
+            case "mend": sf = R.raw.mend;
+                break;
+            case "pet": sf = R.raw.pet;
+                break;
+            case "many": sf = R.raw.many;
+                break;
+            case "expensive": sf = R.raw.expensive;
+                break;
+            case "very": sf = R.raw.very;
+                break;
+
+            // Short 'Ih' Sound
+
+            case "bit": sf = R.raw.bit;
+                break;
+            case "fill": sf = R.raw.fill;
+                break;
+            case "still": sf = R.raw.still;
+                break;
+            case "hill": sf = R.raw.hill;
+                break;
+            case "city": sf = R.raw.city;
+                break;
+            case "biscuit": sf = R.raw.biscuit;
+                break;
+            case "ring": sf = R.raw.ring;
+                break;
+            case "music": sf = R.raw.music;
+                break;
+            case "kitchen": sf = R.raw.kitchen;
+                break;
+
+            // Short 'Ooh' Sound
+
+            case "book": sf = R.raw.book;
+                break;
+            case "could": sf = R.raw.could;
+                break;
+            case "couldn't": sf = R.raw.couldnt;
+                break;
+            case "foot": sf = R.raw.foot;
+                break;
+            case "full": sf = R.raw.full;
+                break;
+            case "good": sf = R.raw.good;
+                break;
+            case "look": sf = R.raw.look;
+                break;
+            case "pull": sf = R.raw.pull;
+                break;
+            case "put": sf = R.raw.put;
+                break;
+            case "shook": sf = R.raw.shook;
+                break;
+
+            default: sf = 0;
+                break;
+        }
+        return sf;
+    };
 
     public String getTitlefromDesc(int desc) {
 
@@ -91,6 +287,7 @@ public class ShowWordsPager extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
+
         // Get Intent Stuff
 
         Intent intent = getIntent();
@@ -99,12 +296,49 @@ public class ShowWordsPager extends AppCompatActivity {
         sentFrom = intent.getIntExtra("sentFrom", 0);
         moreInfoSections = intent.getIntArrayExtra("moreInfoSections");
 
+        // FIRST TIME
+
+
+
+        if (getSoundFile(wordArr[0]) != 0) {
+
+            if (media != null) {
+                media.release();
+            }
+
+            media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[0]));
+            media.start();
+
+            media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    media.release();
+                }
+            });
+        }
+
         vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
                 pageSelected = position;
+                if (getSoundFile(wordArr[position]) != 0) {
+
+                    if (media != null) {
+                        media.release();
+                    }
+
+                    media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[position]));
+                    media.start();
+
+                    media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            media.release();
+                        }
+                    });
+                }
             }
 
             // This method will be invoked when the current page is scrolled
@@ -124,6 +358,8 @@ public class ShowWordsPager extends AppCompatActivity {
         final Button bBtn = (Button) findViewById(R.id.backbtn);
         final ImageButton nBtn = (ImageButton) findViewById(R.id.nextbtn);
         final ImageButton pBtn = (ImageButton) findViewById(R.id.prevbtn);
+        nBtn.setSoundEffectsEnabled(false);
+        pBtn.setSoundEffectsEnabled(false);
 
         nBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

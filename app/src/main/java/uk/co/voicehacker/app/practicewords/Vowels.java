@@ -92,6 +92,7 @@ public class Vowels extends Fragment {
                 insertedBtn.setText("/" + s.symbol + "/ - PRACTICE");
                 insertedBtn.setAllCaps(false);
                 insertedBtn.setTextSize(20);
+                insertedBtn.setSoundEffectsEnabled(false);
                 insertedBtn.setTextColor(getResources().getColor(R.color.white));
                 insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
