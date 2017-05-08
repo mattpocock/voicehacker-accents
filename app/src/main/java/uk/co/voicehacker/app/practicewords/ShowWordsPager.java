@@ -7,9 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import static java.security.AccessController.getContext;
 
@@ -23,7 +27,60 @@ public class ShowWordsPager extends AppCompatActivity {
     String wordArr[];
     String title;
     int sentFrom;
+    int moreInfoSections[];
     int pageSelected;
+
+    public String getTitlefromDesc(int desc) {
+
+        String t;
+
+        switch (desc) {
+            case R.string.desc_morecoming: t = "More Coming Soon";
+                break;
+            case R.string.desc_closedjaw: t = "Jaw: Closed";
+                break;
+            case R.string.desc_midjaw: t = "Jaw: Semi-Open";
+                break;
+            case R.string.desc_openjaw: t = "Jaw: Open";
+                break;
+            case R.string.desc_longvowels: t = "Long Vowel";
+                break;
+            case R.string.desc_shortvowels: t = "Short Vowel";
+                break;
+            case R.string.desc_diphthongs: t = "Diphthong";
+                break;
+            case R.string.desc_roundedlips: t = "Lips: Rounded";
+                break;
+            case R.string.desc_neutrallips: t = "Lips: Neutral";
+                break;
+            case R.string.desc_spreadlips: t = "Lips: Spread";
+                break;
+            case R.string.desc_placementback: t = "Placement: Back";
+                break;
+            case R.string.desc_placementcentral: t = "Placement: Central";
+                break;
+            case R.string.desc_placementfront: t = "Placement: Front";
+                break;
+            case R.string.desc_fricatve: t = "Fricative";
+                break;
+            case R.string.desc_plosive: t = "Plosive";
+                break;
+            case R.string.desc_affricate: t = "Affricate";
+                break;
+            case R.string.desc_nasal: t = "Nasal";
+                break;
+            case R.string.desc_approximant: t = "Approximant";
+                break;
+            case R.string.desc_voiced: t = "Voiced";
+                break;
+            case R.string.desc_unvoiced: t = "Unvoiced";
+                break;
+            default: t = "Unknown Title";
+                break;
+        }
+
+        return t;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +96,7 @@ public class ShowWordsPager extends AppCompatActivity {
         wordArr = intent.getStringArrayExtra("wordArr");
         title = intent.getStringExtra("title");
         sentFrom = intent.getIntExtra("sentFrom", 0);
+        moreInfoSections = intent.getIntArrayExtra("moreInfoSections");
 
         vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -68,16 +126,12 @@ public class ShowWordsPager extends AppCompatActivity {
 
         nBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                pBtn.setPressed(false);
-                nBtn.setPressed(true);
                 vpPager.setCurrentItem(pageSelected + 1);
             }
         });
 
         pBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                pBtn.setPressed(true);
-                nBtn.setPressed(false);
                 vpPager.setCurrentItem(pageSelected - 1);
             }
         });
@@ -89,6 +143,47 @@ public class ShowWordsPager extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        LinearLayout moreinfoll = (LinearLayout) findViewById(R.id.moreinfo);
+
+        TextView titleview = (TextView) findViewById(R.id.moreinfotitle);
+        titleview.setText(title.toUpperCase());
+
+        int insertID = 0; // 1 Because of title, 0 if none
+
+        for (int i = 0; i < moreInfoSections.length; i++) {
+
+            // Subtitle
+
+            TextView subtitle = new TextView(getApplicationContext());
+            subtitle.setId(i);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            if (i == 0) {
+                params.topMargin = 24;
+            }
+            params.bottomMargin = 24;
+            moreinfoll.addView(subtitle, insertID, params);
+            TextView insertedSub = (TextView) findViewById(i);
+            insertedSub.setText(getTitlefromDesc(moreInfoSections[i]));
+            insertedSub.setTextAppearance(this, R.style.MoreInfoSub);
+            // insertedSub.setGravity(Gravity.CENTER);
+            insertID++;
+
+            // Body
+
+            //TODO: Create Buttons instead of Body
+
+            TextView body = new TextView(getApplicationContext());
+            body.setId(i + 1000);
+            LinearLayout.LayoutParams bodyparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            bodyparams.bottomMargin = 24;
+            moreinfoll.addView(body, insertID, bodyparams);
+            TextView insertedBody = (TextView) findViewById(i + 1000);
+            insertedBody.setText(moreInfoSections[i]);
+            insertedBody.setTextAppearance(this, R.style.MoreInfoBody);
+            insertID++;
+
+        }
 
     }
 

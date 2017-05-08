@@ -10,6 +10,7 @@ import android.content.Intent;
 public class sound {
     int buttonid;
     String[] words = {};
+    int[] moreinfosections = {};
     String symbol;
     int soundfile;
     String title;
@@ -17,17 +18,16 @@ public class sound {
     int column;
     int section;
 
-    public sound(int id, String sym, int file, String tit, int col, int ro, int sec, String[] wordArr) {
+    public sound(int id, String sym, int file, String tit, int[] mIS, int col, int ro, int sec, String[] wordArr) {
         buttonid = id;
-        words=wordArr;
+        words = wordArr;
         symbol = sym;
         soundfile = file;
+        moreinfosections = mIS;
         title = tit;
         row = ro;
         column = col;
         section = sec;
+
     }
-
-
-
 }
