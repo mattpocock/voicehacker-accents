@@ -32,8 +32,6 @@ public class ShowWordsPager extends AppCompatActivity {
     int pageSelected;
     MediaPlayer media;
 
-    //TODO: Add All Words to This
-
     int getSoundFile(String word) {
         int sf;
 
@@ -129,6 +127,375 @@ public class ShowWordsPager extends AppCompatActivity {
             case "is": sf = R.raw.is;
                 break;
             case "jeans": sf = R.raw.jeans;
+                break;
+
+            // F Sounds
+
+            case "afraid": sf = R.raw.afraid;
+                break;
+            case "beautiful": sf = R.raw.beautiful;
+                break;
+            case "before": sf = R.raw.before;
+                break;
+            case "boyfriend": sf = R.raw.boyfriend;
+                break;
+            case "coffee": sf = R.raw.coffee;
+                break;
+            case "definitely": sf = R.raw.definitely;
+                break;
+            case "different": sf = R.raw.different;
+                break;
+
+            // V Sounds
+
+            case "above": sf = R.raw.above;
+                break;
+            case "arrive": sf = R.raw.arrive;
+                break;
+            case "conversation": sf = R.raw.conversation;
+                break;
+            case "cover": sf = R.raw.cover;
+                break;
+            case "drive": sf = R.raw.drive;
+                break;
+            case "even": sf = R.raw.even;
+                break;
+            case "everyone": sf = R.raw.everyone;
+                break;
+
+            // H Sounds
+
+            case "ahead": sf = R.raw.ahead;
+                break;
+            case "behind": sf = R.raw.behind;
+                break;
+            case "hair": sf = R.raw.hair;
+                break;
+            case "half": sf = R.raw.half;
+                break;
+            case "hall": sf = R.raw.hall;
+                break;
+            case "hand": sf = R.raw.hand;
+                break;
+            case "hang": sf = R.raw.hang;
+                break;
+            case "happy": sf = R.raw.happy;
+                break;
+            case "hard": sf = R.raw.hard;
+                break;
+
+            // SH Sounds
+
+            case "brush": sf = R.raw.brush;
+                break;
+            case "finish": sf = R.raw.finish;
+                break;
+            case "flash": sf = R.raw.flash;
+                break;
+            case "push": sf = R.raw.push;
+                break;
+            case "relationship": sf = R.raw.relationship;
+                break;
+            case "rush": sf = R.raw.rush;
+                break;
+            case "shadow": sf = R.raw.shadow;
+                break;
+            case "shake": sf = R.raw.shake;
+                break;
+            case "she": sf = R.raw.she;
+                break;
+
+            // ZH Sounds
+
+            case "measure": sf = R.raw.measure;
+                break;
+            case "treasure": sf = R.raw.treasure;
+                break;
+            case "pleasure": sf = R.raw.pleasure;
+                break;
+            case "vision": sf = R.raw.vision;
+                break;
+            case "casual": sf = R.raw.casual;
+                break;
+            case "revision": sf = R.raw.revision;
+                break;
+            case "occasion": sf = R.raw.occasion;
+                break;
+            case "divison": sf = R.raw.division;
+                break;
+            case "decision": sf = R.raw.decision;
+                break;
+
+            // P Sounds
+
+            case "drop": sf = R.raw.drop;
+                break;
+            case "empty": sf = R.raw.empty;
+                break;
+            case "escape": sf = R.raw.escape;
+                break;
+            case "except": sf = R.raw.except;
+                break;
+            case "flip": sf = R.raw.flip;
+                break;
+            case "gasp": sf = R.raw.gasp;
+                break;
+            case "happen": sf = R.raw.happen;
+                break;
+            case "hope": sf = R.raw.hope;
+                break;
+            case "help": sf = R.raw.help;
+                break;
+            case "important": sf = R.raw.important;
+                break;
+
+            // B Sounds
+
+            case "by": sf = R.raw.by;
+                break;
+            case "eyebrow": sf = R.raw.eyebrow;
+                break;
+            case "job": sf = R.raw.job;
+                break;
+            case "maybe": sf = R.raw.maybe;
+                break;
+            case "number": sf = R.raw.number;
+                break;
+            case "possible": sf = R.raw.possible;
+                break;
+            case "probably": sf = R.raw.probably;
+                break;
+            case "problem": sf = R.raw.problem;
+                break;
+            case "remember": sf = R.raw.remember;
+                break;
+            case "table": sf = R.raw.table;
+                break;
+
+            // T Sounds
+
+            case "forget": sf = R.raw.forget;
+                break;
+            case "front": sf = R.raw.front;
+                break;
+            case "great": sf = R.raw.great;
+                break;
+            case "hospital": sf = R.raw.hospital;
+                break;
+            case "jacket": sf = R.raw.jacket;
+                break;
+
+            // D Sounds
+
+            case "admit": sf = R.raw.admit;
+                break;
+            case "already": sf = R.raw.already;
+                break;
+            case "around": sf = R.raw.around;
+                break;
+            case "blonde": sf = R.raw.blonde;
+                break;
+            case "body": sf = R.raw.body;
+                break;
+            case "card": sf = R.raw.card;
+                break;
+            case "consider": sf = R.raw.consider;
+                break;
+            case "dance": sf = R.raw.dance;
+                break;
+
+            // K Sounds
+
+            case "check": sf = R.raw.check;
+                break;
+            case "dark": sf = R.raw.dark;
+                break;
+            case "kept": sf = R.raw.kept;
+                break;
+            case "kick": sf = R.raw.kick;
+                break;
+
+            // G Sounds
+
+            case "again": sf = R.raw.again;
+                break;
+            case "ago": sf = R.raw.ago;
+                break;
+            case "anger": sf = R.raw.anger;
+                break;
+            case "began": sf = R.raw.began;
+                break;
+            case "begin": sf = R.raw.begin;
+                break;
+            case "drag": sf = R.raw.drag;
+                break;
+            case "figure": sf = R.raw.figure;
+                break;
+
+            // CH Sounds
+
+            case "approach": sf = R.raw.approach;
+                break;
+            case "catch": sf = R.raw.catchfile;
+                break;
+            case "chance": sf = R.raw.cause;
+                break;
+            case "chase": sf = R.raw.chase;
+                break;
+            case "chest": sf = R.raw.chest;
+                break;
+            case "child": sf = R.raw.has;
+                break;
+
+            // J Sounds
+
+            case "enjoy": sf = R.raw.enjoy;
+                break;
+            case "joke": sf = R.raw.joke;
+                break;
+            case "jump": sf = R.raw.jump;
+                break;
+            case "edge": sf = R.raw.edge;
+                break;
+            case "age": sf = R.raw.age;
+                break;
+            case "college": sf = R.raw.college;
+                break;
+
+            // M Sounds
+
+            case "anymore": sf = R.raw.anymore;
+                break;
+            case "arm": sf = R.raw.arm;
+                break;
+            case "became": sf = R.raw.became;
+                break;
+            case "bedroom": sf = R.raw.bedroom;
+                break;
+            case "bottom": sf = R.raw.bottom;
+                break;
+            case "climb": sf = R.raw.climb;
+                break;
+            case "come": sf = R.raw.come;
+                break;
+
+            // N Sounds
+
+            case "band": sf = R.raw.band;
+                break;
+            case "been": sf = R.raw.been;
+                break;
+            case "change": sf = R.raw.change;
+                break;
+            case "children": sf = R.raw.children;
+                break;
+            case "continue": sf = R.raw.continuefile;
+                break;
+            case "control": sf = R.raw.control;
+                break;
+
+            // Z Sounds
+
+            case "evening": sf = R.raw.evening;
+                break;
+            case "finger": sf = R.raw.finger;
+                break;
+            case "hung": sf = R.raw.hung;
+                break;
+            case "blink": sf = R.raw.blink;
+                break;
+            case "drink": sf = R.raw.drink;
+                break;
+            case "pink": sf = R.raw.pink;
+                break;
+            case "thank": sf = R.raw.thank;
+                break;
+            case "long": sf = R.raw.longfile;
+                break;
+            case "morning": sf = R.raw.morning;
+                break;
+
+            // Light L
+
+            case "life": sf = R.raw.life;
+                break;
+            case "lean": sf = R.raw.lean;
+                break;
+            case "lead": sf = R.raw.lead;
+                break;
+            case "please": sf = R.raw.please;
+                break;
+
+            // Dark L
+
+            case "bottle": sf = R.raw.bottle;
+                break;
+            case "couple": sf = R.raw.couple;
+                break;
+            case "giggle": sf = R.raw.giggle;
+                break;
+            case "call": sf = R.raw.call;
+                break;
+            case "bill": sf = R.raw.bill;
+                break;
+            case "tell": sf = R.raw.tell;
+                break;
+            case "shall": sf = R.raw.shall;
+                break;
+
+            // R Sounds
+
+            case "carry": sf = R.raw.carry;
+                break;
+            case "cry": sf = R.raw.cry;
+                break;
+            case "dry": sf = R.raw.dry;
+                break;
+            case "every": sf = R.raw.every;
+                break;
+            case "right": sf = R.raw.right;
+                break;
+            case "round": sf = R.raw.round;
+                break;
+            case "sorry": sf = R.raw.sorry;
+                break;
+
+            // Y Sounds
+
+            case "UK": sf = R.raw.uk;
+                break;
+            case "yell": sf = R.raw.yell;
+                break;
+            case "yes": sf = R.raw.yes;
+                break;
+            case "yet": sf = R.raw.yet;
+                break;
+            case "yourself": sf = R.raw.yourself;
+                break;
+            case "USA": sf = R.raw.usa;
+                break;
+
+            // W Sounds
+
+            case "one": sf = R.raw.one;
+                break;
+            case "once": sf = R.raw.once;
+                break;
+            case "what": sf = R.raw.what;
+                break;
+            case "why": sf = R.raw.why;
+                break;
+            case "where": sf = R.raw.where;
+                break;
+            case "forward": sf = R.raw.forward;
+                break;
+            case "however": sf = R.raw.however;
+                break;
+            case "sweet": sf = R.raw.sweet;
+                break;
+            case "quite": sf = R.raw.quite;
+                break;
+            case "quiet": sf = R.raw.quiet;
                 break;
 
             // Short 'Ah' Sound
@@ -451,7 +818,7 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "now": sf = R.raw.now;
                 break;
-            case "how": sf = R.raw.shower;
+            case "how": sf = R.raw.how;
                 break;
             case "power": sf = R.raw.power;
                 break;
