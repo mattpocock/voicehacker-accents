@@ -165,7 +165,7 @@ public class Vowels extends Fragment {
         sound shortOohSound = new sound(R.id.button4,"ʊ",R.raw.ouh,"The /ʊ/ Sound", new int[]{R.string.desc_shortvowels, R.string.desc_midjaw, R.string.desc_neutrallips, R.string.desc_placementback}, 1,2,1, new String[]{"book","could","couldn't","foot","full","good","look","pull","put","shook"});
         sound ohSound = new sound(R.id.button5,"ɒ",R.raw.oh,"The /ɒ/ Sound", new int[]{R.string.desc_shortvowels, R.string.desc_openjaw, R.string.desc_roundedlips, R.string.desc_placementback}, 2,2,1, new String[]{"won","off","not","cost","hot","dog","sock","sausage","pot","chocolate"});
         sound uhSound = new sound(R.id.button6,"ʌ",R.raw.uh,"The /ʌ/ Sound", new int[]{R.string.desc_shortvowels, R.string.desc_midjaw, R.string.desc_neutrallips, R.string.desc_placementcentral}, 1,3,1, new String[]{"button","just","hut","other","mother","government","blood","bus","chuckle","enough"});
-        sound schwaSound = new sound(R.id.button7,"ə",R.raw.schwa,"The Schwa", new int[]{R.string.desc_shortvowels, R.string.desc_midjaw, R.string.desc_neutrallips, R.string.desc_placementcentral}, 2,3,1, new String[]{"comma","better","complete","station","england","doctor","delicate","allow","forgot","local"});
+        sound schwaSound = new sound(R.id.button7,"ə",R.raw.schwa,"The Schwa - /ə/", new int[]{R.string.desc_schwa, R.string.desc_shortvowels, R.string.desc_midjaw, R.string.desc_neutrallips, R.string.desc_placementcentral}, 2,3,1, new String[]{"comma","better","complete","station","england","doctor","delicate","allow","forgot","local"});
 
         createButton(button1, shortAhsound);
         createButton(button2, ehSound);
@@ -191,14 +191,14 @@ public class Vowels extends Fragment {
 
         // Diphthongs
 
-        sound ay = new sound(R.id.button13,"eɪ",R.raw.ay,"The /eɪ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 1,6,3, new String[]{"same","fame","rain","hey","game","brain","amaze","hate","case","aim"});
-        sound igh = new sound(R.id.button14,"aɪ",R.raw.igh,"The /aɪ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 2,6,3, new String[]{"fine","line","time","mine","kind","find","sign","die","hi","my"});
-        sound ow = new sound(R.id.button15,"aʊ",R.raw.ow,"The /aʊ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 3,6,3, new String[]{"out","about","now","how","shower","power","found","loud","proud","without"});
-        sound oh = new sound(R.id.button16,"əʊ",R.raw.o,"The /əʊ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 1,7,3, new String[]{"home","know","grow","show","flow","OK","open","location","load","cold"});
-        sound ear = new sound(R.id.button17,"ɪə",R.raw.ear,"The /ɪə/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 2,7,3, new String[]{"ear","real","area","beer","dear","hear","nearly","year","weird","really"});
-        sound ehuh = new sound(R.id.button18,"eə",R.raw.air,"The /eə/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 3,7,3, new String[]{"chair","air","care","area","there","mary","dare","nightmare","rare","share"});
-        sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 1,8,3, new String[]{"boy","coin","foil","noise","toy","choice","avoid","join","point","voice"});
-        sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_morecoming}, 2,8,3, new String[]{"pure","cure","endure","jewel","usual","fury","mature","during","secure","curious"});
+        sound ay = new sound(R.id.button13,"eɪ",R.raw.ay,"The /eɪ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_midjaw, R.string.desc_aylips, R.string.desc_placementfront}, 1,6,3, new String[]{"same","fame","rain","hey","game","brain","amaze","hate","case","aim"});
+        sound igh = new sound(R.id.button14,"aɪ",R.raw.igh,"The /aɪ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_ighjaw, R.string.desc_ighlips, R.string.desc_placementfront}, 2,6,3, new String[]{"fine","line","time","mine","kind","find","sign","die","hi","my"});
+        sound ow = new sound(R.id.button15,"aʊ",R.raw.ow,"The /aʊ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_owjaw, R.string.desc_owlips, R.string.desc_owplace}, 3,6,3, new String[]{"out","about","now","how","shower","power","found","loud","proud","without"});
+        sound oh = new sound(R.id.button16,"əʊ",R.raw.o,"The /əʊ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_midjaw, R.string.desc_olips, R.string.desc_oplace}, 1,7,3, new String[]{"home","know","grow","show","flow","OK","open","location","load","cold"});
+        sound ear = new sound(R.id.button17,"ɪə",R.raw.ear,"The /ɪə/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_midjaw, R.string.desc_neutrallips, R.string.desc_earplace}, 2,7,3, new String[]{"ear","real","area","beer","dear","hear","nearly","year","weird","really"});
+        sound ehuh = new sound(R.id.button18,"eə",R.raw.air,"The /eə/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_midjaw, R.string.desc_airlips, R.string.desc_airplace}, 3,7,3, new String[]{"chair","air","care","area","there","mary","dare","nightmare","rare","share"});
+        sound oy = new sound(R.id.button19,"ɔɪ",R.raw.oy,"The /ɔɪ/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_midjaw, R.string.desc_oylips, R.string.desc_oyplace}, 1,8,3, new String[]{"boy","coin","foil","noise","toy","choice","avoid","join","point","voice"});
+        sound ure = new sound(R.id.button20,"ʊə",R.raw.ure,"The /ʊə/ Sound", new int[]{R.string.desc_diphthongs, R.string.desc_midjaw, R.string.desc_neutrallips, R.string.desc_placementcentral}, 2,8,3, new String[]{"pure","cure","endure","jewel","usual","fury","mature","during","secure","curious"});
 
         createButton(button13, ay);
         createButton(button14, igh);

@@ -338,13 +338,13 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "catch": sf = R.raw.catchfile;
                 break;
-            case "chance": sf = R.raw.cause;
+            case "chance": sf = R.raw.chance;
                 break;
             case "chase": sf = R.raw.chase;
                 break;
             case "chest": sf = R.raw.chest;
                 break;
-            case "child": sf = R.raw.has;
+            case "child": sf = R.raw.child;
                 break;
 
             // J Sounds
@@ -997,6 +997,66 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case R.string.desc_unvoiced: t = "Unvoiced";
                 break;
+            case R.string.desc_thsound: t = "Dental";
+                break;
+            case R.string.desc_szsounds: t = "Alveolar";
+                break;
+            case R.string.desc_fvsounds: t = "Labiodental";
+                break;
+            case R.string.desc_hsound: t = "Glottal";
+                break;
+            case R.string.desc_shzhsounds: t = "Palato-Alveolar";
+                break;
+            case R.string.desc_pbsounds: t = "Bilabial";
+                break;
+            case R.string.desc_tdsounds: t = "Alveolar";
+                break;
+            case R.string.desc_kgsounds: t = "Velar";
+                break;
+            case R.string.desc_msounds: t = "Bilabial";
+                break;
+            case R.string.desc_nsounds: t = "Alveolar";
+                break;
+            case R.string.desc_ngsounds: t = "Velar";
+                break;
+            case R.string.desc_lsounds: t = "Alveolar Lateral";
+                break;
+            case R.string.desc_darkl: t = "Velar";
+                break;
+            case R.string.desc_rsound: t = "Postalveolar";
+                break;
+            case R.string.desc_ysound: t = "Palatal";
+                break;
+            case R.string.desc_wsound: t = "Labio-Velar";
+                break;
+            case R.string.desc_aylips: t = "Lips: Spread to Neutral";
+                break;
+            case R.string.desc_ighlips: t = "Lips: Spread to Neutral";
+                break;
+            case R.string.desc_airlips: t = "Lips: Spread to Neutral";
+                break;
+            case R.string.desc_owlips: t = "Lips: Spread to Rounded";
+                break;
+            case R.string.desc_olips: t = "Lips: Neutral to Rounded";
+                break;
+            case R.string.desc_oylips: t = "Lips: Rounded to Neutral";
+                break;
+            case R.string.desc_ighjaw: t = "Jaw: Open to Closed";
+                break;
+            case R.string.desc_owjaw: t = "Jaw: Open to Semi-Open";
+                break;
+            case R.string.desc_owplace: t = "Placement: Front to Back";
+                break;
+            case R.string.desc_oplace: t = "Placement: Central to Back";
+                break;
+            case R.string.desc_earplace: t = "Placement: Front to Central";
+                break;
+            case R.string.desc_airplace: t = "Placement: Front to Central";
+                break;
+            case R.string.desc_oyplace: t = "Placement: Back to Front";
+                break;
+            case R.string.desc_schwa: t = "The Most Important Vowel?";
+                break;
             default: t = "Unknown Title";
                 break;
         }
@@ -1132,8 +1192,6 @@ public class ShowWordsPager extends AppCompatActivity {
             insertedSub.setText(getTitlefromDesc(moreInfoSections[i]));
             insertedSub.setTextAppearance(this, R.style.MoreInfoSub);
             insertID++;
-
-            //TODO: Create Buttons instead of Body
 
             // Body
 
