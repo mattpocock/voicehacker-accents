@@ -1,7 +1,6 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -360,7 +359,9 @@ public class ShowWordsPager extends AppCompatActivity {
 
             case "tall": sf = R.raw.tall;
                 break;
-            case "more": sf = R.raw.thought;
+            case "more": sf = R.raw.more;
+                break;
+            case "thought": sf = R.raw.thought;
                 break;
             case "caution": sf = R.raw.caution;
                 break;
@@ -763,7 +764,6 @@ public class ShowWordsPager extends AppCompatActivity {
             TextView insertedSub = (TextView) findViewById(i);
             insertedSub.setText(getTitlefromDesc(moreInfoSections[i]));
             insertedSub.setTextAppearance(this, R.style.MoreInfoSub);
-            // insertedSub.setGravity(Gravity.CENTER);
             insertID++;
 
             //TODO: Create Buttons instead of Body
@@ -788,7 +788,7 @@ public class ShowWordsPager extends AppCompatActivity {
             moreinfoll.addView(bodypreview, insertID, prevparams);
             TextView insertedBodyPrev = (TextView) findViewById(i + 3000);
             String str = getResources().getString(moreInfoSections[i]);
-            insertedBodyPrev.setText(str.substring(0,42) + "...");
+            insertedBodyPrev.setText(str.substring(0,30) + "...");
             insertedBodyPrev.setTextAppearance(this, R.style.MoreInfoBody);
             insertedBodyPrev.setTextColor(getResources().getColor(R.color.darkGrey));
             insertID++;
