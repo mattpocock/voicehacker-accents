@@ -16,7 +16,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/app_name"
@@ -25,6 +25,7 @@
 
         <ImageButton
             android:id="@+id/starbtn"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_weight="0.2"
             android:layout_height="match_parent"

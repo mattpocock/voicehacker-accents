@@ -2,4 +2,5 @@
 <resources>
     <item name="navbarbtn" type="id"/>
     <item name="navbarll" type="id"/>
+    <item name="starbtn" type="id"/>
 </resources>

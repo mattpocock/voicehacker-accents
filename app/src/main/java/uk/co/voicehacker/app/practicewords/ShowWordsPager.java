@@ -221,7 +221,7 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "occasion": sf = R.raw.occasion;
                 break;
-            case "divison": sf = R.raw.division;
+            case "division": sf = R.raw.division;
                 break;
             case "decision": sf = R.raw.decision;
                 break;
@@ -803,7 +803,7 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "sign": sf = R.raw.sign;
                 break;
-            case "die": sf = R.raw.hi;
+            case "die": sf = R.raw.die;
                 break;
             case "my": sf = R.raw.my;
                 break;

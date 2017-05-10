@@ -1,6 +1,7 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.content.Intent;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -12,8 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
@@ -31,23 +37,27 @@ public class Consonants extends Fragment {
 
     // Keeps track of all buttons created
 
-    int consArr[] = {0};
+    int[] soundArr = new int[25];
+    int soundCounter = 0;
+
+    boolean[] soundStarred = new boolean[25];
+    boolean firstStarPress = true;
 
     boolean navBarOn = false;
 
     // Create Button Method
 
     public void createButton(Button btn, final sound s) {
+
+        final int thisSound = soundCounter;
+
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
 
         // Adds all Button Id's to btnArray
 
-        int l = consArr.length;
-
-        consArr[l-1] = s.buttonid;
-
+        soundArr[soundCounter] = s.buttonid;
 
         final int sf = s.soundfile;
 
@@ -67,16 +77,13 @@ public class Consonants extends Fragment {
                 // Handles nav bar creation
 
                 LinearLayout newll = new LinearLayout(getContext());
-
                 newll.setId(R.id.navbarll);
-
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                params.setMargins(16,12,16,0);
-                params.gravity = Gravity.CENTER_HORIZONTAL;
 
                 Button navbtn = new Button(getContext());
                 navbtn.setId(R.id.navbarbtn);
+
+                ImageButton starbtn = new ImageButton(getContext());
+                starbtn.setId(R.id.starbtn);
 
 
 
@@ -87,36 +94,129 @@ public class Consonants extends Fragment {
                 if (navBarOn) {
                     Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
                     LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
+                    ImageButton insertedstar = (ImageButton) getView().findViewById(R.id.starbtn);
                     newllid.removeView(insertedBtn);
+                    newllid.removeView(insertedstar);
                     oldll.removeView(newllid);
                     navBarOn = false;
                 }
 
                 // Puts in Button
 
-                    int insertId = s.row + (s.section + 1);
+                int insertId = s.row + (s.section + 1);
 
-                    oldll.addView(newll, insertId, params);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 142);
+                params.setMargins(20,12,20,28);
+                params.gravity = Gravity.CENTER_HORIZONTAL;
 
-                    LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
+                oldll.addView(newll, insertId, params);
 
-                    newllid.addView(navbtn, 0, params);
+                LinearLayout.LayoutParams pracparams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 6);
+                LinearLayout.LayoutParams starparams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 2);
+                LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
 
-                    navBarOn = true;
-                    Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
 
 
-                    insertedBtn.setText("/" + s.symbol + "/ - PRACTICE");
-                    insertedBtn.setAllCaps(false);
-                    insertedBtn.setTextSize(20);
-                    insertedBtn.setSoundEffectsEnabled(false);
-                    insertedBtn.setTextColor(getResources().getColor(R.color.white));
-                    insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    // Prepare the View for the animation
-                    insertedBtn.setAlpha(0.0f);
-                    // Start the animation
-                    insertedBtn.animate()
-                        .alpha(1.0f);
+                newllid.addView(navbtn, 0, pracparams);
+                newllid.addView(starbtn, 1, starparams);
+
+                navBarOn = true;
+
+                    // Star Button
+
+                final ImageButton insertedStar = (ImageButton) getView().findViewById(R.id.starbtn);
+                insertedStar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                // Checks if the star should be pre-pressed or not
+
+                if (!soundStarred[thisSound]) {
+
+                    insertedStar.setImageResource(R.drawable.star_btn);
+
+                } else {
+                    insertedStar.setImageResource(R.drawable.star_btn_pressed);
+                }
+
+                insertedStar.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                insertedStar.setAlpha(0.0f);
+                insertedStar.animate().alpha(1.0f);
+
+
+
+                insertedStar.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+
+                        // TODO: Work Out This Damn Star
+
+                        if (firstStarPress) {
+
+                            for (int i = 0; i < soundArr.length; i++) {
+                                Button toChange = (Button) getView().findViewById(soundArr[i]);
+                                toChange.setBackgroundColor(getResources().getColor(R.color.darkGrey));
+                                toChange.setAlpha(0.0f);
+                                toChange.animate().alpha(1.0f);
+                                soundStarred[i] = false;
+                            }
+
+                            firstStarPress = false;
+
+                        }
+
+                        if (soundStarred[thisSound]) {
+
+                            Button toChange = (Button) getView().findViewById(soundArr[thisSound]);
+                            toChange.setBackgroundColor(getResources().getColor(R.color.darkGrey));
+                            toChange.setAlpha(0.0f);
+                            toChange.animate().alpha(1.0f);
+                            soundStarred[thisSound] = false;
+                            insertedStar.setImageResource(R.drawable.star_btn);
+
+                        } else {
+
+                            Button toChange = (Button) getView().findViewById(s.buttonid);
+                            toChange.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            toChange.setAlpha(0.0f);
+                            toChange.animate().alpha(1.0f);
+                            soundStarred[thisSound] = true;
+                            insertedStar.setImageResource(R.drawable.star_btn_pressed);
+                        }
+
+                        // Turns all blue again if all off
+
+                        boolean alloff = true;
+
+                        for (int i = 0; i < soundStarred.length; i++) {
+                            if (soundStarred[i]) {alloff = false;}
+                        }
+
+                        if (alloff) {
+                            for (int i = 0; i < soundArr.length; i++) {
+                                Button toChange = (Button) getView().findViewById(soundArr[i]);
+                                toChange.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                                toChange.setAlpha(0.0f);
+                                toChange.animate().alpha(1.0f);
+
+                            }
+                            firstStarPress = true;
+                        }
+
+                    }
+
+                });
+
+                    // Main Nav Button
+                Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
+                insertedBtn.setText("/" + s.symbol + "/ - PRACTICE");
+                insertedBtn.setAllCaps(false);
+                insertedBtn.setTextSize(20);
+                insertedBtn.setSoundEffectsEnabled(false);
+                insertedBtn.setTextColor(getResources().getColor(R.color.white));
+                insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                // Prepare the View for the animation
+                insertedBtn.setAlpha(0.0f);
+                // Start the animation
+                insertedBtn.animate().alpha(1.0f);
 
                 insertedBtn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -136,13 +236,9 @@ public class Consonants extends Fragment {
             }
         });
 
+        soundCounter++; // This has to go here to keep soundCounter as this button's id.
+
     }
-
-
-
-    // Store instance variables
-    private String title;
-    private int page;
 
     // newInstance constructor for creating fragment with arguments
     public static Consonants newInstance() {
@@ -162,6 +258,7 @@ public class Consonants extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.consonants, container, false);
+
         return view;
     }
 

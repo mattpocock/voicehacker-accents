@@ -41,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
-        ImageButton starbtn = (ImageButton) findViewById(R.id.starbtn);
-        starbtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                //TODO: They've just pressed the starbtn. What happens next?
-                Toast.makeText(MainActivity.this, "Star Button Pressed!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Intent intent = getIntent();
         if (intent != null) {
             int p = intent.getIntExtra("sentFrom", 0);
