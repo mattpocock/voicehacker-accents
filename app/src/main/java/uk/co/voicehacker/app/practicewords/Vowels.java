@@ -1,5 +1,6 @@
 package uk.co.voicehacker.app.practicewords;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class Vowels extends Fragment {
 
     MediaPlayer allsounds;
 
+    int vowelArr[] = {0};
+
     boolean navBarOn = false;
 
     // Create Button Method
@@ -33,6 +36,10 @@ public class Vowels extends Fragment {
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
         // mp = MediaPlayer.create(this, s.soundfile);
+
+        int l = vowelArr.length;
+
+        vowelArr[l-1] = s.buttonid;
 
         final int sf = s.soundfile;
 
@@ -128,24 +135,36 @@ public class Vowels extends Fragment {
     private int page;
 
     // newInstance constructor for creating fragment with arguments
-    public static Vowels newInstance(int page, String title) {
+    public static Vowels newInstance() {
         Vowels vowels = new Vowels();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        vowels.setArguments(args);
         return vowels;
     }
 
-    // Store instance variables based on arguments passed
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
     }
 
-    // Inflate the view for the fragment based on layout XML
+    // TODO: Interface for Star View
+    /*
+    public interface OnDataPass {
+        public void onDataPass(int[] data);
+    }
+
+    OnDataPass dataPasser;
+
+    @Override
+    public void onAttach(Activity a) {
+        super.onAttach(a);
+        dataPasser = (OnDataPass) a;
+    }
+
+    public void passData(int[] data) {
+        dataPasser.onDataPass(data);
+    } */
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -209,7 +228,7 @@ public class Vowels extends Fragment {
         createButton(button19, oy);
         createButton(button20, ure);
 
-
+        //TODO: Need to make a new version of the fragment, with behaviours that respond if the fragment was created as a
 
     }
 

@@ -29,7 +29,9 @@ public class Consonants extends Fragment {
 
     MediaPlayer allsounds;
 
-    // Is there a navbar?
+    // Keeps track of all buttons created
+
+    int consArr[] = {0};
 
     boolean navBarOn = false;
 
@@ -40,6 +42,13 @@ public class Consonants extends Fragment {
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
 
+        // Adds all Button Id's to btnArray
+
+        int l = consArr.length;
+
+        consArr[l-1] = s.buttonid;
+
+
         final int sf = s.soundfile;
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +58,6 @@ public class Consonants extends Fragment {
                 if (allsounds != null) {
                     allsounds.release();
                 }
-
 
                 // Handles Sound Playing
 
@@ -137,12 +145,8 @@ public class Consonants extends Fragment {
     private int page;
 
     // newInstance constructor for creating fragment with arguments
-    public static Consonants newInstance(int page, String title) {
+    public static Consonants newInstance() {
         Consonants consonants = new Consonants();
-        Bundle args = new Bundle();
-        args.putInt("someInt", page);
-        args.putString("someTitle", title);
-        consonants.setArguments(args);
         return consonants;
     }
 
@@ -151,8 +155,6 @@ public class Consonants extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt", 0);
-        title = getArguments().getString("someTitle");
     }
 
     // Inflate the view for the fragment based on layout XML
@@ -168,8 +170,6 @@ public class Consonants extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Creates Buttons
-
-        //TODO: Add descriptions for each consonant: Bilabial, Dental etc.
 
         sound unvoicedTHsound = new sound(R.id.button1,"θ",R.raw.unvoicedth,"The Unvoiced TH - /θ/", new int[]{R.string.desc_unvoiced, R.string.desc_fricatve, R.string.desc_thsound}, 1,1,1, new String[]{"think","anything","bath","breath","death","everything","month","mouth","nothing","something"});
         sound voicedTHsound = new sound(R.id.button2,"ð",R.raw.voicedth,"The Voiced TH - /ð/", new int[]{R.string.desc_voiced, R.string.desc_fricatve, R.string.desc_thsound}, 2,1,1, new String[]{"this","than","that","the","themselves","mother","brother","these","they","together"});

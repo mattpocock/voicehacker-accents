@@ -3,17 +3,22 @@ package uk.co.voicehacker.app.practicewords;
 
 
 import android.content.Intent;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     FragmentPagerAdapter adapterViewPager;
+    /*
+    public void onDataPass(int[] data) {
+        //TODO: This is the int array being passed back from the fragment.
+    } */
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         final ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
+        ImageButton starbtn = (ImageButton) findViewById(R.id.starbtn);
+        starbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO: They've just pressed the starbtn. What happens next?
+                Toast.makeText(MainActivity.this, "Star Button Pressed!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -104,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return Consonants.newInstance(0, "Page # 1");
+                    return Consonants.newInstance();
                 case 1:
-                    return Vowels.newInstance(1, "Page # 2");
+                    return Vowels.newInstance();
                 default:
                     return null;
             }
