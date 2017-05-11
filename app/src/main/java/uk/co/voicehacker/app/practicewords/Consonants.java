@@ -41,7 +41,7 @@ public class Consonants extends Fragment {
     int soundCounter = 0;
 
     boolean[] soundStarred = new boolean[25];
-    String importedSoundStarred = null;
+    String importedSoundStarred = "";
     boolean firstStarPress = true;
 
     boolean navBarOn = false;
@@ -83,6 +83,8 @@ public class Consonants extends Fragment {
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
+        btn.setAlpha(0.0f);
+        btn.animate().alpha(1.0f);
 
         if (!soundStarred[thisSound] && !firstStarPress) {
             btn.setBackgroundColor(getResources().getColor(R.color.darkGrey));
@@ -293,8 +295,9 @@ public class Consonants extends Fragment {
     // Store instance variables based on arguments passed
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+        super.onCreate(savedInstanceState);}
+
+
 
     // Inflate the view for the fragment based on layout XML
     @Override
@@ -310,19 +313,27 @@ public class Consonants extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Check Preferences
-        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
-        importedSoundStarred = sharedPref.getString(getString(R.string.importedconsonantsstarred), "0000000000000000000000000");
 
-        for (int i = 0; i < importedSoundStarred.length(); i++) {
-            String sub = importedSoundStarred.substring(i,(i+1));
-            if (Integer.parseInt(sub) == 0) {
-                soundStarred[i] = false;
-            } else {
-                soundStarred[i] = true;
-                firstStarPress = false;
+            SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
+            importedSoundStarred = sharedPref.getString(getString(R.string.importedconsonantsstarred), "0000000000000000000000000");
+
+            soundArr = new int[25];
+            soundCounter = 0;
+
+            soundStarred = new boolean[25];
+            firstStarPress = true;
+
+            navBarOn = false;
+
+            for (int i = 0; i < importedSoundStarred.length(); i++) {
+                String sub = importedSoundStarred.substring(i,(i+1));
+                if (Integer.parseInt(sub) == 0) {
+                    soundStarred[i] = false;
+                } else {
+                    soundStarred[i] = true;
+                    firstStarPress = false;
+                }
             }
-        }
-
 
 
 

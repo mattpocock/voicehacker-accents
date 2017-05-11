@@ -37,7 +37,7 @@ public class Vowels extends Fragment {
     int vowelCounter = 0;
 
     boolean[] vowelStarred = new boolean[20];
-    String importedVowelStarred = "";
+    String importedVowelStarred;
     boolean firstStarPress = true;
 
     boolean navBarOn = false;
@@ -78,6 +78,8 @@ public class Vowels extends Fragment {
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
+        btn.setAlpha(0.0f);
+        btn.animate().alpha(1.0f);
 
         if (!vowelStarred[thisvowel] && !firstStarPress) {
             btn.setBackgroundColor(getResources().getColor(R.color.darkGrey));
@@ -283,6 +285,7 @@ public class Vowels extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     // TODO: Interface for Star View
@@ -317,6 +320,14 @@ public class Vowels extends Fragment {
 
         SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
         importedVowelStarred = sharedPref.getString(getString(R.string.importedvowelsstarred), "00000000000000000000");
+
+        vowelArr = new int[20];
+        vowelCounter = 0;
+
+        vowelStarred = new boolean[25];
+        firstStarPress = true;
+
+        navBarOn = false;
 
         for (int i = 0; i < importedVowelStarred.length(); i++) {
             String sub = importedVowelStarred.substring(i,(i+1));

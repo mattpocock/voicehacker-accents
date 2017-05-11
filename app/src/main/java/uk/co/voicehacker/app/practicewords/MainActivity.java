@@ -3,6 +3,7 @@ package uk.co.voicehacker.app.practicewords;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v4.app.FragmentManager;
@@ -40,6 +41,27 @@ public class MainActivity extends AppCompatActivity {
         final ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
+        ImageButton resetBtn = (ImageButton) findViewById(R.id.resetbtn);
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                int cur = vpPager.getCurrentItem();
+
+                if (0 == cur) {
+                    editor.putString(getString(R.string.importedconsonantsstarred), "0000000000000000000000000");
+                } else {
+                    editor.putString(getString(R.string.importedvowelsstarred), "00000000000000000000");
+                }
+                editor.commit();
+                vpPager.setAdapter(adapterViewPager);
+                vpPager.setCurrentItem(cur);
+            }
+        });
+
 
         Intent intent = getIntent();
         if (intent != null) {
