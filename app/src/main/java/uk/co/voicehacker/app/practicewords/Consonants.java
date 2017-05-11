@@ -1,7 +1,7 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.content.Intent;
-import android.media.Image;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -12,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -37,23 +35,58 @@ public class Consonants extends Fragment {
 
     // Keeps track of all buttons created
 
+    SharedPreferences sharedPref;
+
     int[] soundArr = new int[25];
     int soundCounter = 0;
 
     boolean[] soundStarred = new boolean[25];
+    String importedSoundStarred = null;
     boolean firstStarPress = true;
 
     boolean navBarOn = false;
 
+    // Convert Pixels to Dps
+
+    public int pixelsToDps(int pix) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int pixels = (int) (pix * scale + 0.5f);
+        return pixels;
+    }
+
+    // Convert Boolean Array to String
+
+    public String booleanToString(boolean[] arr) {
+
+        String result = "";
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]) {
+                result+= "1";
+            } else {
+                result+="0";
+            }
+        }
+
+        return result;
+    }
+
+
     // Create Button Method
 
     public void createButton(Button btn, final sound s) {
+
+        final SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
 
         final int thisSound = soundCounter;
 
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
+
+        if (!soundStarred[thisSound] && !firstStarPress) {
+            btn.setBackgroundColor(getResources().getColor(R.color.darkGrey));
+        }
 
         // Adds all Button Id's to btnArray
 
@@ -101,12 +134,14 @@ public class Consonants extends Fragment {
                     navBarOn = false;
                 }
 
+                // Converts to dp
+
                 // Puts in Button
 
                 int insertId = s.row + (s.section + 1);
 
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 142);
-                params.setMargins(20,12,20,28);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, pixelsToDps(50));
+                params.setMargins(pixelsToDps(8),pixelsToDps(0),pixelsToDps(8),pixelsToDps(8));
                 params.gravity = Gravity.CENTER_HORIZONTAL;
 
                 oldll.addView(newll, insertId, params);
@@ -131,10 +166,10 @@ public class Consonants extends Fragment {
 
                 if (!soundStarred[thisSound]) {
 
-                    insertedStar.setImageResource(R.drawable.star_btn);
+                    insertedStar.setImageResource(R.drawable.star_btn1);
 
                 } else {
-                    insertedStar.setImageResource(R.drawable.star_btn_pressed);
+                    insertedStar.setImageResource(R.drawable.star_btn2);
                 }
 
                 insertedStar.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -170,7 +205,12 @@ public class Consonants extends Fragment {
                             toChange.setAlpha(0.0f);
                             toChange.animate().alpha(1.0f);
                             soundStarred[thisSound] = false;
-                            insertedStar.setImageResource(R.drawable.star_btn);
+
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(getString(R.string.importedconsonantsstarred), booleanToString(soundStarred));
+                            editor.commit();
+
+                            insertedStar.setImageResource(R.drawable.star_btn1);
 
                         } else {
 
@@ -179,7 +219,10 @@ public class Consonants extends Fragment {
                             toChange.setAlpha(0.0f);
                             toChange.animate().alpha(1.0f);
                             soundStarred[thisSound] = true;
-                            insertedStar.setImageResource(R.drawable.star_btn_pressed);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(getString(R.string.importedconsonantsstarred), booleanToString(soundStarred));
+                            editor.commit();
+                            insertedStar.setImageResource(R.drawable.star_btn2);
                         }
 
                         // Turns all blue again if all off
@@ -265,6 +308,23 @@ public class Consonants extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Check Preferences
+        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
+        importedSoundStarred = sharedPref.getString(getString(R.string.importedconsonantsstarred), "0000000000000000000000000");
+
+        for (int i = 0; i < importedSoundStarred.length(); i++) {
+            String sub = importedSoundStarred.substring(i,(i+1));
+            if (Integer.parseInt(sub) == 0) {
+                soundStarred[i] = false;
+            } else {
+                soundStarred[i] = true;
+                firstStarPress = false;
+            }
+        }
+
+
+
 
         // Creates Buttons
 

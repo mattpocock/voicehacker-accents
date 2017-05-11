@@ -1,6 +1,7 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -30,23 +31,57 @@ public class Vowels extends Fragment {
 
     MediaPlayer allsounds;
 
+    SharedPreferences sharedPref;
+
     int[] vowelArr = new int[20];
     int vowelCounter = 0;
 
     boolean[] vowelStarred = new boolean[20];
+    String importedVowelStarred = "";
     boolean firstStarPress = true;
 
     boolean navBarOn = false;
 
+    // Convert Pixels to Dps
+
+    public int pixelsToDps(int pix) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int pixels = (int) (pix * scale + 0.5f);
+        return pixels;
+    }
+
+    // Convert Boolean Array to String
+
+    public String booleanToString(boolean[] arr) {
+
+        String result = "";
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]) {
+                result+= "1";
+            } else {
+                result+="0";
+            }
+        }
+
+        return result;
+    }
+
     // Create Button Method
 
     public void createButton(Button btn, final sound s) {
+
+        final SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
 
         final int thisvowel = vowelCounter;
 
         btn = (Button) getView().findViewById(s.buttonid);
         btn.setText(s.symbol);
         btn.setSoundEffectsEnabled(false);
+
+        if (!vowelStarred[thisvowel] && !firstStarPress) {
+            btn.setBackgroundColor(getResources().getColor(R.color.darkGrey));
+        }
 
         // Adds all Button Id's to btnArray
 
@@ -98,8 +133,8 @@ public class Vowels extends Fragment {
 
                 int insertId = s.row + (s.section + 1);
 
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 142);
-                params.setMargins(20,12,20,28);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, pixelsToDps(50));
+                params.setMargins(pixelsToDps(8),pixelsToDps(0),pixelsToDps(8),pixelsToDps(8));
                 params.gravity = Gravity.CENTER_HORIZONTAL;
 
                 oldll.addView(newll, insertId, params);
@@ -124,10 +159,10 @@ public class Vowels extends Fragment {
 
                 if (!vowelStarred[thisvowel]) {
 
-                    insertedStar.setImageResource(R.drawable.star_btn);
+                    insertedStar.setImageResource(R.drawable.star_btn1);
 
                 } else {
-                    insertedStar.setImageResource(R.drawable.star_btn_pressed);
+                    insertedStar.setImageResource(R.drawable.star_btn2);
                 }
 
                 insertedStar.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -163,6 +198,9 @@ public class Vowels extends Fragment {
                             toChange.setAlpha(0.0f);
                             toChange.animate().alpha(1.0f);
                             vowelStarred[thisvowel] = false;
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(getString(R.string.importedvowelsstarred), booleanToString(vowelStarred));
+                            editor.commit();
                             insertedStar.setImageResource(R.drawable.star_btn);
 
                         } else {
@@ -172,7 +210,10 @@ public class Vowels extends Fragment {
                             toChange.setAlpha(0.0f);
                             toChange.animate().alpha(1.0f);
                             vowelStarred[thisvowel] = true;
-                            insertedStar.setImageResource(R.drawable.star_btn_pressed);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(getString(R.string.importedvowelsstarred), booleanToString(vowelStarred));
+                            editor.commit();
+                            insertedStar.setImageResource(R.drawable.star_btn2);
                         }
 
                         // Turns all blue again if all off
@@ -273,6 +314,19 @@ public class Vowels extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
+        importedVowelStarred = sharedPref.getString(getString(R.string.importedvowelsstarred), "00000000000000000000");
+
+        for (int i = 0; i < importedVowelStarred.length(); i++) {
+            String sub = importedVowelStarred.substring(i,(i+1));
+            if (Integer.parseInt(sub) == 0) {
+                vowelStarred[i] = false;
+            } else {
+                vowelStarred[i] = true;
+                firstStarPress = false;
+            }
+        }
 
         // Short Vowels
 
