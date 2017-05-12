@@ -9,6 +9,9 @@
                 android:top="10dp"
                 android:right="10dp"
                 android:bottom="10dp" />
+            <corners
+                android:radius="5dp"
+                />
         </shape>
     </item>
     <item>
@@ -22,6 +25,9 @@
                 android:top="10dp"
                 android:right="10dp"
                 android:bottom="10dp" />
+            <corners
+                android:radius="5dp"
+                />
         </shape>
     </item>
 </selector>

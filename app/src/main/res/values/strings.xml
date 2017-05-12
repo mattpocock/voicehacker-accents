@@ -3,6 +3,10 @@
     <string name="preference_file_key">app.voicehacker.co.uk.PREFERENCE_FILE_KEY</string>
     <string name="importedconsonantsstarred">app.voicehacker.co.uk.CONSONANTS_STARRED</string>
     <string name="importedvowelsstarred">app.voicehacker.co.uk.VOWELS_STARRED</string>
+    <string name="tutorialviewed">app.voicehacker.co.uk.TUTORIAL_VIEWED</string>
+
+
+
     <string name="desc_morecoming">There‘s more to say about this sound, so future updates will add more descriptions.</string>
     <string name="desc_diphthongs">Some vowels, like the ‘long’ and ‘short’ ones, choose one position and stick to it throughout. On the word ‘see’, your mouth finds a static position when it hits the ‘ee’, and holds it until the word is done. Diphthongs are vowels which move from one position to another. The vowel /eɪ/ (in ‘say’) starts with an /e/ (in ‘set’) and ends with an /ɪ/ (in ‘sit’). Diphthongs glide from one place to another, like “saaaayyyyy”. Some are obvious, like the ‘ah’ and ‘oo’ in the /aʊ/ in ‘mouth’. Some are more subtle, such as the sliding /eə/ in ‘chair’. Try to feel the beginning and end point of the diphthong vowel in the words above.</string>
     <string name="desc_shortvowels">Short vowels are - no surprises - short. They are quick, sharp, and punchy. When you emphasise a word with a short vowel, you emphasise the consonants, not the vowel. It’s the difference between ‘seat’ and ‘sit’. “Have a seeeeaat!”. “Just sssssit.” Try saying the words sharply, with more emphasis on the consonants.</string>

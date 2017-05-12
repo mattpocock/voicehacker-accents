@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginBottom="-1sp">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +39,18 @@
             android:layout_gravity="center_vertical"
             android:scaleType="fitCenter"
             android:src="@drawable/reset_btn"
+            android:background="#00000000"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"/>
+
+        <ImageButton
+            android:id="@+id/toptutbtn"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tut_btn_drawable"
             android:background="#00000000"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"/>
@@ -73,5 +93,76 @@
             android:gravity="center_vertical|center_horizontal"
             android:text="Vowels"
             android:background="@drawable/background"/>
+
     </LinearLayout>
+
 </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tutframe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            android:padding="12dp"
+            android:layout_weight="0">
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/maintitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="VoiceHacker" />
+
+            </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/tutViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1">
+        </android.support.v4.view.ViewPager>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@color/colorPrimary"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/tut_skipbtn"
+                android:layout_width="0sp"
+                android:textSize="18sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="0sp"
+                android:textColor="@color/darkestGrey"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Done"
+                android:background="@drawable/whitebackground"/>
+
+            <Button
+                android:id="@+id/tut_nextbtn"
+                android:layout_width="0sp"
+                android:textSize="18sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="8sp"
+                android:textColor="@color/darkestGrey"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Next"
+                android:background="@drawable/whitebackground"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
