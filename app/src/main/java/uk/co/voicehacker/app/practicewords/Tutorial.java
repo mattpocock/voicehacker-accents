@@ -43,6 +43,14 @@ public class Tutorial extends Fragment {
         return tutorial;
     }
 
+    // Convert Pixels to Dps
+
+    public int pixelsToDps(int pix) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int pixels = (int) (pix * scale + 0.5f);
+        return pixels;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +78,10 @@ public class Tutorial extends Fragment {
         TextView firstParaTV = (TextView) getView().findViewById(R.id.firsttxtview);
         firstParaTV.setText(firstPara);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        // firstParaTV.setLayoutParams(params);
-        firstParaTV.setGravity(Gravity.CENTER_HORIZONTAL);
+        params.setMargins(pixelsToDps(25),pixelsToDps(20),pixelsToDps(25),0);
+        firstParaTV.setLayoutParams(params);
+        //firstParaTV.setGravity(Gravity.CENTER_HORIZONTAL);
+
 
         // Create Slightly See-through backdrop
 
@@ -86,10 +96,9 @@ public class Tutorial extends Fragment {
             secondParaTV = (TextView) getView().findViewById(R.id.tutsecondpara);
             secondParaTV.setText(secondPara);
             secondParaTV.setTextAppearance(R.style.tuttext);
-            secondParaTV.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
+           // secondParaTV.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
 
             // params.weight = 1;
-            params.setMargins(50,40,50,40);
             //params.gravity = Gravity.CENTER_HORIZONTAL;
             secondParaTV.setLayoutParams(params);
 
@@ -103,7 +112,7 @@ public class Tutorial extends Fragment {
             thirdParaTV = (TextView) getView().findViewById(R.id.tutthirdpara);
             thirdParaTV.setText(thirdPara);
             thirdParaTV.setTextAppearance(R.style.tuttext);
-            thirdParaTV.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
+            //thirdParaTV.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
             //params.gravity = Gravity.CENTER_HORIZONTAL;
             thirdParaTV.setLayoutParams(params);
         }

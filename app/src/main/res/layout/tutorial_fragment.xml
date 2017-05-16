@@ -24,10 +24,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:layout_marginTop="100px"
-            android:layout_marginLeft="50px"
-            android:layout_marginRight="50px"
-            android:layout_marginBottom="40px"/>
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"/>
 
 </LinearLayout>
     </ScrollView>

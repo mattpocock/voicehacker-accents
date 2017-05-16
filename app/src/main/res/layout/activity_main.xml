@@ -117,7 +117,7 @@
             style="@style/maintitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginLeft="8dp"
             android:text="VoiceHacker" />
 
             </LinearLayout>
