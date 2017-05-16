@@ -1072,7 +1072,6 @@ public class ShowWordsPager extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
-
         // Get Intent Stuff
 
         Intent intent = getIntent();
@@ -1082,8 +1081,6 @@ public class ShowWordsPager extends AppCompatActivity {
         moreInfoSections = intent.getIntArrayExtra("moreInfoSections");
 
         // FIRST TIME
-
-
 
         if (getSoundFile(wordArr[0]) != 0) {
 
@@ -1108,21 +1105,25 @@ public class ShowWordsPager extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 pageSelected = position;
-                if (getSoundFile(wordArr[position]) != 0) {
 
-                    if (media != null) {
-                        media.release();
-                    }
+                if (position < wordArr.length) { // New implementation because of Promo Fragment
 
-                    media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[position]));
-                    media.start();
+                    if (getSoundFile(wordArr[position]) != 0) {
 
-                    media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
+                        if (media != null) {
                             media.release();
                         }
-                    });
+
+                        media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[position]));
+                        media.start();
+
+                        media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                media.release();
+                            }
+                        });
+                    }
                 }
             }
 
@@ -1169,12 +1170,14 @@ public class ShowWordsPager extends AppCompatActivity {
             }
         });
 
+        // More Info Section
+
         LinearLayout moreinfoll = (LinearLayout) findViewById(R.id.moreinfo);
 
         TextView titleview = (TextView) findViewById(R.id.moreinfotitle);
         titleview.setText(title);
 
-        int insertID = 0; // 1 Because of title, 0 if none
+        int insertID = 0;
 
         for (int i = 0; i < moreInfoSections.length; i++) {
 
@@ -1194,6 +1197,8 @@ public class ShowWordsPager extends AppCompatActivity {
             insertID++;
 
             // Body
+
+            //TODO: Insert View.Gone sections to promote the premium version in every section except the first
 
             TextView body = new TextView(getApplicationContext());
             body.setId(i + 1000);
@@ -1260,13 +1265,17 @@ public class ShowWordsPager extends AppCompatActivity {
         public int getCount() {
             Intent intent = getIntent();
             wordArr = intent.getStringArrayExtra("wordArr");
-            return wordArr.length;
+            return wordArr.length + 1; // +1 because of the promo
         }
 
         // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
-            return ShowWordsFragment.newInstance(title, wordArr, position);
+            if (position < wordArr.length) {
+                return ShowWordsFragment.newInstance(title, wordArr, position);
+            } else {
+                return PromoFragment.newInstance();
+            }
         }
 
         // Returns the page title for the top indicator

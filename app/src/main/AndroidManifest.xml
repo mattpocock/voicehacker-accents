@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".ShowWordsPager">
         </activity>
+        <activity android:name=".InAppPurchase">
+        </activity>
     </application>
 
 </manifest>
