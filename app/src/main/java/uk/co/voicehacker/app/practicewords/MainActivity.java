@@ -22,6 +22,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     FragmentPagerAdapter adapterViewPager;
     FragmentPagerAdapter tutadapterViewPager;
+    boolean purchased001;
 
     BillingProcessor bp;
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
         bp = new BillingProcessor(this, getKey(), this);
 
-        final boolean purchased001 = sharedPref.getBoolean(getString(R.string.purchased001), false);
+        purchased001 = sharedPref.getBoolean(getString(R.string.purchased001), false);
 
         boolean loadOwnedPurchasesFromGoogle = bp.loadOwnedPurchasesFromGoogle();
         String productId = "premiumwordpack001";
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean(getString(R.string.purchased001), true);
                     editor.commit();
+                    purchased001 = true;
+
                 }
             }
         }
@@ -193,10 +197,13 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
         tutagainbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                tutPager.setCurrentItem(0);
+                /* tutPager.setCurrentItem(0);
                 tutview.setAlpha(0);
                 tutview.setVisibility(View.VISIBLE);
-                tutview.animate().alpha(1).translationY(0);
+                tutview.animate().alpha(1).translationY(0); */ //TODO: Swap Below
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(getString(R.string.purchased001), false);
+                editor.commit();
 
 
             }
@@ -217,6 +224,23 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         });
 
     }
+
+    public void onResume () {
+        super.onResume();
+
+        TextView mt = (TextView) findViewById(R.id.topbartitle);
+        mt.setText(getString(R.string.app_name_pro));
+
+        if (purchased001) {
+            mt.setText(R.string.app_name_pro);
+        }
+        else {
+            mt.setText(R.string.app_name_free);
+        }
+
+    }
+
+    // Functions to make the top line happy.
 
     @Override
     public void onProductPurchased(String productId, TransactionDetails details) {

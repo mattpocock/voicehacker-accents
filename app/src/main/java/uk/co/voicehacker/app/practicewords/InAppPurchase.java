@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -32,15 +33,37 @@ public class InAppPurchase extends Activity implements BillingProcessor.IBilling
         super.onCreate(savedInstanceState);
         setContentView(R.layout.in_app_purchase);
 
+
+
         bp = new BillingProcessor(this, getKey(), this);
 
         Button purchase = (Button) findViewById(R.id.purchasebtn);
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bp.purchase(InAppPurchase.this, "premiumwordpack001");
-                /*Intent i = new Intent(InAppPurchase.this, MainActivity.class);
-                startActivity(i); */ //TODO: Delete this comment
+
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+
+                EditText code = (EditText) findViewById(R.id.autotext);
+                String codeinput = code.getText().toString();
+                String discountcode = getString(R.string.discountcode001);
+
+                if (codeinput.equals(discountcode)) {
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean(getString(R.string.purchased001), true);
+                    editor.commit();
+                    Toast.makeText(InAppPurchase.this, "Success! You've unlocked the Premium word pack.", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(InAppPurchase.this, MainActivity.class);
+                    startActivity(i);
+                }
+                else if (!codeinput.equals("")) {
+                    Toast.makeText(InAppPurchase.this, "Incorrect code - sending you to the Google Store.", Toast.LENGTH_LONG).show();
+                    bp.purchase(InAppPurchase.this, "premiumwordpack001");
+                }
+                else
+                {
+                    bp.purchase(InAppPurchase.this, "premiumwordpack001");
+                }
             }
         });
 
@@ -79,7 +102,7 @@ public class InAppPurchase extends Activity implements BillingProcessor.IBilling
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putBoolean(getString(R.string.purchased001), true);
                     editor.commit();
-                    Toast.makeText(this, "Success! You've purchased our word pack.", Toast.LENGTH_SHORT).show(); //TODO: Make this better
+                    Toast.makeText(this, "Success! You've unlocked the Premium word pack.", Toast.LENGTH_SHORT).show(); //TODO: Make this better
                     Intent i = new Intent(InAppPurchase.this, MainActivity.class);
                     startActivity(i);
                 }

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:orientation="horizontal"
@@ -17,44 +19,83 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
             android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="18dp" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_weight="0.9"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/textView8"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/promotext"
-            android:textSize="18dp" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/purchasebtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Buy" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="Premium Word Pack"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textSize="30sp"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <Button
-            android:id="@+id/revokebtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Revoke" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/promotext"
+                android:textSize="18dp" />
 
-    </LinearLayout>
+            <LinearLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="0px"
+                android:layout_height="0px"/>
+
+            <EditText
+                android:id="@+id/autotext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:hint="Enter Discount Code"
+                android:inputType="textNoSuggestions"
+                android:nextFocusLeft="@id/autotext"
+                android:nextFocusUp="@id/autotext" />
+
+            <Button
+                android:id="@+id/purchasebtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/background"
+                android:text="Unlock"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

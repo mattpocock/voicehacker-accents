@@ -7,8 +7,8 @@ android {
         applicationId "uk.co.voicehacker.app.practicewords"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 22
-        versionName "Alpha 0.24"
+        versionCode 23
+        versionName "Alpha 0.22.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

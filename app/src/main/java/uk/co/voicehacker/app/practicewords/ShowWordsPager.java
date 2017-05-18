@@ -1221,7 +1221,7 @@ public class ShowWordsPager extends AppCompatActivity {
 
         // More Info Section
 
-        LinearLayout moreinfoll = (LinearLayout) findViewById(R.id.moreinfo);
+        final LinearLayout moreinfoll = (LinearLayout) findViewById(R.id.moreinfo);
 
         TextView titleview = (TextView) findViewById(R.id.moreinfotitle);
         titleview.setText(title);
@@ -1322,15 +1322,34 @@ public class ShowWordsPager extends AppCompatActivity {
                     Button btn = (Button) findViewById(listenerID + 2000);
                     btn.setVisibility(View.GONE);
 
-                    if (listenerID > 0 && !ifPurchased()) {
+                    if (!ifPurchased()) {
+
+                        final int childcount = moreinfoll.getChildCount();
+                        for (int i = 0; i < childcount; i++) {
+                            View view = moreinfoll.getChildAt(i);
+                            view.setVisibility(View.GONE);
+                        }
                         TextView promo = (TextView) findViewById(listenerID + 4000);
                         promo.setVisibility(View.VISIBLE);
-                        TextView prevbody = (TextView) findViewById(listenerID + 3000);
-                        prevbody.setVisibility(View.GONE);
+                        promo.setAlpha(0);
+                        promo.animate().alpha(1);
                         TextView subtitle = (TextView) findViewById(listenerID);
+                        subtitle.setVisibility(View.VISIBLE);
                         subtitle.setText("Go Premium");
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        params.topMargin = 24;
+                        params.bottomMargin = 24;
+                        subtitle.setLayoutParams(params);
+                        subtitle.setAlpha(0);
+                        subtitle.animate().alpha(1);
                         Button promobtn = (Button) findViewById(listenerID + 5000);
                         promobtn.setVisibility(View.VISIBLE);
+                        promobtn.setAlpha(0);
+                        promobtn.animate().alpha(1);
                     } else {
                         TextView body = (TextView) findViewById(listenerID + 1000);
                         body.setVisibility(View.VISIBLE);
