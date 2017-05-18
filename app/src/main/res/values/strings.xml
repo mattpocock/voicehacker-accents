@@ -3,7 +3,22 @@
     <string name="preference_file_key">app.voicehacker.co.uk.PREFERENCE_FILE_KEY</string>
     <string name="importedconsonantsstarred">app.voicehacker.co.uk.CONSONANTS_STARRED</string>
     <string name="importedvowelsstarred">app.voicehacker.co.uk.VOWELS_STARRED</string>
+    <string name="purchased001">app.voicehacker.co.uk.PURCHASED_001</string>
     <string name="tutorialviewed">app.voicehacker.co.uk.TUTORIAL_VIEWED</string>
+    <string name="promotext">Eventually, I plan to release a word pack to give those who want it a chance to access over 1,000 recordings and the full set of descriptions for the app. This page, and the button below, will mean that you can make a purchase inside the app. But for now, pressing the button will result in a test. On this version, there\'s nothing to purchase. But there soon will be.</string>
+    <string name="promopreview">Get access to over 3,000 words of descriptions and 1,000 words of recordings by buying our premium package.</string>
+
+    <string name="key1">MIIBIjANBgkqhkiG9w0B</string>
+    <string name="key2">AQEFAAOCAQ8AMIIBCgKCAQEAjbBugXuIHsnf</string>
+    <string name="key3">+BhvSFfycgZKdlJJyrg8gx2039fCVh8HjttGZvZwctUs64p0WOC</string>
+    <string name="key4">ylfri5uTDvwxer3eT6iLY</string>
+    <string name="key5">dBOBIN77arxKMhktPLKFQ+5h9EfkE9w9/wFMQwb+</string>
+    <string name="key6">uo8CTdFLWg+i2YQk9gPXLsv6sbZ96JpZ</string>
+    <string name="key7">ubipxvGXI6xtD9DXCsItzf5HUBPty5BcDDath6zL7T4mSn</string>
+    <string name="key8">g295uFxZA0DY3jLbeBhTwIkq/xnoebNcRKbSzIQl</string>
+    <string name="key9">5o5GDIXlRl6uBNlMMrLHTQZ7kD+caE7Ap7e1mIzxuwVDR</string>
+    <string name="key10">b+ornpyLMpW7+ieCxS7TLJZvvAWI5CAu3aNtU</string>
+    <string name="key11">W7UTPvD2oQOcu76hDQIDAQAB</string>
 
 
 

@@ -175,14 +175,11 @@ public class Vowels extends Fragment {
 
                 insertedStar.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        // TODO: Work Out This Damn Star
 
                         if (firstStarPress) {
 
                             for (int i = 0; i < vowelArr.length; i++) {
                                 Button toChange = (Button) getView().findViewById(vowelArr[i]);
-
-                                //TODO:
                                 toChange.setBackgroundColor(getResources().getColor(R.color.darkGrey));
                                 toChange.setAlpha(0.0f);
                                 toChange.animate().alpha(1.0f);
@@ -288,24 +285,6 @@ public class Vowels extends Fragment {
 
     }
 
-    // TODO: Interface for Star View
-    /*
-    public interface OnDataPass {
-        public void onDataPass(int[] data);
-    }
-
-    OnDataPass dataPasser;
-
-    @Override
-    public void onAttach(Activity a) {
-        super.onAttach(a);
-        dataPasser = (OnDataPass) a;
-    }
-
-    public void passData(int[] data) {
-        dataPasser.onDataPass(data);
-    } */
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -390,8 +369,6 @@ public class Vowels extends Fragment {
         createButton(button18, ehuh);
         createButton(button19, oy);
         createButton(button20, ure);
-
-        //TODO: Need to make a new version of the fragment, with behaviours that respond if the fragment was created as a
 
     }
 

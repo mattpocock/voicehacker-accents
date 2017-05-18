@@ -1,6 +1,7 @@
 package uk.co.voicehacker.app.practicewords;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+
 import static java.security.AccessController.getContext;
 
 /**
@@ -25,12 +28,13 @@ import static java.security.AccessController.getContext;
 public class ShowWordsPager extends AppCompatActivity {
 
     FragmentPagerAdapter adapterViewPager;
-    String wordArr[];
     String title;
     int sentFrom;
     int moreInfoSections[];
     int pageSelected;
     MediaPlayer media;
+    boolean purchased001;
+    SharedPreferences sharedPref;
 
     int getSoundFile(String word) {
         int sf;
@@ -1064,6 +1068,40 @@ public class ShowWordsPager extends AppCompatActivity {
         return t;
     }
 
+    public String[] getWordArr() {
+        Intent intent = getIntent();
+        String[] fWordArr = intent.getStringArrayExtra("wordArr");
+        String[] sWordArr = Arrays.copyOfRange(fWordArr, 0, 5);
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+        boolean p = sp.getBoolean(getString(R.string.purchased001), false);
+
+        if (!p) {
+            return sWordArr;
+        } else {
+            return fWordArr;
+        }
+    }
+
+    public boolean ifPurchased() {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+        boolean p = sp.getBoolean(getString(R.string.purchased001), false);
+        return p;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+        purchased001 = sharedPref.getBoolean(getString(R.string.purchased001), false);
+
+        final ViewPager vpPager = (ViewPager) findViewById(R.id.showwordsvpager);
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
+        pageSelected = 0;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1072,23 +1110,33 @@ public class ShowWordsPager extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
+        // Shared Preferences
+
+        sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+
+        // Check if Premium User
+
+        purchased001 = sharedPref.getBoolean(getString(R.string.purchased001), false);
+
         // Get Intent Stuff
 
         Intent intent = getIntent();
-        wordArr = intent.getStringArrayExtra("wordArr");
+
+        String[] wa = getWordArr();
+
         title = intent.getStringExtra("title");
         sentFrom = intent.getIntExtra("sentFrom", 0);
         moreInfoSections = intent.getIntArrayExtra("moreInfoSections");
 
         // FIRST TIME
 
-        if (getSoundFile(wordArr[0]) != 0) {
+        if (getSoundFile(wa[0]) != 0) {
 
             if (media != null) {
                 media.release();
             }
 
-            media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[0]));
+            media = MediaPlayer.create(getApplicationContext(), getSoundFile(wa[0]));
             media.start();
 
             media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -1105,16 +1153,17 @@ public class ShowWordsPager extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 pageSelected = position;
+                String[] wa = getWordArr();
 
-                if (position < wordArr.length) { // New implementation because of Promo Fragment
+                if (position < wa.length) { // New implementation because of Promo Fragment
 
-                    if (getSoundFile(wordArr[position]) != 0) {
+                    if (getSoundFile(wa[position]) != 0) {
 
                         if (media != null) {
                             media.release();
                         }
 
-                        media = MediaPlayer.create(getApplicationContext(), getSoundFile(wordArr[position]));
+                        media = MediaPlayer.create(getApplicationContext(), getSoundFile(wa[position]));
                         media.start();
 
                         media.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -1198,8 +1247,6 @@ public class ShowWordsPager extends AppCompatActivity {
 
             // Body
 
-            //TODO: Insert View.Gone sections to promote the premium version in every section except the first
-
             TextView body = new TextView(getApplicationContext());
             body.setId(i + 1000);
             body.setVisibility(View.GONE);
@@ -1210,6 +1257,38 @@ public class ShowWordsPager extends AppCompatActivity {
             insertedBody.setText(moreInfoSections[i]);
             insertedBody.setTextAppearance(this, R.style.MoreInfoBody);
             insertID++;
+
+            TextView promo = new TextView(getApplicationContext());
+            promo.setId(i + 4000);
+            promo.setVisibility(View.GONE);
+            LinearLayout.LayoutParams promoparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            promoparams.bottomMargin = 24;
+            moreinfoll.addView(promo, insertID, promoparams);
+            TextView promobody = (TextView) findViewById(i + 4000);
+            promobody.setText(getString(R.string.promopreview));
+            promobody.setTextAppearance(this, R.style.MoreInfoBody);
+            insertID++;
+
+            Button promobtn = new Button(getApplicationContext(), null, R.drawable.moreinfobtn);
+            promobtn.setId(i + 5000);
+            promobtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.moreinfobtn));
+            LinearLayout.LayoutParams promobtnparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            promobtnparams.bottomMargin = 24;
+            moreinfoll.addView(promobtn, insertID, promobtnparams);
+            promobtn = (Button) findViewById(i + 5000);
+            promobtn.setTextSize(16);
+            promobtn.setText("LEARN MORE");
+            promobtn.setVisibility(View.GONE);
+            promobtn.setTextColor(getResources().getColor(R.color.colorPrimary));
+            insertID++;
+
+            promobtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(), InAppPurchase.class);
+                    startActivity(i);
+                }
+            });
 
             TextView bodypreview = new TextView(getApplicationContext());
             bodypreview.setId(i + 3000);
@@ -1222,6 +1301,8 @@ public class ShowWordsPager extends AppCompatActivity {
             insertedBodyPrev.setTextAppearance(this, R.style.MoreInfoBody);
             insertedBodyPrev.setTextColor(getResources().getColor(R.color.darkGrey));
             insertID++;
+
+
 
             Button moreinfobtn = new Button(getApplicationContext(), null, R.drawable.moreinfobtn);
             moreinfobtn.setId(i + 2000);
@@ -1237,12 +1318,27 @@ public class ShowWordsPager extends AppCompatActivity {
             final int listenerID = i;
             insertedBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+
                     Button btn = (Button) findViewById(listenerID + 2000);
                     btn.setVisibility(View.GONE);
-                    TextView body = (TextView) findViewById(listenerID + 1000);
-                    body.setVisibility(View.VISIBLE);
-                    TextView prevbody = (TextView) findViewById(listenerID + 3000);
-                    prevbody.setVisibility(View.GONE);
+
+                    if (listenerID > 0 && !ifPurchased()) {
+                        TextView promo = (TextView) findViewById(listenerID + 4000);
+                        promo.setVisibility(View.VISIBLE);
+                        TextView prevbody = (TextView) findViewById(listenerID + 3000);
+                        prevbody.setVisibility(View.GONE);
+                        TextView subtitle = (TextView) findViewById(listenerID);
+                        subtitle.setText("Go Premium");
+                        Button promobtn = (Button) findViewById(listenerID + 5000);
+                        promobtn.setVisibility(View.VISIBLE);
+                    } else {
+                        TextView body = (TextView) findViewById(listenerID + 1000);
+                        body.setVisibility(View.VISIBLE);
+                        TextView prevbody = (TextView) findViewById(listenerID + 3000);
+                        prevbody.setVisibility(View.GONE);
+                    }
+
+
                 }
             });
             insertID++;
@@ -1250,6 +1346,8 @@ public class ShowWordsPager extends AppCompatActivity {
         }
 
     }
+
+
 
     // ...
 
@@ -1263,16 +1361,27 @@ public class ShowWordsPager extends AppCompatActivity {
         // Returns total number of pages
         @Override
         public int getCount() {
-            Intent intent = getIntent();
-            wordArr = intent.getStringArrayExtra("wordArr");
-            return wordArr.length + 1; // +1 because of the promo
+
+            String[] wa = getWordArr();
+            int walength = wa.length;
+
+            if (!ifPurchased()) {
+                return walength + 1;
+            } else {
+                return walength;
+            }
+
+
+
         }
 
         // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
-            if (position < wordArr.length) {
-                return ShowWordsFragment.newInstance(title, wordArr, position);
+            String[] wa = getWordArr();
+
+            if (position < wa.length) {
+                return ShowWordsFragment.newInstance(title, wa, position);
             } else {
                 return PromoFragment.newInstance();
             }

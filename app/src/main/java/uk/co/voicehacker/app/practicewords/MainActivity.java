@@ -2,6 +2,7 @@ package uk.co.voicehacker.app.practicewords;
 
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
@@ -23,24 +24,53 @@ import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 
-public class MainActivity extends AppCompatActivity {
 
-
+public class MainActivity extends AppCompatActivity implements BillingProcessor.IBillingHandler {
 
     FragmentPagerAdapter adapterViewPager;
     FragmentPagerAdapter tutadapterViewPager;
-    /*
-    public void onDataPass(int[] data) {
-        //TODO: This is the int array being passed back from the fragment.
-    } */
 
+    BillingProcessor bp;
 
+    String getKey () {
+
+        String k = getString(R.string.key1) + getString(R.string.key2) +getString(R.string.key3) +getString(R.string.key4) +getString(R.string.key5) +getString(R.string.key6) +getString(R.string.key7) +getString(R.string.key8) +getString(R.string.key9) +getString(R.string.key10) +getString(R.string.key11);
+        return k;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Shared Preferences
+
+        final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+
+        // Check if Premium User. If Shared Prefs doesn't think so, checks Google to make sure.
+
+        bp = new BillingProcessor(this, getKey(), this);
+
+        final boolean purchased001 = sharedPref.getBoolean(getString(R.string.purchased001), false);
+
+        boolean loadOwnedPurchasesFromGoogle = bp.loadOwnedPurchasesFromGoogle();
+        String productId = "premiumwordpack001";
+
+        if (!purchased001)
+        {
+            if (loadOwnedPurchasesFromGoogle)
+            {
+                if (bp.isPurchased(productId))
+                {
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean(getString(R.string.purchased001), true);
+                    editor.commit();
+                }
+            }
+        }
 
         // Tutorial ViewPager
 
@@ -61,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 int cur = vpPager.getCurrentItem();
 
@@ -150,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
         final LinearLayout tutview = (LinearLayout) findViewById(R.id.tutframe);
         tutview.setVisibility(View.INVISIBLE);
         tutview.animate().translationY(tutview.getHeight());
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
         boolean tutorialviewed = sharedPref.getBoolean(getString(R.string.tutorialviewed), false);
 
         if (!tutorialviewed) {
@@ -169,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
                 tutview.setAlpha(0);
                 tutview.setVisibility(View.VISIBLE);
                 tutview.animate().alpha(1).translationY(0);
+
+
             }
         });
 
@@ -185,6 +215,26 @@ public class MainActivity extends AppCompatActivity {
                 tutview.animate().translationY(tutview.getHeight());
             }
         });
+
+    }
+
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
+
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+
+    }
+
+    @Override
+    public void onBillingInitialized() {
 
     }
 

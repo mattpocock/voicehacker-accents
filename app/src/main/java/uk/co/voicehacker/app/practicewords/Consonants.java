@@ -184,8 +184,6 @@ public class Consonants extends Fragment {
                     public void onClick(View v) {
 
 
-                        // TODO: Work Out This Damn Star
-
                         if (firstStarPress) {
 
                             for (int i = 0; i < soundArr.length; i++) {
