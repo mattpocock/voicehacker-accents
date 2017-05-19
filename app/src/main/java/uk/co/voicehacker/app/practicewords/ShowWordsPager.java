@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -35,6 +36,7 @@ public class ShowWordsPager extends AppCompatActivity {
     MediaPlayer media;
     boolean purchased001;
     SharedPreferences sharedPref;
+    boolean starshowing;
 
     int getSoundFile(String word) {
         int sf;
@@ -63,6 +65,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "something": sf = R.raw.something;
                 break;
+            case "thumb": sf = R.raw.thumb;
+                break;
+            case "thistle": sf = R.raw.thistle;
+                break;
+            case "path": sf = R.raw.path;
+                break;
+            case "moth": sf = R.raw.moth;
+                break;
+            case "worth": sf = R.raw.worth;
+                break;
 
             // Voiced TH Sounds
 
@@ -85,6 +97,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "they": sf = R.raw.they;
                 break;
             case "together": sf = R.raw.together;
+                break;
+            case "those": sf = R.raw.those;
+                break;
+            case "them": sf = R.raw.them;
+                break;
+            case "with": sf = R.raw.with;
+                break;
+            case "bathe": sf = R.raw.bathe;
+                break;
+            case "father": sf = R.raw.father;
                 break;
 
             // S Sounds
@@ -109,6 +131,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "breakfast": sf = R.raw.breakfast;
                 break;
+            case "simple": sf = R.raw.simple;
+                break;
+            case "cast": sf = R.raw.cast;
+                break;
+            case "mast": sf = R.raw.mast;
+                break;
+            case "feast": sf = R.raw.feast;
+                break;
+            case "mess": sf = R.raw.mess;
+                break;
 
             // Z Sounds
 
@@ -132,6 +164,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "jeans": sf = R.raw.jeans;
                 break;
+            case "feels": sf = R.raw.feels;
+                break;
+            case "rails": sf = R.raw.rails;
+                break;
+            case "wands": sf = R.raw.wands;
+                break;
+            case "was": sf = R.raw.was;
+                break;
+            case "rose": sf = R.raw.rose;
+                break;
 
             // F Sounds
 
@@ -149,6 +191,12 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "different": sf = R.raw.different;
                 break;
+            case "fight": sf = R.raw.fight;
+                break;
+            case "fell": sf = R.raw.fell;
+                break;
+            case "feel": sf = R.raw.feel;
+                break;
 
             // V Sounds
 
@@ -165,6 +213,12 @@ public class ShowWordsPager extends AppCompatActivity {
             case "even": sf = R.raw.even;
                 break;
             case "everyone": sf = R.raw.everyone;
+                break;
+            case "save": sf = R.raw.save;
+                break;
+            case "veil": sf = R.raw.veil;
+                break;
+            case "never": sf = R.raw.never;
                 break;
 
             // H Sounds
@@ -187,6 +241,10 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "hard": sf = R.raw.hard;
                 break;
+            case "whose": sf = R.raw.whose;
+                break;
+            case "perhaps": sf = R.raw.perhaps;
+                break;
 
             // SH Sounds
 
@@ -208,6 +266,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "she": sf = R.raw.she;
                 break;
+            case "shame": sf = R.raw.shame;
+                break;
+            case "shape": sf = R.raw.shape;
+                break;
+            case "shine": sf = R.raw.shine;
+                break;
+            case "leash": sf = R.raw.leash;
+                break;
+            case "fish": sf = R.raw.fish;
+                break;
 
             // ZH Sounds
 
@@ -228,6 +296,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "division": sf = R.raw.division;
                 break;
             case "decision": sf = R.raw.decision;
+                break;
+            case "asia": sf = R.raw.everything;
+                break;
+            case "closure": sf = R.raw.month;
+                break;
+            case "version": sf = R.raw.mouth;
+                break;
+            case "explosion": sf = R.raw.explosion;
+                break;
+            case "conclusion": sf = R.raw.conclusion;
                 break;
 
             // P Sounds
@@ -252,6 +330,14 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "important": sf = R.raw.important;
                 break;
+            case "possess": sf = R.raw.possess;
+                break;
+            case "prize": sf = R.raw.prize;
+                break;
+            case "cape": sf = R.raw.cape;
+                break;
+            case "mop": sf = R.raw.mop;
+                break;
 
             // B Sounds
 
@@ -275,6 +361,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "table": sf = R.raw.table;
                 break;
+            case "rub": sf = R.raw.rub;
+                break;
+            case "pub": sf = R.raw.pub;
+                break;
+            case "cable": sf = R.raw.cable;
+                break;
+            case "bomb": sf = R.raw.bomb;
+                break;
+            case "boss": sf = R.raw.boss;
+                break;
 
             // T Sounds
 
@@ -287,6 +383,12 @@ public class ShowWordsPager extends AppCompatActivity {
             case "hospital": sf = R.raw.hospital;
                 break;
             case "jacket": sf = R.raw.jacket;
+                break;
+            case "toast": sf = R.raw.toast;
+                break;
+            case "top": sf = R.raw.top;
+                break;
+            case "coat": sf = R.raw.coat;
                 break;
 
             // D Sounds
@@ -307,6 +409,10 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "dance": sf = R.raw.dance;
                 break;
+            case "don't": sf = R.raw.dont;
+                break;
+            case "breed": sf = R.raw.breed;
+                break;
 
             // K Sounds
 
@@ -317,6 +423,14 @@ public class ShowWordsPager extends AppCompatActivity {
             case "kept": sf = R.raw.kept;
                 break;
             case "kick": sf = R.raw.kick;
+                break;
+            case "socks": sf = R.raw.socks;
+                break;
+            case "creek": sf = R.raw.creek;
+                break;
+            case "can't": sf = R.raw.cant;
+                break;
+            case "coast": sf = R.raw.coast;
                 break;
 
             // G Sounds
@@ -335,6 +449,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "figure": sf = R.raw.figure;
                 break;
+            case "grant": sf = R.raw.grant;
+                break;
+            case "beg": sf = R.raw.beg;
+                break;
+            case "fog": sf = R.raw.fog;
+                break;
+            case "bug": sf = R.raw.bug;
+                break;
+            case "agree": sf = R.raw.agree;
+                break;
 
             // CH Sounds
 
@@ -349,6 +473,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "chest": sf = R.raw.chest;
                 break;
             case "child": sf = R.raw.child;
+                break;
+            case "match": sf = R.raw.match;
+                break;
+            case "inches": sf = R.raw.inches;
+                break;
+            case "picture": sf = R.raw.picture;
+                break;
+            case "lunch": sf = R.raw.lunch;
+                break;
+            case "touch": sf = R.raw.touch;
                 break;
 
             // J Sounds
@@ -365,6 +499,17 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "college": sf = R.raw.college;
                 break;
+            case "agent": sf = R.raw.agent;
+                break;
+            case "object": sf = R.raw.object;
+                break;
+            case "project": sf = R.raw.project;
+                break;
+            case "bridge": sf = R.raw.bridge;
+                break;
+            case "damage": sf = R.raw.damage;
+                break;
+
 
             // M Sounds
 
@@ -382,6 +527,14 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "come": sf = R.raw.come;
                 break;
+            case "tomato": sf = R.raw.tomato;
+                break;
+            case "animal": sf = R.raw.animal;
+                break;
+            case "famous": sf = R.raw.famous;
+                break;
+            case "stream": sf = R.raw.stream;
+                break;
 
             // N Sounds
 
@@ -397,8 +550,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "control": sf = R.raw.control;
                 break;
+            case "pony": sf = R.raw.pony;
+                break;
+            case "frown": sf = R.raw.frown;
+                break;
+            case "moon": sf = R.raw.moon;
+                break;
+            case "nine": sf = R.raw.nine;
+                break;
 
-            // Z Sounds
+            // NG Sounds
 
             case "evening": sf = R.raw.evening;
                 break;
@@ -418,6 +579,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "morning": sf = R.raw.morning;
                 break;
+            case "bring": sf = R.raw.bring;
+                break;
+            case "sing": sf = R.raw.sing;
+                break;
+            case "spring": sf = R.raw.spring;
+                break;
+            case "king": sf = R.raw.king;
+                break;
+            case "swing": sf = R.raw.swing;
+                break;
 
             // Light L
 
@@ -428,6 +599,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "lead": sf = R.raw.lead;
                 break;
             case "please": sf = R.raw.please;
+                break;
+            case "belly": sf = R.raw.belly;
+                break;
+            case "sailing": sf = R.raw.sailing;
+                break;
+            case "alarm": sf = R.raw.alarm;
+                break;
+            case "police": sf = R.raw.police;
+                break;
+            case "family": sf = R.raw.family;
                 break;
 
             // Dark L
@@ -446,6 +627,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "shall": sf = R.raw.shall;
                 break;
+            case "wallpaper": sf = R.raw.wallpaper;
+                break;
+            case "elbow": sf = R.raw.elbow;
+                break;
+            case "pencil": sf = R.raw.pencil;
+                break;
+            case "owl": sf = R.raw.owl;
+                break;
+            case "muscle": sf = R.raw.muscle;
+                break;
 
             // R Sounds
 
@@ -463,6 +654,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "sorry": sf = R.raw.sorry;
                 break;
+            case "carrot": sf = R.raw.carrot;
+                break;
+            case "giraffe": sf = R.raw.giraffe;
+                break;
+            case "pirate": sf = R.raw.pirate;
+                break;
+            case "camera": sf = R.raw.camera;
+                break;
+            case "syrup": sf = R.raw.syrup;
+                break;
 
             // Y Sounds
 
@@ -477,6 +678,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "yourself": sf = R.raw.yourself;
                 break;
             case "USA": sf = R.raw.usa;
+                break;
+            case "union": sf = R.raw.union;
+                break;
+            case "useful": sf = R.raw.useful;
+                break;
+            case "yesterday": sf = R.raw.yesterday;
+                break;
+            case "yoghurt": sf = R.raw.yoghurt;
+                break;
+            case "unique": sf = R.raw.unique;
                 break;
 
             // W Sounds
@@ -501,6 +712,14 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "quiet": sf = R.raw.quiet;
                 break;
+            case "award": sf = R.raw.award;
+                break;
+            case "homework": sf = R.raw.homework;
+                break;
+            case "reward": sf = R.raw.reward;
+                break;
+            case "microwave": sf = R.raw.microwave;
+                break;
 
             // Short 'Ah' Sound
 
@@ -523,6 +742,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "bag": sf = R.raw.bag;
                 break;
             case "had": sf = R.raw.had;
+                break;
+            case "matter": sf = R.raw.matter;
+                break;
+            case "bat": sf = R.raw.bat;
+                break;
+            case "balance": sf = R.raw.balance;
+                break;
+            case "national": sf = R.raw.national;
+                break;
+            case "actual": sf = R.raw.actual;
                 break;
 
             // Short 'Eh' Sound
@@ -547,6 +776,14 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "very": sf = R.raw.very;
                 break;
+            case "mention": sf = R.raw.mention;
+                break;
+            case "head": sf = R.raw.head;
+                break;
+            case "bell": sf = R.raw.bell;
+                break;
+            case "extra": sf = R.raw.extra;
+                break;
 
             // Short 'Ih' Sound
 
@@ -567,6 +804,12 @@ public class ShowWordsPager extends AppCompatActivity {
             case "music": sf = R.raw.music;
                 break;
             case "kitchen": sf = R.raw.kitchen;
+                break;
+            case "mist": sf = R.raw.mist;
+                break;
+            case "building": sf = R.raw.building;
+                break;
+            case "listen": sf = R.raw.listen;
                 break;
 
             // Short 'Ooh' Sound
@@ -591,6 +834,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "shook": sf = R.raw.shook;
                 break;
+            case "soot": sf = R.raw.soot;
+                break;
+            case "cook": sf = R.raw.cook;
+                break;
+            case "stood": sf = R.raw.stood;
+                break;
+            case "would": sf = R.raw.would;
+                break;
+            case "hood": sf = R.raw.hood;
+                break;
 
             // Short 'Oh' Sound
 
@@ -614,6 +867,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "chocolate": sf = R.raw.chocolate;
                 break;
+            case "stop": sf = R.raw.stop;
+                break;
+            case "cotton": sf = R.raw.cotton;
+                break;
+            case "lost": sf = R.raw.lost;
+                break;
+            case "posh": sf = R.raw.posh;
+                break;
+            case "dock": sf = R.raw.dock;
+                break;
 
             // Short Uh
 
@@ -634,6 +897,14 @@ public class ShowWordsPager extends AppCompatActivity {
             case "chuckle": sf = R.raw.chuckle;
                 break;
             case "enough": sf = R.raw.enough;
+                break;
+            case "much": sf = R.raw.much;
+                break;
+            case "such": sf = R.raw.such;
+                break;
+            case "rust": sf = R.raw.rust;
+                break;
+            case "rough": sf = R.raw.rough;
                 break;
 
             // Schwa
@@ -658,6 +929,10 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "local": sf = R.raw.local;
                 break;
+            case "amount": sf = R.raw.amount;
+                break;
+            case "information": sf = R.raw.information;
+                break;
 
             // Long 'Ee' Sound
 
@@ -680,6 +955,10 @@ public class ShowWordsPager extends AppCompatActivity {
             case "believe": sf = R.raw.believe;
                 break;
             case "thirteen": sf = R.raw.thirteen;
+                break;
+            case "peace": sf = R.raw.peace;
+                break;
+            case "green": sf = R.raw.green;
                 break;
 
             // Long 'Oo' Sound
@@ -704,6 +983,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "shoe": sf = R.raw.shoe;
                 break;
+            case "mood": sf = R.raw.mood;
+                break;
+            case "clue": sf = R.raw.clue;
+                break;
+            case "renew": sf = R.raw.renew;
+                break;
+            case "balloon": sf = R.raw.balloon;
+                break;
+            case "due": sf = R.raw.due;
+                break;
 
             // Long 'Ur' Sound
 
@@ -724,6 +1013,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "word": sf = R.raw.word;
                 break;
             case "earth": sf = R.raw.earth;
+                break;
+            case "service": sf = R.raw.service;
+                break;
+            case "third": sf = R.raw.third;
+                break;
+            case "murder": sf = R.raw.murder;
+                break;
+            case "birth": sf = R.raw.birth;
+                break;
+            case "earn": sf = R.raw.earn;
                 break;
 
             // Long 'Or' Sound
@@ -746,6 +1045,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "august": sf = R.raw.august;
                 break;
+            case "awful": sf = R.raw.awful;
+                break;
+            case "alright": sf = R.raw.alright;
+                break;
+            case "dawn": sf = R.raw.dawn;
+                break;
+            case "born": sf = R.raw.born;
+                break;
+            case "torn": sf = R.raw.torn;
+                break;
 
             // Long 'Ah' Sound
 
@@ -766,6 +1075,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "heart": sf = R.raw.heart;
                 break;
             case "party": sf = R.raw.party;
+                break;
+            case "sharp": sf = R.raw.sharp;
+                break;
+            case "master": sf = R.raw.master;
+                break;
+            case "graph": sf = R.raw.graph;
+                break;
+            case "chart": sf = R.raw.chart;
+                break;
+            case "nasty": sf = R.raw.nasty;
                 break;
 
             // Ay Sound
@@ -790,6 +1109,12 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "aim": sf = R.raw.aim;
                 break;
+            case "plain": sf = R.raw.plain;
+                break;
+            case "pace": sf = R.raw.pace;
+                break;
+            case "daily": sf = R.raw.daily;
+                break;
 
             // Igh Sound
 
@@ -812,6 +1137,14 @@ public class ShowWordsPager extends AppCompatActivity {
             case "my": sf = R.raw.my;
                 break;
             case "hi": sf = R.raw.hi;
+                break;
+            case "might": sf = R.raw.might;
+                break;
+            case "timer": sf = R.raw.timer;
+                break;
+            case "eye": sf = R.raw.eye;
+                break;
+            case "sight": sf = R.raw.sight;
                 break;
 
             // Ow Sound
@@ -836,6 +1169,14 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "without": sf = R.raw.without;
                 break;
+            case "voucher": sf = R.raw.voucher;
+                break;
+            case "cloud": sf = R.raw.cloud;
+                break;
+            case "towel": sf = R.raw.towel;
+                break;
+            case "sound": sf = R.raw.sound;
+                break;
 
             // O Sound
 
@@ -859,6 +1200,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "cold": sf = R.raw.cold;
                 break;
+            case "boat": sf = R.raw.boat;
+                break;
+            case "although": sf = R.raw.although;
+                break;
+            case "remote": sf = R.raw.remote;
+                break;
+            case "over": sf = R.raw.over;
+                break;
+            case "oak": sf = R.raw.oak;
+                break;
 
             // O Sound
 
@@ -880,7 +1231,17 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "weird": sf = R.raw.weird;
                 break;
-            case "really": sf = R.raw.cold;
+            case "really": sf = R.raw.really;
+                break;
+            case "severe": sf = R.raw.severe;
+                break;
+            case "clear": sf = R.raw.clear;
+                break;
+            case "fear": sf = R.raw.fear;
+                break;
+            case "appear": sf = R.raw.appear;
+                break;
+            case "rear": sf = R.raw.rear;
                 break;
 
             // Air Sound
@@ -902,6 +1263,16 @@ public class ShowWordsPager extends AppCompatActivity {
             case "nightmare": sf = R.raw.nightmare;
                 break;
             case "share": sf = R.raw.share;
+                break;
+            case "staircase": sf = R.raw.staircase;
+                break;
+            case "fair": sf = R.raw.fair;
+                break;
+            case "bear": sf = R.raw.bear;
+                break;
+            case "aware": sf = R.raw.aware;
+                break;
+            case "pair": sf = R.raw.pair;
                 break;
 
             // Oy Sound
@@ -926,6 +1297,16 @@ public class ShowWordsPager extends AppCompatActivity {
                 break;
             case "voice": sf = R.raw.voice;
                 break;
+            case "joy": sf = R.raw.joy;
+                break;
+            case "anmoyed": sf = R.raw.annoyed;
+                break;
+            case "coil": sf = R.raw.coil;
+                break;
+            case "appoint": sf = R.raw.appoint;
+                break;
+            case "soya": sf = R.raw.soya;
+                break;
 
             // Ure Sound
 
@@ -948,6 +1329,91 @@ public class ShowWordsPager extends AppCompatActivity {
             case "secure": sf = R.raw.secure;
                 break;
             case "curious": sf = R.raw.curious;
+                break;
+            case "furious": sf = R.raw.furious;
+                break;
+            case "alluring": sf = R.raw.alluring;
+                break;
+            case "tour": sf = R.raw.tour;
+                break;
+            case "sure": sf = R.raw.sure;
+                break;
+            case "insurance": sf = R.raw.insurance;
+                break;
+
+            // Unstressed i
+
+            case "totally": sf = R.raw.totally;
+                break;
+            case "usually": sf = R.raw.usually;
+                break;
+            case "pretty": sf = R.raw.pretty;
+                break;
+            case "only": sf = R.raw.only;
+                break;
+            case "funny": sf = R.raw.funny;
+                break;
+
+            // TN
+
+            case "rotten": sf = R.raw.rotten;
+                break;
+            case "bitten": sf = R.raw.bitten;
+                break;
+            case "written": sf = R.raw.written;
+                break;
+            case "brighten": sf = R.raw.brighten;
+                break;
+            case "eaten": sf = R.raw.eaten;
+                break;
+
+            // DN
+
+            case "hidden": sf = R.raw.hidden;
+                break;
+            case "sudden": sf = R.raw.sudden;
+                break;
+            case "shouldn't": sf = R.raw.shouldnt;
+                break;
+            case "wouldn't": sf = R.raw.wouldnt;
+                break;
+            case "hadn't": sf = R.raw.hadnt;
+                break;
+            case "didn't": sf = R.raw.didnt;
+                break;
+
+            // TL
+
+            case "rattle": sf = R.raw.rattle;
+                break;
+            case "battle": sf = R.raw.battle;
+                break;
+            case "settle": sf = R.raw.settle;
+                break;
+            case "cattle": sf = R.raw.cattle;
+                break;
+            case "kettle": sf = R.raw.kettle;
+                break;
+            case "subtle": sf = R.raw.subtle;
+                break;
+            case "nettle": sf = R.raw.nettle;
+                break;
+
+            // DL
+
+            case "middle": sf = R.raw.middle;
+                break;
+            case "saddle": sf = R.raw.saddle;
+                break;
+            case "cuddle": sf = R.raw.cuddle;
+                break;
+            case "riddle": sf = R.raw.riddle;
+                break;
+            case "fiddle": sf = R.raw.fiddle;
+                break;
+            case "modal": sf = R.raw.modal;
+                break;
+            case "paddle": sf = R.raw.paddle;
                 break;
 
             default: sf = 0;
@@ -1155,6 +1621,8 @@ public class ShowWordsPager extends AppCompatActivity {
                 pageSelected = position;
                 String[] wa = getWordArr();
 
+                // Make Sound
+
                 if (position < wa.length) { // New implementation because of Promo Fragment
 
                     if (getSoundFile(wa[position]) != 0) {
@@ -1174,6 +1642,44 @@ public class ShowWordsPager extends AppCompatActivity {
                         });
                     }
                 }
+
+                // Premium Button
+
+                ImageButton star = (ImageButton) findViewById(R.id.premiumbtn);
+
+
+                    starshowing = false;
+                    star.animate().translationX(300);
+
+                    if (!ifPurchased()) {
+                        star.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                Toast.makeText(ShowWordsPager.this, "This is a premium feature!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        star.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                Toast.makeText(ShowWordsPager.this, "This word was unlocked with the premium word pack!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                if (sentFrom != 2) {
+                    if (position > 4) {
+                        if (!starshowing) {
+                            star.setVisibility(View.VISIBLE);
+                            //star.setAlpha(0);
+                            star.animate().translationX(0);
+                        }
+                    } else {
+                        if (starshowing) {
+                            star.animate().translationX(300);
+                        }
+                    }
+                }
+
+
             }
 
             // This method will be invoked when the current page is scrolled
@@ -1228,18 +1734,73 @@ public class ShowWordsPager extends AppCompatActivity {
 
         int insertID = 0;
 
+        // Add Promo Section
+
+        TextView promosub = new TextView(getApplicationContext());
+        promosub.setId(0 + 6000);
+        promosub.setVisibility(View.GONE);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.topMargin = 24;
+        params.bottomMargin = 24;
+        moreinfoll.addView(promosub, insertID, params);
+        TextView insertedPSub = (TextView) findViewById(0+6000);
+        insertedPSub.setText("Go Premium");
+        insertedPSub.setTextAppearance(this, R.style.MoreInfoSub);
+        insertID++;
+
+        TextView promo = new TextView(getApplicationContext());
+        promo.setId(0 + 4000);
+        promo.setVisibility(View.GONE);
+        LinearLayout.LayoutParams promoparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        promoparams.bottomMargin = 24;
+        moreinfoll.addView(promo, insertID, promoparams);
+        TextView promobody = (TextView) findViewById(0 + 4000);
+        promobody.setText(getString(R.string.promopreview));
+        promobody.setTextAppearance(this, R.style.MoreInfoBody);
+        insertID++;
+
+        Button promobtn = new Button(getApplicationContext(), null, R.drawable.moreinfobtn);
+        promobtn.setId(0 + 5000);
+        promobtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.moreinfobtn));
+        LinearLayout.LayoutParams promobtnparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        moreinfoll.addView(promobtn, insertID, promobtnparams);
+        promobtn = (Button) findViewById(0 + 5000);
+        promobtn.setTextSize(16);
+        promobtn.setText("UNLOCK PREMIUM");
+        promobtn.setVisibility(View.GONE);
+        promobtn.setTextColor(getResources().getColor(R.color.colorPrimary));
+        insertID++;
+
+        ImageButton moreinfostar = (ImageButton) findViewById(R.id.premiummoreinfobtn);
+
+            moreinfostar.animate().translationX(300);
+
+        moreinfostar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(ShowWordsPager.this, "Descriptions are a premium feature!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        promobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), InAppPurchase.class);
+                startActivity(i);
+            }
+        });
+
         for (int i = 0; i < moreInfoSections.length; i++) {
 
             // Subtitle
 
             TextView subtitle = new TextView(getApplicationContext());
             subtitle.setId(i);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams subparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            subparams.bottomMargin = 24;
             if (i == 0) {
-                params.topMargin = 24;
+                subparams.topMargin = 24;
             }
-            params.bottomMargin = 24;
-            moreinfoll.addView(subtitle, insertID, params);
+            moreinfoll.addView(subtitle, insertID, subparams);
             TextView insertedSub = (TextView) findViewById(i);
             insertedSub.setText(getTitlefromDesc(moreInfoSections[i]));
             insertedSub.setTextAppearance(this, R.style.MoreInfoSub);
@@ -1258,38 +1819,6 @@ public class ShowWordsPager extends AppCompatActivity {
             insertedBody.setTextAppearance(this, R.style.MoreInfoBody);
             insertID++;
 
-            TextView promo = new TextView(getApplicationContext());
-            promo.setId(i + 4000);
-            promo.setVisibility(View.GONE);
-            LinearLayout.LayoutParams promoparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            promoparams.bottomMargin = 24;
-            moreinfoll.addView(promo, insertID, promoparams);
-            TextView promobody = (TextView) findViewById(i + 4000);
-            promobody.setText(getString(R.string.promopreview));
-            promobody.setTextAppearance(this, R.style.MoreInfoBody);
-            insertID++;
-
-            Button promobtn = new Button(getApplicationContext(), null, R.drawable.moreinfobtn);
-            promobtn.setId(i + 5000);
-            promobtn.setBackgroundDrawable(getResources().getDrawable(R.drawable.moreinfobtn));
-            LinearLayout.LayoutParams promobtnparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            promobtnparams.bottomMargin = 24;
-            moreinfoll.addView(promobtn, insertID, promobtnparams);
-            promobtn = (Button) findViewById(i + 5000);
-            promobtn.setTextSize(16);
-            promobtn.setText("LEARN MORE");
-            promobtn.setVisibility(View.GONE);
-            promobtn.setTextColor(getResources().getColor(R.color.colorPrimary));
-            insertID++;
-
-            promobtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(getApplicationContext(), InAppPurchase.class);
-                    startActivity(i);
-                }
-            });
-
             TextView bodypreview = new TextView(getApplicationContext());
             bodypreview.setId(i + 3000);
             LinearLayout.LayoutParams prevparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -1301,8 +1830,6 @@ public class ShowWordsPager extends AppCompatActivity {
             insertedBodyPrev.setTextAppearance(this, R.style.MoreInfoBody);
             insertedBodyPrev.setTextColor(getResources().getColor(R.color.darkGrey));
             insertID++;
-
-
 
             Button moreinfobtn = new Button(getApplicationContext(), null, R.drawable.moreinfobtn);
             moreinfobtn.setId(i + 2000);
@@ -1316,41 +1843,37 @@ public class ShowWordsPager extends AppCompatActivity {
             insertedBtn.setTextColor(getResources().getColor(R.color.colorPrimary));
 
             final int listenerID = i;
+            final int descCount = moreInfoSections.length;
             insertedBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    Button btn = (Button) findViewById(listenerID + 2000);
-                    btn.setVisibility(View.GONE);
-
                     if (!ifPurchased()) {
 
-                        final int childcount = moreinfoll.getChildCount();
-                        for (int i = 0; i < childcount; i++) {
-                            View view = moreinfoll.getChildAt(i);
-                            view.setVisibility(View.GONE);
+                        for (int i = 0; i < descCount; i++) {
+                            Button btn = (Button) findViewById(i + 2000);
+                            btn.setVisibility(View.GONE);
                         }
-                        TextView promo = (TextView) findViewById(listenerID + 4000);
+
+                        ImageButton moreinfostar = (ImageButton) findViewById(R.id.premiummoreinfobtn);
+                        moreinfostar.setVisibility(View.VISIBLE);
+                        moreinfostar.animate().translationX(0);
+
+                        TextView promo = (TextView) findViewById(0 + 4000);
                         promo.setVisibility(View.VISIBLE);
                         promo.setAlpha(0);
                         promo.animate().alpha(1);
-                        TextView subtitle = (TextView) findViewById(listenerID);
+                        TextView subtitle = (TextView) findViewById(0 + 6000);
                         subtitle.setVisibility(View.VISIBLE);
-                        subtitle.setText("Go Premium");
-
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        );
-                        params.topMargin = 24;
-                        params.bottomMargin = 24;
-                        subtitle.setLayoutParams(params);
                         subtitle.setAlpha(0);
                         subtitle.animate().alpha(1);
-                        Button promobtn = (Button) findViewById(listenerID + 5000);
+                        Button promobtn = (Button) findViewById(0 + 5000);
                         promobtn.setVisibility(View.VISIBLE);
                         promobtn.setAlpha(0);
                         promobtn.animate().alpha(1);
                     } else {
+
+                        Button btn = (Button) findViewById(listenerID + 2000);
+                        btn.setVisibility(View.GONE);
                         TextView body = (TextView) findViewById(listenerID + 1000);
                         body.setVisibility(View.VISIBLE);
                         TextView prevbody = (TextView) findViewById(listenerID + 3000);

@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         return k;
     }
 
+    public boolean ifPurchased() {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), getApplicationContext().MODE_PRIVATE);
+        boolean p = sp.getBoolean(getString(R.string.purchased001), false);
+        return p;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +91,13 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         // Main ViewPager
 
         final ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+
+        if (ifPurchased()) {
+            adapterViewPager = new PremPagerAdapter(getSupportFragmentManager());
+        } else {
+            adapterViewPager = new FreePagerAdapter(getSupportFragmentManager());
+        }
+
         vpPager.setAdapter(adapterViewPager);
 
         // Top Reset Button
@@ -100,10 +112,19 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
                 if (0 == cur) {
                     editor.putString(getString(R.string.importedconsonantsstarred), "0000000000000000000000000");
-                } else {
+                } else if (1 == cur) {
                     editor.putString(getString(R.string.importedvowelsstarred), "00000000000000000000");
                 }
+                else{
+                    editor.putString(getString(R.string.importedpremstarred), "000000");
+                }
                 editor.commit();
+
+                if (ifPurchased()) {
+                    adapterViewPager = new PremPagerAdapter(getSupportFragmentManager());
+                } else {
+                    adapterViewPager = new FreePagerAdapter(getSupportFragmentManager());
+                }
                 vpPager.setAdapter(adapterViewPager);
                 vpPager.setCurrentItem(cur);
             }
@@ -178,6 +199,18 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
             }
         });
 
+        final Button pBtn = (Button) findViewById(R.id.premiumbtn);
+
+        if (ifPurchased()) {
+            pBtn.setVisibility(View.VISIBLE);
+            pBtn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    vpPager.setCurrentItem(2);
+                }
+            });
+        }
+
+
         //
 
         final LinearLayout tutview = (LinearLayout) findViewById(R.id.tutframe);
@@ -197,15 +230,10 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
         tutagainbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /* tutPager.setCurrentItem(0);
+                tutPager.setCurrentItem(0);
                 tutview.setAlpha(0);
                 tutview.setVisibility(View.VISIBLE);
-                tutview.animate().alpha(1).translationY(0); */ //TODO: Swap Below
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putBoolean(getString(R.string.purchased001), false);
-                editor.commit();
-
-
+                tutview.animate().alpha(1).translationY(0);
             }
         });
 
@@ -264,10 +292,10 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
 
     // ...
 
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
+    public static class FreePagerAdapter extends FragmentPagerAdapter {
         public static int NUM_ITEMS = 2;
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        public FreePagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -280,11 +308,43 @@ public class MainActivity extends AppCompatActivity implements BillingProcessor.
         // Returns the fragment to display for that page
         @Override
         public Fragment getItem(int position) {
+
             switch (position) {
                 case 0:
                     return Consonants.newInstance();
                 case 1:
                     return Vowels.newInstance();
+                default:
+                    return null;
+            }
+        }
+
+    }
+
+    public static class PremPagerAdapter extends FragmentPagerAdapter {
+        public static int NUM_ITEMS = 3;
+
+        public PremPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        // Returns total number of pages
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+
+        // Returns the fragment to display for that page
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position) {
+                case 0:
+                    return Consonants.newInstance();
+                case 1:
+                    return Vowels.newInstance();
+                case 2:
+                    return Advanced.newInstance();
                 default:
                     return null;
             }

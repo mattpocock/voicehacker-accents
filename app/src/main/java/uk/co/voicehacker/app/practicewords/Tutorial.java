@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import static android.support.constraint.ConstraintSet.BOTTOM;
 import static android.support.constraint.ConstraintSet.LEFT;
 import static android.support.constraint.ConstraintSet.RIGHT;
@@ -78,7 +80,7 @@ public class Tutorial extends Fragment {
         TextView firstParaTV = (TextView) getView().findViewById(R.id.firsttxtview);
         firstParaTV.setText(firstPara);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMargins(pixelsToDps(25),pixelsToDps(20),pixelsToDps(25),0);
+        params.setMargins(pixelsToDps(25),pixelsToDps(10),pixelsToDps(25),0);
         firstParaTV.setLayoutParams(params);
         //firstParaTV.setGravity(Gravity.CENTER_HORIZONTAL);
 
@@ -112,9 +114,14 @@ public class Tutorial extends Fragment {
             thirdParaTV = (TextView) getView().findViewById(R.id.tutthirdpara);
             thirdParaTV.setText(thirdPara);
             thirdParaTV.setTextAppearance(R.style.tuttext);
+            params.bottomMargin = pixelsToDps(10);
             //thirdParaTV.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
             //params.gravity = Gravity.CENTER_HORIZONTAL;
             thirdParaTV.setLayoutParams(params);
+        } else {
+            TextView secondParaTV = (TextView) getView().findViewById(R.id.tutsecondpara);
+            params.bottomMargin = pixelsToDps(10);
+            secondParaTV.setLayoutParams(params);
         }
 
         if (buttontext != null) {
@@ -126,6 +133,7 @@ public class Tutorial extends Fragment {
             btn.setText(buttontext);
             params.width = LinearLayout.LayoutParams.WRAP_CONTENT;
             params.gravity = Gravity.CENTER;
+            params.bottomMargin = 0;
             btn.setLayoutParams(params);
             btn.setAllCaps(false);
             btn.setTextColor(getResources().getColor(R.color.white));
