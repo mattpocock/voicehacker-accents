@@ -115,8 +115,6 @@ public class Advanced extends Fragment {
                 ImageButton starbtn = new ImageButton(getContext());
                 starbtn.setId(R.id.starbtn);
 
-
-
                 LinearLayout oldll = (LinearLayout) getView().findViewById(R.id.advancedll); // Used in both statements
 
                 // Takes Out NavBtn
@@ -144,8 +142,6 @@ public class Advanced extends Fragment {
                 LinearLayout.LayoutParams pracparams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 6);
                 LinearLayout.LayoutParams starparams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 2);
                 LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
-
-
 
                 newllid.addView(navbtn, 0, pracparams);
                 newllid.addView(starbtn, 1, starparams);
@@ -320,12 +316,12 @@ public class Advanced extends Fragment {
 
         // Short Vowels //TODO: Give each sound a main recording
 
-        sound unstressedee = new sound(R.id.button1,"Unstressed /i/",R.raw.family,"The Unstressed /i/", new int[]{R.string.desc_morecoming, R.string.desc_closedjaw, R.string.desc_spreadlips, R.string.desc_placementfront}, 1,1,1, new String[]{"family","totally","usually","city","pretty","many","very","only","funny","really"});
-        sound nonRhoticR = new sound(R.id.button2,"Non-Rhotic /r/",R.raw.air,"The Non-Rhotic /r/", new int[]{R.string.desc_morecoming}, 1,2,2, new String[]{"before","hair","conversation","measure","pleasure","treasure","cover","share","number","remember","card","dark","anger","forget","figure","chair","picture","anymore","arm","finger","morning","alarm","wallpaper","yourself","year","where","forward","homework","government","doctor","better","information","thirteen","hurt","shirt","first","work","worse","were","urgent","word","earth","service","third","murder","birth","earn","ear","beer","hear","nearly","weird","severe","clear","fear","appear","air","care","there","dare","nightmare","staircase","fair","bear","aware","pair","pure","cure","endure","mature","secure","tour","sure"});
-        sound tn = new sound(R.id.button3,"/tn/",R.raw.button,"The Unvoiced Nasal Plosion", new int[]{R.string.desc_unvoiced, R.string.desc_morecoming}, 1,3,3, new String[]{"button","cotton","rotten","bitten","written","brighten","eaten"});
-        sound dn = new sound(R.id.button4,"/dn/",R.raw.hidden,"The Voiced Nasal Plosion", new int[]{R.string.desc_voiced, R.string.desc_morecoming}, 2,3,3, new String[]{"hidden","sudden","shouldn't","wouldn't","hadn't","couldn't","didn't"});
-        sound tl = new sound(R.id.button5,"/tɫ/",R.raw.rattle,"The Unvoiced Lateral Plosion", new int[]{R.string.desc_unvoiced, R.string.desc_morecoming}, 1,4,3, new String[]{"rattle","battle","settle","cattle","kettle","subtle","nettle"});
-        sound dl = new sound(R.id.button6,"/dɫ/",R.raw.middle,"The Voiced Lateral Plosion", new int[]{R.string.desc_voiced, R.string.desc_morecoming}, 2,4,3, new String[]{"middle","saddle","cuddle","riddle","fiddle","modal","paddle"});
+        sound unstressedee = new sound(R.id.button1,"Unstressed /i/",R.raw.family,"The Unstressed /i/", new int[]{R.string.desc_unstressedee, R.string.desc_closedjaw, R.string.desc_spreadlips, R.string.desc_placementfront}, 1,1,1, new String[]{"family","totally","usually","city","pretty","many","very","only","funny","really"});
+        sound nonRhoticR = new sound(R.id.button2,"Non-Rhotic /r/",R.raw.air,"The Non-Rhotic /r/", new int[]{R.string.desc_nonrhoticr}, 1,2,2, new String[]{"before","hair","conversation","measure","pleasure","treasure","cover","share","number","remember","card","dark","anger","forget","figure","chair","picture","anymore","arm","finger","morning","alarm","wallpaper","yourself","year","where","forward","homework","government","doctor","better","information","thirteen","hurt","shirt","first","work","worse","were","urgent","word","earth","service","third","murder","birth","earn","ear","beer","hear","nearly","weird","severe","clear","fear","appear","air","care","there","dare","nightmare","staircase","fair","bear","aware","pair","pure","cure","endure","mature","secure","tour","sure"});
+        sound tn = new sound(R.id.button3,"/tn/",R.raw.button,"The Unvoiced Nasal Plosion", new int[]{R.string.desc_unvoiced, R.string.desc_nasalplosions}, 1,3,3, new String[]{"button","cotton","rotten","bitten","written","brighten","eaten"});
+        sound dn = new sound(R.id.button4,"/dn/",R.raw.hidden,"The Voiced Nasal Plosion", new int[]{R.string.desc_voiced, R.string.desc_nasalplosions}, 2,3,3, new String[]{"hidden","sudden","shouldn't","wouldn't","hadn't","couldn't","didn't"});
+        sound tl = new sound(R.id.button5,"/tɫ/",R.raw.rattle,"The Unvoiced Lateral Plosion", new int[]{R.string.desc_unvoiced, R.string.desc_lateralplosions}, 1,4,3, new String[]{"rattle","battle","settle","cattle","kettle","subtle","nettle"});
+        sound dl = new sound(R.id.button6,"/dɫ/",R.raw.middle,"The Voiced Lateral Plosion", new int[]{R.string.desc_voiced, R.string.desc_lateralplosions}, 2,4,3, new String[]{"middle","saddle","cuddle","riddle","fiddle","modal","paddle"});
 
         createButton(button1, unstressedee);
         createButton(button2, nonRhoticR);
