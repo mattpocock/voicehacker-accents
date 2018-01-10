@@ -21,12 +21,12 @@ import android.widget.Toast;
 
 /**
  * Created by Matt on 01-May-17.
+ * 
  */
 
 public class Advanced extends Fragment {
 
     // Declares Buttons & Sounds
-
     Button button1, button2, button3, button4, button5, button6;
 
     MediaPlayer allsounds;
@@ -51,7 +51,6 @@ public class Advanced extends Fragment {
     }
 
     // Convert Boolean Array to String
-
     public String booleanToString(boolean[] arr) {
 
         String result = "";
@@ -68,7 +67,6 @@ public class Advanced extends Fragment {
     }
 
     // Create Button Method
-
     public void createButton(Button btn, final sound s) {
 
         final SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.preference_file_key), getContext().MODE_PRIVATE);
@@ -86,9 +84,7 @@ public class Advanced extends Fragment {
         }
 
         // Adds all Button Id's to btnArray
-
         vowelArr[vowelCounter] = s.buttonid;
-
         final int sf = s.soundfile;
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -100,12 +96,10 @@ public class Advanced extends Fragment {
                 }
 
                 // Handles Sound Playing
-
                 allsounds = MediaPlayer.create(getActivity(), sf);
                 allsounds.start();
 
                 // Handles nav bar creation
-
                 LinearLayout newll = new LinearLayout(getContext());
                 newll.setId(R.id.navbarll);
 
@@ -118,7 +112,6 @@ public class Advanced extends Fragment {
                 LinearLayout oldll = (LinearLayout) getView().findViewById(R.id.advancedll); // Used in both statements
 
                 // Takes Out NavBtn
-
                 if (navBarOn) {
                     Button insertedBtn = (Button) getView().findViewById(R.id.navbarbtn);
                     LinearLayout newllid = (LinearLayout) getView().findViewById(R.id.navbarll);
@@ -130,7 +123,6 @@ public class Advanced extends Fragment {
                 }
 
                 // Puts in Button
-
                 int insertId = s.row + (s.section + 1);
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, pixelsToDps(50));
@@ -149,12 +141,10 @@ public class Advanced extends Fragment {
                 navBarOn = true;
 
                 // Star Button
-
                 final ImageButton insertedStar = (ImageButton) getView().findViewById(R.id.starbtn);
                 insertedStar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
                 // Checks if the star should be pre-pressed or not
-
                 if (!vowelStarred[thisvowel]) {
 
                     insertedStar.setImageResource(R.drawable.star_btn1);
@@ -166,9 +156,6 @@ public class Advanced extends Fragment {
                 insertedStar.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 insertedStar.setAlpha(0.0f);
                 insertedStar.animate().alpha(1.0f);
-
-
-
                 insertedStar.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
 
@@ -212,7 +199,6 @@ public class Advanced extends Fragment {
                         }
 
                         // Turns all blue again if all off
-
                         boolean alloff = true;
 
                         for (int i = 0; i < vowelStarred.length; i++) {
@@ -241,8 +227,10 @@ public class Advanced extends Fragment {
                 insertedBtn.setSoundEffectsEnabled(false);
                 insertedBtn.setTextColor(getResources().getColor(R.color.white));
                 insertedBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
                 // Prepare the View for the animation
                 insertedBtn.setAlpha(0.0f);
+
                 // Start the animation
                 insertedBtn.animate().alpha(1.0f);
 
@@ -268,19 +256,15 @@ public class Advanced extends Fragment {
 
     }
 
-    // newInstance constructor for creating fragment with arguments
     public static Advanced newInstance() {
         Advanced advanced = new Advanced();
         return advanced;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -313,8 +297,6 @@ public class Advanced extends Fragment {
                 firstStarPress = false;
             }
         }
-
-        // Short Vowels //TODO: Give each sound a main recording
 
         sound unstressedee = new sound(R.id.button1,"Unstressed /i/",R.raw.family,"The Unstressed /i/", new int[]{R.string.desc_unstressedee, R.string.desc_closedjaw, R.string.desc_spreadlips, R.string.desc_placementfront}, 1,1,1, new String[]{"family","totally","usually","city","pretty","many","very","only","funny","really"});
         sound nonRhoticR = new sound(R.id.button2,"Non-Rhotic /r/",R.raw.air,"The Non-Rhotic /r/", new int[]{R.string.desc_nonrhoticr}, 1,2,2, new String[]{"before","hair","conversation","measure","pleasure","treasure","cover","share","number","remember","card","dark","anger","forget","figure","chair","picture","anymore","arm","finger","morning","alarm","wallpaper","yourself","year","where","forward","homework","government","doctor","better","information","thirteen","hurt","shirt","first","work","worse","were","urgent","word","earth","service","third","murder","birth","earn","ear","beer","hear","nearly","weird","severe","clear","fear","appear","air","care","there","dare","nightmare","staircase","fair","bear","aware","pair","pure","cure","endure","mature","secure","tour","sure"});
